@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Item from '../components/item'
-import SearchMenu from '../components/searchMenu'
+import Item from '../../components/item'
+import SearchMenu from '../../components/searchMenu'
 import products from '../../public/items-sample.json'
 import { useRouter } from "next/router";
 

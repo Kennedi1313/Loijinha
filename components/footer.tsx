@@ -1,4 +1,4 @@
-import FormasPagamento from '../../public/formas-pagamento.png'
+import FormasPagamento from '../public/formas-pagamento.png'
 import { BsInstagram, BsFacebook, BsYoutube, BsLinkedin } from 'react-icons/bs'
 import Image from 'next/image'
 

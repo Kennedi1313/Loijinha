@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 // images
 
-import logoKR from '../../public/KR-logo-3.png';
+import logoKR from '../public/KR-logo-3.png';
 import Link from 'next/link';
 
 
