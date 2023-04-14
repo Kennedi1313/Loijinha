@@ -4,7 +4,7 @@
         "name": "Camisa Botafogo" ,
         "gender": "Masculino" ,
         "price": 12000 ,
-        "srcImg": "https://drive.google.com/uc?export=view&id=18x-bMxq9JedUdcG8QexSfZgdKszJyRzO",
+        "srcImg": "/product_1.jpg",
         "categories": [
             "masculino", "brasileiro", "rj", "primeiro"
         ]
@@ -14,7 +14,7 @@
         "name": "Camisa Flamengo" ,
         "gender": "Masculino" ,
         "price": 12000 ,
-        "srcImg": "https://drive.google.com/uc?export=view&id=18P9hD-P7rW_EW9WnsEce6Nj6PP5XVYLe",
+        "srcImg": "/product_2.jpg",
         "categories": [
             "masculino", "brasileiro", "rj", "primeiro"
         ]
@@ -24,7 +24,7 @@
         "name": "Camisa Flamengo Branca" ,
         "gender": "Masculino" ,
         "price": 11000 ,
-        "srcImg": "https://drive.google.com/uc?export=view&id=18aOP0MFEFmvxsJo0noM1UH0LAwVxi9vn",
+        "srcImg": "/product_3.jpg",
         "categories": [
             "masculino", "brasileiro", "rj", "segundo"
         ]
@@ -34,7 +34,7 @@
         "name": "Camisa Seleção Brasileira" ,
         "gender": "Masculino" ,
         "price": 20000 ,
-        "srcImg": "https://drive.google.com/uc?export=view&id=15Vc1quQ0ydlrOObBH2iLZiJV5I_Qa8H5",
+        "srcImg": "/product_4.jpg",
         "categories": [
             "masculino", "selecao", "amer-sul", "primeiro"
         ]
