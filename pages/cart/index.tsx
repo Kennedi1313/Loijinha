@@ -130,6 +130,7 @@ export default function Details() {
                     </p>
 
                     <button
+                        onClick={redirectToCheckout}
                         disabled={redirecting}
                         className="text-white bg-black-1000 rounded-full px-5 py-3 w-fit mt-8 block"
                     >
