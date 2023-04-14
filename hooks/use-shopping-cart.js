@@ -21,7 +21,7 @@ const addItem = (state = {}, product = null, quantity = 0) => {
         ...state.cartDetails,
         [product.id]: {
           ...entry,
-          quantity: entry.quantity++,
+          quantity: entry.quantity + quantity,
         }
       },
       cartCount: Math.max(0, state.cartCount + quantity),
