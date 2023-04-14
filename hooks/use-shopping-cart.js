@@ -15,6 +15,7 @@ const addItem = (state = {}, product = null, quantity = 0) => {
 
   // Update item
   if (entry) {
+    console.log(entry.quantity + " --- " + quantity)
     return {
       ...state,
       cartDetails: {
