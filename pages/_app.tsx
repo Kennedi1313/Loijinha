@@ -6,6 +6,7 @@ import Menu from '../components/menu';
 import PromotionBanner from '../components/promotionBanner';
 import Footer from '../components/footer';
 import { Toaster } from 'react-hot-toast';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -22,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </div>
       </CartProvider>
       <Toaster />
+      <Analytics />
     </>
   ) 
 }
