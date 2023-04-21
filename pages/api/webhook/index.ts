@@ -20,7 +20,7 @@ export default async function handler (req: any, res: any) {
             event = stripe.webhooks.constructEvent(
                 rawBody.toString(),
                 signature,
-                process.env.STRIPE_WEBHOOK_SECRET as string
+                process.env.NEXT_PUBLIC_STRIPE_WEBHOOK_SECRET as string
             )
         } catch (err: any) {
             res.status(400).send(err.message);

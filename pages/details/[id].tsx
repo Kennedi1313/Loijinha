@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
 import { Product, useShoppingCart } from '@/hooks/use-shopping-cart';
 import Image from 'next/image'
-const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 import { BsCartDash, BsCartPlus } from 'react-icons/bs';
 import Head from 'next/head';
 import { formatCurrency } from '@/lib/utils';
+const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 interface ItemProps {
     id: string,
