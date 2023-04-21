@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['drive.google.com', 'localhost:3000', '', 'loijinha.vercel.app'],
+    domains: ['drive.google.com', 'localhost:3000', '', 'loijinha.vercel.app', 'files.stripe.com'],
   },
   reactStrictMode: true,
   typescript: {

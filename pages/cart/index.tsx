@@ -15,6 +15,7 @@ import axios from 'axios';
 export default function Details() {
     const { cartDetails, totalPrice, cartCount, addItem, removeItem, clearCart } = useShoppingCart();
     const [redirecting, setRedirecting] = useState(false);
+    const [hasMounted, setHasMounted] = useState(false);
 
     const redirectToCheckout = async () => {
         const { data: { id } } = await axios.post('/api/checkout_sessions', {
@@ -23,10 +24,19 @@ export default function Details() {
                 quantity,
             }))
         });
-
         const stripe = await getStripe();
-        await stripe.redirectToCheckout({ sessionId: id });
+        await stripe?.redirectToCheckout({ sessionId: id });
     }
+
+    
+    useEffect(() => {
+      setHasMounted(true);
+    }, []);
+
+    if (!hasMounted) {
+      return null;
+    }
+
     return (
         <>
             <div className="container xl:max-w-screen-xl mx-auto py-12 px-6">

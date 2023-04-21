@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
-import { useShoppingCart } from '@/hooks/use-shopping-cart';
+import { Product, useShoppingCart } from '@/hooks/use-shopping-cart';
 import Image from 'next/image'
-import Link from 'next/link'
+const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 import { BsCartDash, BsCartPlus } from 'react-icons/bs';
-import products from '../../public/items-sample.json'
 import Head from 'next/head';
 import { formatCurrency } from '@/lib/utils';
 
@@ -102,6 +101,18 @@ export default function Details(props: ItemProps) {
 }
 
 export async function getStaticPaths() {
+    const { data: prices } = await stripe.prices.list();
+    const products = await Promise.all(prices.map(async (price: any) => {
+        const product = await stripe.products.retrieve(price.product)
+        return {
+            id: price.id,
+            name: product.name,
+            gender: product.metadata.gender,
+            price: price.unit_amount,
+            srcImg: product.images[0],
+            categories: product.metadata.categories.replaceAll('"', '').split(',')
+        }
+    }));
     const paths = products.map((product: ItemProps) => ({
         params: { id: product.id },
     }))
@@ -110,6 +121,18 @@ export async function getStaticPaths() {
   
 export async function getStaticProps({ params }: any) {
     try {
+        const { data: prices } = await stripe.prices.list();
+        const products = await Promise.all(prices.map(async (price: any) => {
+            const product = await stripe.products.retrieve(price.product)
+            return {
+                id: price.id,
+                name: product.name,
+                gender: product.metadata.gender,
+                price: price.unit_amount,
+                srcImg: product.images[0],
+                categories: product.metadata.categories.replaceAll('"', '').split(',')
+            }
+        }));
         const props = products?.find((product: ItemProps) => product.id === params.id) ?? {};
         return {
             props,

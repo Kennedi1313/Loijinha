@@ -1,14 +1,53 @@
-import React, { useContext, useReducer, useMemo } from 'react';
+import React, { useContext, useReducer, useMemo, Reducer, Dispatch, ReactElement } from 'react';
 import useLocalStorageReducer from './use-local-storage-reducer';
 
 // Reducers
-const initialCartValues = {
+const initialCartValues: State = {
   cartDetails: {},
   cartCount: 0,
   totalPrice: 0,
+  currency: 'BRL'
 };
 
-const addItem = (state = {}, product = null, quantity = 0) => {
+export interface State {
+  cartDetails: {
+    [key: string]: {
+      categories: string [],
+      gender: string,
+      id: string,
+      name: string,
+      price: number,
+      quantity: number,
+      scrImg: string
+    } | { quantity: number, id: string, price: number }
+  },
+  cartCount: number,
+  totalPrice: number,
+  currency: string | undefined,
+}
+
+export interface Product {
+  id: string,
+  price: number,
+}
+
+export interface Action {
+  type: string,
+  quantity: number,
+  product: Product
+}
+
+interface InitContextProps {
+  state: State;
+  dispatch: Dispatch<Action>;
+}
+
+interface CartProviderProps {
+  reducer: Reducer<Product, Action>;
+  initState: Product;
+}
+
+const addItem = (state: State = {} as State, product: Product|null = null, quantity = 0) => {
   if (quantity <= 0 || !product) return state;
 
   let entry = state?.cartDetails?.[product.id];
@@ -43,7 +82,7 @@ const addItem = (state = {}, product = null, quantity = 0) => {
   };
 };
 
-const removeItem = (state = {}, product = null, quantity = 0) => {
+const removeItem = (state: State = {} as State, product: Product|null = null, quantity = 0) => {
   if (quantity <= 0 || !product) return state;
 
   let entry = state?.cartDetails?.[product.id];
@@ -86,7 +125,7 @@ const clearCart = () => {
   return initialCartValues;
 };
 
-const cartReducer = (state = {}, action) => {
+const cartReducer: Reducer<State, Action> = (state: State = {} as State, action: Action) => {
   switch (action.type) {
     case 'ADD_ITEM':
       return addItem(state, action.product, action.quantity);
@@ -99,27 +138,32 @@ const cartReducer = (state = {}, action) => {
   }
 };
 
-// Context + Provider
-const CartContext = React.createContext();
+interface Props {
+  currency?: string,
+  children: ReactElement|null
+}
 
-export const CartProvider = ({ currency = 'BRL', children = null }) => {
+// Context + Provider
+export const CartContext = React.createContext({} as [State, Dispatch<Action>]);
+
+export const CartProvider = ({ currency = 'BRL', children = null }: Props) => {
   const [cart, dispatch] = useLocalStorageReducer(
     'cart',
     cartReducer,
     initialCartValues
   );
 
-  const contextValue = useMemo(
+  const contextValue =  useMemo(
     () => [
       {
         ...cart,
         currency,
       },
       dispatch,
-    ],
+    ] as [State, Dispatch<Action>],
     [cart, currency]
   );
-
+  
   return (
     <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>
   );
@@ -129,13 +173,13 @@ export const CartProvider = ({ currency = 'BRL', children = null }) => {
 export const useShoppingCart = () => {
   const [cart, dispatch] = useContext(CartContext);
 
-  const addItem = (product, quantity = 1) =>
+  const addItem = (product: Product, quantity = 1) =>
     dispatch({ type: 'ADD_ITEM', product, quantity });
 
-  const removeItem = (product, quantity = 1) =>
+  const removeItem = (product: Product, quantity = 1) =>
     dispatch({ type: 'REMOVE_ITEM', product, quantity });
 
-  const clearCart = () => dispatch({ type: 'CLEAR_CART' });
+  const clearCart = () => dispatch({ type: 'CLEAR_CART', product: {} as Product, quantity: 0 });
 
   const shoppingCart = {
     ...cart,

@@ -38,6 +38,36 @@
         "categories": [
             "masculino", "selecao", "amer-sul", "primeiro"
         ]
+    },
+    {
+        "id": "price_1Mw9KZLIpYNBRSs49DhuZiJS",
+        "name": "Camisa Flamengo" ,
+        "gender": "Masculino" ,
+        "price": 12000 ,
+        "srcImg": "/product_2.jpg",
+        "categories": [
+            "masculino", "brasileiro", "rj", "primeiro"
+        ]
+    },
+    {
+        "id": "price_1Mw9L6LIpYNBRSs4JcnOv1Q7",
+        "name": "Camisa Flamengo Branca" ,
+        "gender": "Masculino" ,
+        "price": 11000 ,
+        "srcImg": "/product_3.jpg",
+        "categories": [
+            "masculino", "brasileiro", "rj", "segundo"
+        ]
+    },
+    {
+        "id": "price_1Mw9LZLIpYNBRSs4CCbFgq6N",
+        "name": "Camisa Seleção Brasileira" ,
+        "gender": "Masculino" ,
+        "price": 20000 ,
+        "srcImg": "/product_4.jpg",
+        "categories": [
+            "masculino", "selecao", "amer-sul", "primeiro"
+        ]
     }
 ]
   

@@ -1,8 +1,10 @@
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string, {
+    apiVersion: '2022-11-15'
+});
 
-export default async function handler(req, res) {
+export default async function handler(req: any, res: any) {
     if (req.method === "POST") {
         console.log('entrei aqui')
         try {
@@ -14,7 +16,7 @@ export default async function handler(req, res) {
                 cancel_url: `${req.headers.origin}/cart`
             });
             res.status(200).json(session)
-        } catch (err) {
+        } catch (err: any) {
             res.status(500).json({ statusCode: 500, message: err.message })
         }
     } else {

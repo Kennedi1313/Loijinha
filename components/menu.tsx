@@ -41,16 +41,10 @@ export default function Menu() {
           <MenuItemNode onClick={toggleMenu} name="Home" src="/products/index">
           </MenuItemNode>
 
-          <MenuItemNode onClick={toggleMenu} name="Masculino" src="/products/masculino">
-          </MenuItemNode>
-
-          <MenuItemNode onClick={toggleMenu} name="Feminino" src="/products/feminino">
-          </MenuItemNode>
-
           <MenuItemNode onClick={toggleMenu} name="Seleções" src="/products/selecao">
           </MenuItemNode>
           
-          <MenuItemNode onClick={toggleMenu} name="Brasileirão" src="/products/brasileiro">
+          <MenuItemNode onClick={toggleMenu} name="Brasileirão" src="/products/brasileirao">
           </MenuItemNode>
         
           <MenuItemNode onClick={toggleMenu} name="Internacional" src="/products/inter">

@@ -1,7 +1,9 @@
 import Stripe from "stripe";
 import { buffer } from "micro";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string, {
+    apiVersion: '2022-11-15'
+});
 
 export const config = {
     api: {
@@ -9,7 +11,7 @@ export const config = {
     }
 }
 
-export default async function handler (req, res) {
+export default async function handler (req: any, res: any) {
     if (req.method === 'POST') {
         let event;
         try {
@@ -18,9 +20,9 @@ export default async function handler (req, res) {
             event = stripe.webhooks.constructEvent(
                 rawBody.toString(),
                 signature,
-                process.env.STRIPE_WEBHOOK_SECRET
+                process.env.STRIPE_WEBHOOK_SECRET as string
             )
-        } catch (err) {
+        } catch (err: any) {
             res.status(400).send(err.message);
             return;
         }
