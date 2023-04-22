@@ -11,6 +11,8 @@ import {
 import { formatCurrency } from '@/lib/utils';
 import { useShoppingCart } from '@/hooks/use-shopping-cart';
 import axios from 'axios';
+import products from '../../public/items-sample.json'
+import Item from '@/components/item';
 
 export default function Details() {
     const { cartDetails, totalPrice, cartCount, addItem, removeItem, clearCart } = useShoppingCart();
@@ -39,7 +41,7 @@ export default function Details() {
 
     return (
         <>
-            <div className="container xl:max-w-screen-xl mx-auto py-12 px-6">
+            <div className="md:container xl:max-w-screen-xl mx-auto py-12 p-2 md:px-6">
                 {cartCount > 0 ? (
                 <>
                     <h2 className="text-4xl font-semibold">Seu carrinho</h2>
@@ -72,7 +74,7 @@ export default function Details() {
                     {Object.entries(cartDetails).map(([key, product]: [any, any]) => (
                     <div
                         key={key}
-                        className="flex flex-col gap-4 mt-2 md:flex-row justify-between space-x-4 hover:shadow-lg hover:border-opacity-50 border border-opacity-0 rounded-md p-4"
+                        className="flex flex-col gap-4 mt-2 md:flex-row justify-between space-x-4 hover:shadow-lg hover:border-opacity-50 border border-opacity-0 rounded-md p-2 md:p-4"
                     >
                         {/* Image + Name */}
                         <Link href={`/products/${product.id}`}>
@@ -131,23 +133,39 @@ export default function Details() {
                     </div>
                     ))}
 
-                    <div className="flex flex-col items-end border-t py-4 mt-8">
-                    <p className="text-xl">
+                    <div className="flex flex-col justify-between items-center md:items-end border-t py-4 mt-8 gap-2">
+                    <p className="text-xl self-end">
                         Total:{' '}
                         <span className="font-semibold">
                         {formatCurrency(totalPrice)}
                         </span>
                     </p>
-
                     <button
                         onClick={redirectToCheckout}
                         disabled={redirecting}
-                        className="text-white bg-black-1000 rounded-full px-5 py-3 w-fit mt-8 block"
+                        className="text-white bg-black-1000 w-full md:w-1/2 self-end rounded-md px-5 py-3 md:mt-8 md:block"
                     >
-                        {redirecting ? 'Redirecionando...' : 'Ir para   Checkout'}
+                        {redirecting ? 'Redirecionando...' : 'Fechar Pedido'}
                     </button>
                     </div>
+
+                    <div className='my-4 mt-24'>
+                        <h1 className='font-extrabold text-black-1000 text-2xl'>VOCÊ TAMBÉM VAI CURTIR</h1>
+                        <div className='grid grid-cols-2 md:grid-cols-4 gap-2 my-2'>
+                            {products.slice(0, 4).map(item => {
+                                return (
+                                <Item 
+                                    key={item.id}
+                                    id={item.id}
+                                    name={item.name} 
+                                    gender={item.gender}
+                                    price={item.price} 
+                                    srcImg={item.srcImg}/>)
+                            })}
+                        </div>
+                    </div>
                 </div>
+                
                 ) : null}
             </div>           
         </>

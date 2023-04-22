@@ -3,11 +3,12 @@ import MenuItemNode from "./menuItemNode";
 import { useShoppingCart } from '@/hooks/use-shopping-cart';
 import { formatCurrency } from '@/lib/utils';
 import Link from 'next/link';
+import { useEffect, useState } from "react";
 import { BsCart } from 'react-icons/bs'
 import { FaBars } from 'react-icons/fa'
 
 export default function Menu() {
-  
+  const [hasMounted, setHasMounted] = useState(false);
   function toggleMenu() {
       var menu = document.getElementById('menu');
       menu?.classList.toggle('hidden');
@@ -20,6 +21,13 @@ export default function Menu() {
   }
 
   const { totalPrice, cartCount } = useShoppingCart();
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return null;
+  }
     return (
       <div id="menu-container" className="fixed top-10 w-full h-[4.5rem] p-1 z-50 bg-white shadow-sm shadow-slate-200">
       
@@ -56,12 +64,15 @@ export default function Menu() {
             className="text-2xl text-black-1000 font-bold flex items-center absolute left-8 top-4 md:z-50 z-40">
               Loijinha
           </Link>
-      <Link href="/cart" id="cart" className="absolute right-14 md:h-14 h-14 flex center z-40 md:z-50">
+        <Link href="/cart" id="cart" className="absolute right-14 md:h-14 h-14 flex center z-40 md:z-50">
+          <span className="absolute h-[25px] w-[25px] top-[5px] right-[-10px] 
+            bg-black text-white font-semibold text-sm rounded-full z-40 justify-center flex items-center">
+              {cartCount}
+          </span>
           <div className="flex items-center space-x-1 text-gray-700 hover:text-gray-900">
             <div className="relative">
               <BsCart className="w-7 h-7 flex-shrink-0" />
             </div>
-            
           </div>
         </Link>
       </div>

@@ -1,13 +1,14 @@
 import { BsArrowLeftRight, BsArrowDownShort } from 'react-icons/bs'
 
 interface Props {
-  itemsCount: number
+  itemsCount: number,
+  category: string
 }
 
-const SearchMenu: React.FunctionComponent<Props> = ({ itemsCount }) => {
+const SearchMenu: React.FunctionComponent<Props> = ({ itemsCount, category }) => {
     return (
         <div className='flex justify-between px-8 items-center my-2 text-gray-500'>
-        {itemsCount} resultados encontrados para sua busca
+        {itemsCount} camisas de {category == 'index' ? 'time' : category} encontradas.
         <div className='flex justify-center content-center gap-8'>
         {/*
         <button className='grid grid-cols-2 justify-center items-center gap-3 text-gray-500'>Filtros <BsArrowLeftRight/></button> 

@@ -13,10 +13,10 @@ export default function Home({ products }: any) {
     <>
         { productsArray ? 
         <div>
-          <SearchMenu itemsCount={productsArray.length} />
-          <div className='flex items-center justify-center px-8 py-5 my-8'>
+          <SearchMenu itemsCount={productsArray.length} category={category as string} />
+          <div className='flex items-center justify-center px-2 md:px-8 py-5 my-8'>
             {/*<SideMenu/>*/}
-            <div className='container center grid lg:grid-cols-4 grid-cols-2 w-full gap-8'>
+            <div className='md:container center grid lg:grid-cols-4 grid-cols-2 w-full gap-2'>
               {productsArray.map((item: any) => {
                 return (
                   <Item 

@@ -6,8 +6,9 @@ import Image from 'next/image'
 import { BsCartDash, BsCartPlus } from 'react-icons/bs';
 import Head from 'next/head';
 import { formatCurrency } from '@/lib/utils';
+import Item from '@/components/item';
 const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
-
+let products = require('../../public/items-sample.json');
 interface ItemProps {
     id: string,
     name: string,
@@ -49,8 +50,8 @@ export default function Details(props: ItemProps) {
         </>
         ) : (
         <>
-            <div className='container md:max-w-screen-lg mx-auto md:py-12 px-8'>
-                <div className='flex flex-col md:flex-row justify-between items-center space-y-8 container py-2 md:py-12 md:px-6 md:space-y-0 md:space-x-12'>
+            <div className='md:container md:max-w-screen-lg mx-auto p-2 md:py-12 md:px-8'>
+                <div className='flex flex-col md:flex-row justify-between items-center space-y-8 container py-2 md:py-12 md:space-y-0 md:space-x-12'>
                     <div className='relative w-full h-96 md:w-[30rem] md:h-[30rem]'>
                         <Image 
                             src={props.srcImg}
@@ -61,8 +62,8 @@ export default function Details(props: ItemProps) {
                                 (max-width: 1200px) 100vw,
                                 33vw"/>
                     </div>
-                    <div className='flex-1 flex-col max-w-mdrounded-md'>
-                        <p className='text-4xl'>{props.name}</p> 
+                    <div className='flex-1 flex-col max-w-md w-full rounded-md'>
+                        <p className='text-2xl font-semibold'>{props.name}</p> 
                         <p className='text-gray-600'>{props.gender}</p>
                         <div className="mt-8 border-t pt-4">
                             <p className="text-gray-500">Preço:</p>
@@ -88,13 +89,28 @@ export default function Details(props: ItemProps) {
                             </div>
                             <button 
                                 type="button"
-                                className='text-white bg-black-1000 rounded-full px-5 py-3 w-full md:w-fit mt-8 block' 
+                                className='text-white bg-black-1000 rounded-md px-5 py-3 w-full md:w-fit mt-8 block' 
                                 onClick={handleOnAddToCart}>
                                 Adicionar ao Carrinho ({qty}) 
                             </button>
                         </div>
                     </div>
                 </div>
+                <div className='my-4 mt-24'>
+                        <h1 className='font-extrabold text-black-1000 text-2xl'>VOCÊ TAMBÉM VAI CURTIR</h1>
+                        <div className='grid grid-cols-2 md:grid-cols-4 gap-2 my-2'>
+                            {products.slice(0, 4).map((item: any) => {
+                                return (
+                                <Item
+                                    key={item.id}
+                                    id={item.id}
+                                    name={item.name} 
+                                    gender={item.gender}
+                                    price={item.price} 
+                                    srcImg={item.srcImg}/>)
+                            })}
+                        </div>
+                    </div>
             </div>
         </>
     )
@@ -102,7 +118,7 @@ export default function Details(props: ItemProps) {
 
 export async function getStaticPaths() {
     const { data: prices } = await stripe.prices.list();
-    const products = await Promise.all(prices.map(async (price: any) => {
+    products = await Promise.all(prices.map(async (price: any) => {
         const product = await stripe.products.retrieve(price.product)
         return {
             id: price.id,
@@ -122,7 +138,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: any) {
     try {
         const { data: prices } = await stripe.prices.list();
-        const products = await Promise.all(prices.map(async (price: any) => {
+        products = await Promise.all(prices.map(async (price: any) => {
             const product = await stripe.products.retrieve(price.product)
             return {
                 id: price.id,
@@ -136,7 +152,6 @@ export async function getStaticProps({ params }: any) {
         const props = products?.find((product: ItemProps) => product.id === params.id) ?? {};
         return {
             props,
-            revalidate: 1,
         };
     } catch (error) {
         return { notFound: true };
