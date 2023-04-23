@@ -6,8 +6,9 @@
         "price": 12000 ,
         "srcImg": "/product_1.jpg",
         "categories": [
-            "masculino", "brasileiro", "rj", "primeiro"
-        ]
+            "masculino", "brasileirao", "rj", "primeiro"
+        ],
+        "size": ""
     },
     {
         "id": "price_1Mw9KZLIpYNBRSs49DhuZiJS",
@@ -16,8 +17,9 @@
         "price": 12000 ,
         "srcImg": "/product_2.jpg",
         "categories": [
-            "masculino", "brasileiro", "rj", "primeiro"
-        ]
+            "masculino", "brasileirao", "rj", "primeiro"
+        ],
+        "size": ""
     },
     {
         "id": "price_1Mw9L6LIpYNBRSs4JcnOv1Q7",
@@ -26,8 +28,9 @@
         "price": 11000 ,
         "srcImg": "/product_3.jpg",
         "categories": [
-            "masculino", "brasileiro", "rj", "segundo"
-        ]
+            "masculino", "brasileirao", "rj", "segundo"
+        ],
+        "size": ""
     },
     {
         "id": "price_1Mw9LZLIpYNBRSs4CCbFgq6N",
@@ -37,7 +40,8 @@
         "srcImg": "/product_4.jpg",
         "categories": [
             "masculino", "selecao", "amer-sul", "primeiro"
-        ]
+        ],
+        "size": ""
     }
 ]
   

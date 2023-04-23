@@ -38,7 +38,7 @@ export default function Menu() {
       </button>
       
       <menu id="menu" className="
-        fixed hidden top-0 right-0 px-10 py-16 bg-gray-800 z-40 shadow-sm
+        fixed hidden top-0 right-0 px-10 py-16 bg-black-1000 z-40 shadow-sm
         md:top-10 md:h-fit md:bg-white md:py-0 md:block md:w-full">
         <div className='w-full md:flex mx-auto justify-center'>
           <li className="md:hidden z-90 fixed top-4 right-6">

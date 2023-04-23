@@ -14,7 +14,8 @@ interface ItemProps {
     name: string,
     gender: string,
     price: number,
-    srcImg: string
+    srcImg: string,
+    size: string
 }
 
 export default function Details(props: ItemProps) {
@@ -24,10 +25,25 @@ export default function Details(props: ItemProps) {
 
     const toastId = useRef<string>();
     const actualCartCount = useRef(cartCount);
-
     const handleOnAddToCart = () => {
-        addItem(props, qty);
+        addItem(props, qty, size);
     };
+
+    const [size, setSize] = useState('');
+
+    function toggleSizeButton (e: any, target: any): any {
+        var button = document.getElementById(target);
+        button?.classList.toggle('bg-black-1000');
+        button?.classList.toggle('text-white');
+
+        if (size != target) {
+            var button2 = document.getElementById(size); 
+            button2?.classList.toggle('bg-black-1000');
+            button2?.classList.toggle('text-white');
+        }
+        
+        setSize(target)
+    }
 
     useEffect(() => {
         if (cartCount == actualCartCount.current) {
@@ -62,12 +78,47 @@ export default function Details(props: ItemProps) {
                                 (max-width: 1200px) 100vw,
                                 33vw"/>
                     </div>
-                    <div className='flex-1 flex-col max-w-md w-full rounded-md'>
+                    <div className='flex-1 flex-col max-w-md w-full rounded-md gap-2'>
                         <p className='text-2xl font-semibold'>{props.name}</p> 
                         <p className='text-gray-600'>{props.gender}</p>
                         <div className="mt-8 border-t pt-4">
                             <p className="text-gray-500">Preço:</p>
                             <p className="text-xl font-semibold">{formatCurrency(props.price)}</p>
+                        </div>
+                        <div className='mt-4 border-t pt-4'>
+                            <p className="text-gray-500">Tamanho:</p>
+                            <div className='mt-1 flex flex-row justify-between text-center'>
+                                <button 
+                                    id='pp'
+                                    onClick={(e) => toggleSizeButton(e, 'pp')}
+                                    className='w-14 py-1 px-2 border-solid border-black-1000 border-2 rounded-md'>
+                                        PP
+                                </button>
+                                <button 
+                                    id='p'
+                                    onClick={(e) => toggleSizeButton(e, 'p')}
+                                    className='w-14 py-1 px-2 border-solid border-black-1000 border-2 rounded-md'>
+                                        P
+                                </button>
+                                <button 
+                                    id='m'
+                                    onClick={(e) => toggleSizeButton(e, 'm')}
+                                    className='w-14 py-1 px-2 border-solid border-black-1000 border-2 rounded-md'>
+                                        M
+                                </button>
+                                <button 
+                                    id='g'
+                                    onClick={(e) => toggleSizeButton(e, 'g')}
+                                    className='w-14 py-1 px-2 border-solid border-black-1000 border-2 rounded-md'>
+                                        G
+                                </button>
+                                <button 
+                                    id='gg'
+                                    onClick={(e) => toggleSizeButton(e, 'gg')}
+                                    className='w-14 py-1 px-2 border-solid border-black-1000 border-2 rounded-md'>
+                                        GG
+                                </button>
+                            </div>
                         </div>
                         <div className="mt-4 border-t pt-4">
                             <p className="text-gray-500">Quantidade:</p>

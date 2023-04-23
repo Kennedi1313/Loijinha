@@ -23,7 +23,7 @@ export default function Details() {
         const { data: { id } } = await axios.post('/api/checkout_sessions', {
             items: Object.entries(cartDetails).map(([_, { id, quantity }]) => ({
                 price: id,
-                quantity,
+                quantity
             }))
         });
         const stripe = await getStripe();
@@ -90,9 +90,14 @@ export default function Details() {
                                 33vw"
                             />
                             </div>
-                            <p className="font-semibold text-xl group-hover:underline">
-                            {product.name}
-                            </p>
+                            <div>
+                                <p className="font-semibold text-xl group-hover:underline">
+                                    {product.name}
+                                </p>
+                                <p className='text-gray-600'>
+                                    Tamanho: {product.size.toUpperCase()}
+                                </p>
+                            </div>    
                         </div>
                         </Link>
 
@@ -109,7 +114,7 @@ export default function Details() {
                             </button>
                             <p className="font-semibold text-xl">{product.quantity}</p>
                             <button
-                            onClick={() => addItem(product)}
+                            onClick={() => addItem(product, 1, product?.size)}
                             className="hover:bg-green-100 hover:text-green-500 rounded-md p-1"
                             >
                             <BsPlus className="w-6 h-6 flex-shrink-0 " />

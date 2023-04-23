@@ -18,8 +18,9 @@ export interface State {
       name: string,
       price: number,
       quantity: number,
-      scrImg: string
-    } | { quantity: number, id: string, price: number }
+      scrImg: string,
+      size: string
+    } | { quantity: number, id: string, price: number, size: string }
   },
   cartCount: number,
   totalPrice: number,
@@ -34,7 +35,8 @@ export interface Product {
 export interface Action {
   type: string,
   quantity: number,
-  product: Product
+  product: Product,
+  size: string
 }
 
 interface InitContextProps {
@@ -47,7 +49,7 @@ interface CartProviderProps {
   initState: Product;
 }
 
-const addItem = (state: State = {} as State, product: Product|null = null, quantity = 0) => {
+const addItem = (state: State = {} as State, product: Product|null = null, quantity = 0, size: string = '') => {
   if (quantity <= 0 || !product) return state;
 
   let entry = state?.cartDetails?.[product.id];
@@ -61,6 +63,7 @@ const addItem = (state: State = {} as State, product: Product|null = null, quant
         [product.id]: {
           ...entry,
           quantity: entry.quantity + quantity,
+          size
         }
       },
       cartCount: Math.max(0, state.cartCount + quantity),
@@ -75,6 +78,7 @@ const addItem = (state: State = {} as State, product: Product|null = null, quant
       [product.id]: {
         ...product,
         quantity,
+        size
       },
     },
     cartCount: Math.max(0, state.cartCount + quantity),
@@ -128,7 +132,7 @@ const clearCart = () => {
 const cartReducer: Reducer<State, Action> = (state: State = {} as State, action: Action) => {
   switch (action.type) {
     case 'ADD_ITEM':
-      return addItem(state, action.product, action.quantity);
+      return addItem(state, action.product, action.quantity, action.size);
     case 'REMOVE_ITEM':
       return removeItem(state, action.product, action.quantity);
     case 'CLEAR_CART':
@@ -173,13 +177,14 @@ export const CartProvider = ({ currency = 'BRL', children = null }: Props) => {
 export const useShoppingCart = () => {
   const [cart, dispatch] = useContext(CartContext);
 
-  const addItem = (product: Product, quantity = 1) =>
-    dispatch({ type: 'ADD_ITEM', product, quantity });
+  const addItem = (product: Product, quantity = 1, size: string) => {
+    dispatch({ type: 'ADD_ITEM', product, quantity, size });
+  }
 
   const removeItem = (product: Product, quantity = 1) =>
-    dispatch({ type: 'REMOVE_ITEM', product, quantity });
+    dispatch({ type: 'REMOVE_ITEM', product, quantity, size: '' });
 
-  const clearCart = () => dispatch({ type: 'CLEAR_CART', product: {} as Product, quantity: 0 });
+  const clearCart = () => dispatch({ type: 'CLEAR_CART', product: {} as Product, quantity: 0, size: '' });
 
   const shoppingCart = {
     ...cart,

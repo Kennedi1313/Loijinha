@@ -2,6 +2,7 @@ import Item from '../../components/item'
 import SearchMenu from '../../components/searchMenu'
 import { useRouter } from "next/router";
 const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
+let products = require('../../public/items-sample.json');
 
 export default function Home({ products }: any) {
   const { query: queryParams } = useRouter();
