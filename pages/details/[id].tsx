@@ -25,11 +25,16 @@ export default function Details(props: ItemProps) {
 
     const toastId = useRef<string>();
     const actualCartCount = useRef(cartCount);
-    const handleOnAddToCart = () => {
-        addItem(props, qty, size);
-    };
-
     const [size, setSize] = useState('');
+
+    const handleOnAddToCart = () => {
+        if (size)
+            addItem(props, qty, size);
+        else 
+            toast.error(`Necessário informar o tamanho do produto`, {
+                id: toastId.current,
+            })
+    };
 
     function toggleSizeButton (e: any, target: any): any {
         var button = document.getElementById(target);
@@ -40,9 +45,10 @@ export default function Details(props: ItemProps) {
             var button2 = document.getElementById(size); 
             button2?.classList.toggle('bg-black-1000');
             button2?.classList.toggle('text-white');
+            setSize(target)
+        } else {
+            setSize('');
         }
-        
-        setSize(target)
     }
 
     useEffect(() => {

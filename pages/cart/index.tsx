@@ -24,6 +24,10 @@ export default function Details() {
             items: Object.entries(cartDetails).map(([_, { id, quantity }]) => ({
                 price: id,
                 quantity
+            })),
+            sizes: Object.entries(cartDetails).map(([_, { id, size }]) => ({
+                price: id,
+                size
             }))
         });
         const stripe = await getStripe();

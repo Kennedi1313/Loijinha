@@ -29,17 +29,17 @@ export default function Menu() {
     return null;
   }
     return (
-      <div id="menu-container" className="fixed top-10 w-full h-[4.5rem] p-1 z-50 bg-white shadow-sm shadow-slate-200">
+      <div id="menu-container" className="fixed top-0 w-full h-[4.5rem] p-2 z-50 bg-white shadow-sm shadow-slate-200">
       
       <button id="toggle-button"
-        className="fixed right-2 pl-6 pr-2 w-14 h-14 block md:hidden"
+        className="fixed right-2 pl-6 w-12 h-14 block md:hidden"
         onClick={toggleMenu}>
-        <FaBars className="w-6 h-6"></FaBars>
+        <FaBars className="w-6 h-8"></FaBars>
       </button>
       
       <menu id="menu" className="
         fixed hidden top-0 right-0 px-10 py-16 bg-black-1000 z-40 shadow-sm
-        md:top-10 md:h-fit md:bg-white md:py-0 md:block md:w-full">
+        md:top-0 md:h-fit md:bg-white md:py-0 md:block md:w-full">
         <div className='w-full md:flex mx-auto justify-center'>
           <li className="md:hidden z-90 fixed top-4 right-6">
               <button className="text-right text-white text-4xl"
@@ -64,7 +64,7 @@ export default function Menu() {
             className="text-2xl text-black-1000 font-bold flex items-center absolute left-8 top-4 md:z-50 z-40">
               Loijinha
           </Link>
-        <Link href="/cart" id="cart" className="absolute right-14 md:h-14 h-14 flex center z-40 md:z-50">
+        <Link href="/cart" id="cart" className="absolute right-16 md:h-14 h-14 flex center z-40 md:z-50">
           <span className="absolute h-[25px] w-[25px] top-[5px] right-[-10px] 
             bg-black text-white font-semibold text-sm rounded-full z-40 justify-center flex items-center">
               {cartCount}

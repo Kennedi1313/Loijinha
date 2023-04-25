@@ -13,9 +13,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
     <CartProvider>
       <div>
-          <Header/>
+          {/**<Header/>**/}
           <Menu/>
-          <main className='top-28 relative'>
+          <main className='top-[4.5rem] relative'>
           <PromotionBanner/>
             <Component {...pageProps} />
             <Footer></Footer>
