@@ -33,16 +33,16 @@ export default function Home() {
                         33vw"/>
                 </div>
             </div>
-            <div className='w-full p-4 flex flex-col md:items-center mt-10'>
-                <h1 className='text-2xl mb-4 md:text-5xl font-extrabold md:w-64'>NOVIDADES DO BRASILEIRÃO</h1>
-                <span className='font-bold'>#BORAFOGO #BRASILEIRAO2023 #NOVIDADES</span>
+            <div className='w-full p-4 flex flex-col items-center'>
+                <h1 className='text-2xl mb-4 p-0 md:text-5xl font-extrabold md:w-80 text-center'>POWER OF MINIMALISM</h1>
+                <span className='font-bold'>#MINIMALIST #HPLOVERS #NOVIDADES</span>
             </div>
-            <div className='flex flex-row w-full justify-center items-center my-5 gap-3'>
+            <div className='flex flex-row w-full justify-center items-center my-2 gap-3'>
                 <Link className='text-white bg-black-1000 rounded-full px-5 py-3' href={''}>Ver Coleção</Link>
                 <Link className='text-white bg-black-1000 rounded-full px-5 py-3' href={''}>Saiba Mais</Link>
             </div>
             
-            <div className='my-4 p-2 md:p-4 md:mx-16'>
+            <div className='my-8 p-2 md:p-4 md:mx-16'>
                 <h1 className='font-extrabold text-black-1000 text-2xl'>MAIS COMPRADAS</h1>
                 <div className='grid grid-cols-2 md:grid-cols-4 gap-2 my-2'>
                     {data.slice(0, 4).map(item => {

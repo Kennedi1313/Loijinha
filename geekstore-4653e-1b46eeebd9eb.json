@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "geekstore-4653e",
+  "private_key_id": "1b46eeebd9eb166b89a4f6fa637ba167464dd355",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCbAbpGK3zkvNIY\njeiJomOPU3YWHMOFmbDf1LPFR9eaBktAtCd5/87RuehTdvD4NyaCJtu1sc7uelB4\nKXqGJZddS6tyE2lVgX4QAewoN1FZnmEq8LMuaOxZEcJCemf1nJ479uEiJL3ZMKmd\n6Gmmt5x+CXECOtYJK58iqFyReHmZN7PN4pecZUxuIYmD6fi4txdx8YmWQck52YRq\nFzDhSiMvYaQR1UfmauJNZqAxGrNkyzXSu97xE4R5a0dn0h92a1RiOTt+WmNUmVgc\ntIcwoLwxf6wP/kwk78xc65+1DD/CSshm1bIyF0CybPvLCRyrwSbq6UjrFYyPulgc\nCkMvN7BnAgMBAAECggEAJaCsvD3wSoJ/qdBBA7A05OUIxGNlHzho1F0I6rn+33fp\nqqJQ9u+fIBA2EpTL+CVDJtMSALBSIFf20sSW5puXe+FTlBScPFJ77Jza3ARZrhyh\nT9AwXvK/dPu3oXWfaOMFEl9i1Wv/3gpPEnMJupvV1E6sbTMlJAK/1aTzG6kYM5YO\nRwHWJ47948y+PSJRa/wAlSHpJysiNwyRreC+PcSBda3ZmjIeMhekLs6qKwlAwTv6\n6ON/zLfeWnz2iyBEPMUwES80eaLudbJ+7mMqsTzS6+VvnZhEpl7U287E93l2Z4Ac\nOXPxWFzeZBI+5jXltOSRJTLyNXmrbGEuWjoiiTlBoQKBgQDLRhHNNzBN3YHRvWiD\nWVLNxeY+oyQrOZG5vsvhRKYxJw1kXfnjIfuMtlccFgJYW2/b8I6+wC+rTDrpsKqC\nd+6RV7j3qCpPwRqfp3+aQYR6KKr5ToUtvTtZMiUY+iMNsrkTe+Amu3iAtqycV8+n\nbCtJDwsCyoGmZh1qFkHBrFjjsQKBgQDDNpmP2RiFconlq5+3uqwQHEpmLN0RY/Rt\nBn5/Bn6X5qUB9WsZxwc73l1VxF8ET77TmhRl6XswHP7qlEV5KF3ihrDmJ4YdxJ+F\nYp6UxzYQ8ZrjqEqw1//2tHoDxf221SHwfuLE69fpNfn3Aj/Ihn8QeG/xo9aVfrYZ\n6eellSdTlwKBgF5THnGWuXB4aAQ2myfQLC9WNLg+Jct1BF0n3x2iKGhIkdtQDGPM\nYhjyh8t9nwr3KxnpL6PuNHCNiAzmsMin9Gk3RpqNS00E82DAbeLboii5dFUJjZ0i\n4UZLkZFciSWTGHSlF+eBOLKpkcFesfojpJZbR6W86JqZae7PcyX23qyRAoGAE1BP\nmR/NgUZ3xjVYtADQDTf/VGST6qiNAkxmL4Mg+z5ijPMPCZnbaVzytw2aqP6Kzryr\nz/ltqrDzt5m71eTchRD2Z475gfB2J+g98FJVUw/UVznLSfvU4z+v4rewBmrH1Nd4\n8Cq1Tel9NacPUHOeFq8TxECFdnz231F5DbTYEzkCgYEApRiEW2za57CbtRyA5EJi\nYUkSQJm4FBcObtF71wLJmKwrF3fiMJ3Dc7u8dBXj9WQ9Bkm9DyaDLtnalox3k3Au\nhn12IfT3gMvmcaf5aoD4teEbDDw9cXI+5QBdoxSnHlDjKHiKQoMmtuH6UF0t2gYi\nosV6/z7V9RzWd3iVxduNR0o=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-7afxs@geekstore-4653e.iam.gserviceaccount.com",
+  "client_id": "109444641326403578703",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-7afxs%40geekstore-4653e.iam.gserviceaccount.com"
+}

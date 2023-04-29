@@ -5,6 +5,10 @@ module.exports = {
     extend: {
       colors: {
         'black-1000': '#121212'
+      },
+      fontFamily: {
+        'sans': ['Roboto', 'Helvetica', 'Arial', 'sans-serif', 'Unlock'],
+        'unlock': ['Unlock', 'Roboto']
       }
     },
   },

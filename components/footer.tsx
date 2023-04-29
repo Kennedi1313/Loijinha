@@ -7,7 +7,7 @@ export default function Footer() {
         <div className='text-white bg-black-1000 flex flex-col items-center px-6 py-16 mt-20'>
             <div className='flex flex-col md:flex-row gap-6 justify-evenly w-fill md:w-full'>
                 <ul>
-                    <p className='text-6xl'>Loijinha</p>
+                    <p className='text-6xl font-extrabold font-unlock'>13<span className='text-3xl font-thin'>GeekStore</span></p>
 
                     <div className='flex flex-row justify-between mt-8'>
                         <BsInstagram></BsInstagram>

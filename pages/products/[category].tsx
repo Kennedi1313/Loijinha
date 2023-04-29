@@ -15,7 +15,7 @@ export default function Home({ products }: any) {
         { productsArray ? 
         <div>
           <SearchMenu itemsCount={productsArray.length} category={category as string} />
-          <div className='flex items-center justify-center px-2 md:px-8 py-5 my-8'>
+          <div className='flex items-center justify-center px-2 md:px-8 py-5 my-2'>
             {/*<SideMenu/>*/}
             <div className='md:container center grid lg:grid-cols-4 grid-cols-2 w-full gap-2'>
               {productsArray.map((item: any) => {
@@ -47,7 +47,7 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async () => {
-  const { data: prices } = await stripe.prices.list();
+  const { data: prices } = await stripe.prices.list({ active: true });
   const products = await Promise.all(prices.map(async (price: any) => {
     const product = await stripe.products.retrieve(price.product)
     return {
