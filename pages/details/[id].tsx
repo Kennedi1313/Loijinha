@@ -195,6 +195,7 @@ export async function getStaticPaths() {
   
 export async function getStaticProps({ params }: any) {
     try {
+        await delay(500);
         const { data: prices } = await stripe.prices.list({ active: true });
         products = await Promise.all(prices.map(async (price: any) => {
             const product = await stripe.products.retrieve(price.product)
@@ -217,4 +218,6 @@ export async function getStaticProps({ params }: any) {
         return { notFound: true };
     }
 }
+
+const delay = (ms: any) => new Promise(res => setTimeout(res, ms));
 
