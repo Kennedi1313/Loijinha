@@ -8,7 +8,7 @@ interface Props {
 const SearchMenu: React.FunctionComponent<Props> = ({ itemsCount, category }) => {
     return (
         <div className='flex justify-between px-8 items-center my-2 text-gray-500'>
-        {itemsCount} camisas de {category == 'index' ? 'time' : category} encontradas.
+        {itemsCount} produtos encontrados.
         <div className='flex justify-center content-center gap-8'>
         {/*
         <button className='grid grid-cols-2 justify-center items-center gap-3 text-gray-500'>Filtros <BsArrowLeftRight/></button> 

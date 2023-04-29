@@ -12,13 +12,13 @@ interface ItemProps {
 
 export default function Item(props: ItemProps) {
     return (
-        <Link href={'/details/' + props.id} className='flex flex-col gap-1 h-80 md:h-80 w-full'>
+        <Link href={'/details/' + props.id} className='flex flex-col gap-1 h-80 md:h-80 w-full '>
             <div className=' w-full h-60 md:h-60 relative rounded-md'>
                 <Image 
                     src={props.srcImg}
                     alt='item'
                     fill
-                    className='object-cover rounded-md'
+                    className='object-cover rounded-md bg-gray-200'
                     sizes="(max-width: 768px) 100vw,
                         (max-width: 1200px) 50vw,
                         33vw"/>

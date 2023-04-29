@@ -79,14 +79,13 @@ export default function Details(props: ItemProps) {
                             src={props.srcImg}
                             alt='item'
                             fill
-                            className='object-contain'
+                            className='object-contain bg-gray-200'
                             sizes="(max-width: 768px) 100vw,
                                 (max-width: 1200px) 100vw,
                                 33vw"/>
                     </div>
                     <div className='flex-1 flex-col max-w-md w-full rounded-md gap-2'>
                         <p className='text-2xl font-semibold'>{props.name}</p> 
-                        <p className='text-gray-600'>{props.gender}</p>
                         <div className="mt-8 border-t pt-4">
                             <p className="text-gray-500">Preço:</p>
                             <p className="text-xl font-semibold">{formatCurrency(props.price)}</p>

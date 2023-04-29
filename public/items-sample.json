@@ -1,47 +1,77 @@
 [
     {
-        "id": "price_1Mw9K7LIpYNBRSs4yFxoJhXe",
-        "name": "Batman" ,
-        "gender": "Masculino" ,
-        "price": 4990 ,
-        "srcImg": "/product_1.png",
-        "categories": [
-            "masculino", "brasileirao", "rj", "primeiro"
-        ],
-        "size": ""
+      "id": "price_1N2N7NLIpYNBRSs4anoS8bZ2",
+      "name": "code&rest",
+      "gender": "male",
+      "price": 4990,
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3RfQkE2Q0Fld0FQMXF1djJOamlrcFpjN1lC00OFXTU2zX",
+      "categories": [
+        "geek"
+      ]
     },
     {
-        "id": "price_1Mw9KZLIpYNBRSs49DhuZiJS",
-        "name": "Coringa" ,
-        "gender": "Masculino" ,
-        "price": 4990 ,
-        "srcImg": "/product_2.png",
-        "categories": [
-            "masculino", "brasileirao", "rj", "primeiro"
-        ],
-        "size": ""
+      "id": "price_1N2N6GLIpYNBRSs4r6wDKMKD",
+      "name": "Pera",
+      "gender": "male",
+      "price": 4990,
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3Rfc2lKOXBGS2E2WUJHYnNiZEw2VE1rcmFv00BVHOzDig",
+      "categories": [
+        "geek"
+      ]
     },
     {
-        "id": "price_1Mw9L6LIpYNBRSs4JcnOv1Q7",
-        "name": "Venom" ,
-        "gender": "Masculino" ,
-        "price": 4990 ,
-        "srcImg": "/product_3.png",
-        "categories": [
-            "masculino", "brasileirao", "rj", "segundo"
-        ],
-        "size": ""
+      "id": "price_1N21lULIpYNBRSs4tacp4Tsr",
+      "name": "Venom",
+      "gender": "male",
+      "price": 4990,
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3RfaUgxbm50ZG93ODd2QXpTV1lEcHdEN2hM00GkHLmeuy",
+      "categories": [
+        "filmes",
+        "geek"
+      ]
     },
     {
-        "id": "price_1Mw9LZLIpYNBRSs4CCbFgq6N",
-        "name": "Mario" ,
-        "gender": "Masculino" ,
-        "price": 4990 ,
-        "srcImg": "/product_4.png",
-        "categories": [
-            "masculino", "selecao", "amer-sul", "primeiro"
-        ],
-        "size": ""
+      "id": "price_1N21WdLIpYNBRSs4xvYztv28",
+      "name": "Coringa",
+      "gender": "male",
+      "price": 4990,
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3RfU0tnMExsRHcyVWdndTc3RWVXR0NQeTJQ003Cjbk6WP",
+      "categories": [
+        "filmes",
+        "geek"
+      ]
+    },
+    {
+      "id": "price_1N21W1LIpYNBRSs4OG2g08gn",
+      "name": "Batman",
+      "gender": "male",
+      "price": 4990,
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3Rfc0lwYTlvUnVzWEFWaFJZaW5ZSGh4V3dG00kMPOpu7R",
+      "categories": [
+        "filmes",
+        "geek"
+      ]
+    },
+    {
+      "id": "price_1N21HlLIpYNBRSs4Hwqmr6TW",
+      "name": "Luigi",
+      "gender": "male",
+      "price": 4990,
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3RfTEFlQW5BQUpHZ25ZYWxGcXRLQXVzV1ox00OLt2CUmV",
+      "categories": [
+        "jogos",
+        "geek"
+      ]
+    },
+    {
+      "id": "price_1N20zrLIpYNBRSs491kedrht",
+      "name": "Mario",
+      "gender": "male",
+      "price": 4990,
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3RfRjFvUEg3NUZidVN4Z1BYOEVwOW4zM0Fl007J7iU38D",
+      "categories": [
+        "jogos",
+        "geek"
+      ]
     }
-]
-  
+  ]

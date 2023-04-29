@@ -57,16 +57,16 @@ export default function Menu() {
                   onClick={toggleMenu}>&times;</button>
           </li>
           
-          <MenuItemNode onClick={toggleMenu} name="Filmes" src="/products/index">
+          <MenuItemNode onClick={toggleMenu} name="Filmes" src="/products/filmes">
           </MenuItemNode>
 
-          <MenuItemNode onClick={toggleMenu} name="Séries" src="/products/selecao">
+          <MenuItemNode onClick={toggleMenu} name="Séries" src="/products/series">
           </MenuItemNode>
           
-          <MenuItemNode onClick={toggleMenu} name="Jogos" src="/products/brasileirao">
+          <MenuItemNode onClick={toggleMenu} name="Jogos" src="/products/jogos">
           </MenuItemNode>
         
-          <MenuItemNode onClick={toggleMenu} name="Coleções" src="/products/inter">
+          <MenuItemNode onClick={toggleMenu} name="Geek" src="/products/geek">
           </MenuItemNode>
         </div>
       </menu>

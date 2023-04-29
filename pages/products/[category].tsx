@@ -8,8 +8,7 @@ export default function Home({ products }: any) {
   const { query: queryParams } = useRouter();
   const category = queryParams.category != undefined ? queryParams.category : "default";
   let productsArray = products
-  if (category !== "index") 
-    productsArray = productsArray.filter((product: any) => product.categories.includes(category.toString()))
+  productsArray = productsArray.filter((product: any) => product.categories.includes(category.toString().trim()))
   return (
     <>
         { productsArray ? 
@@ -38,10 +37,10 @@ export default function Home({ products }: any) {
 
 export async function getStaticPaths() {
   const paths = [
-    {params: { category: 'index' }},
-    {params: { category: 'selecao' }},
-    {params: { category: 'brasileirao' }},
-    {params: { category: 'inter' }}
+    {params: { category: 'filmes' }},
+    {params: { category: 'series' }},
+    {params: { category: 'jogos' }},
+    {params: { category: 'geek' }}
   ]
   return { paths, fallback: false }
 }
