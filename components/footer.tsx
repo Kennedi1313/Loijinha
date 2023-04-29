@@ -24,7 +24,7 @@ export default function Footer() {
             </div>
             <div className='border-solid border-white w-3/5 border-b-[1px] my-10'></div>
             <div className='flex flex-row text-sm w-3/5'>
-                <p>©Loijinha 2023.  Todos os direitos reservados.  Brasil.</p>
+                <p>@13geekstore 2023.  Todos os direitos reservados.  Brasil.</p>
             </div>
         </div>
     )

@@ -195,7 +195,7 @@ export async function getStaticPaths() {
   
 export async function getStaticProps({ params }: any) {
     try {
-        const { data: prices } = await stripe.prices.list();
+        const { data: prices } = await stripe.prices.list({ active: true });
         products = await Promise.all(prices.map(async (price: any) => {
             const product = await stripe.products.retrieve(price.product)
             return {
