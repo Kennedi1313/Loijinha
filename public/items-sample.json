@@ -1,9 +1,9 @@
 [
     {
         "id": "price_1Mw9K7LIpYNBRSs4yFxoJhXe",
-        "name": "Camisa Botafogo" ,
+        "name": "Batman" ,
         "gender": "Masculino" ,
-        "price": 12000 ,
+        "price": 4990 ,
         "srcImg": "/product_1.png",
         "categories": [
             "masculino", "brasileirao", "rj", "primeiro"
@@ -12,9 +12,9 @@
     },
     {
         "id": "price_1Mw9KZLIpYNBRSs49DhuZiJS",
-        "name": "Camisa Flamengo" ,
+        "name": "Coringa" ,
         "gender": "Masculino" ,
-        "price": 12000 ,
+        "price": 4990 ,
         "srcImg": "/product_2.png",
         "categories": [
             "masculino", "brasileirao", "rj", "primeiro"
@@ -23,9 +23,9 @@
     },
     {
         "id": "price_1Mw9L6LIpYNBRSs4JcnOv1Q7",
-        "name": "Camisa Flamengo Branca" ,
+        "name": "Venom" ,
         "gender": "Masculino" ,
-        "price": 11000 ,
+        "price": 4990 ,
         "srcImg": "/product_3.png",
         "categories": [
             "masculino", "brasileirao", "rj", "segundo"
@@ -34,9 +34,9 @@
     },
     {
         "id": "price_1Mw9LZLIpYNBRSs4CCbFgq6N",
-        "name": "Camisa Seleção Brasileira" ,
+        "name": "Mario" ,
         "gender": "Masculino" ,
-        "price": 20000 ,
+        "price": 4990 ,
         "srcImg": "/product_4.png",
         "categories": [
             "masculino", "selecao", "amer-sul", "primeiro"
