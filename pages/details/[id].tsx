@@ -213,6 +213,7 @@ export async function getStaticProps({ params }: any) {
             props,
         };
     } catch (error) {
+        console.log(error)
         return { notFound: true };
     }
 }
