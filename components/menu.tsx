@@ -6,10 +6,6 @@ import Link from 'next/link';
 import { useEffect, useState } from "react";
 import { BsCart, BsPerson } from 'react-icons/bs'
 import { FaBars } from 'react-icons/fa'
-import logoKR from '../public/KR-logo-3.png';
-import Image from "next/image";
-import { signIn, signOut, useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation';
 import Head from 'next/head'
 
 export default function Menu() {
@@ -23,13 +19,6 @@ export default function Menu() {
       var toggle = document.getElementById('toggle-button');
       toggle?.classList.toggle('color-white');
       toggle?.classList.toggle('z-100');
-  }
-
-  const  {data: session } = useSession();
-
-  function redirectToUserInformation() {
-    if(!session)
-      signIn();
   }
 
   const { totalPrice, cartCount } = useShoppingCart();
@@ -97,13 +86,6 @@ export default function Menu() {
             </div>
           </div>
         </Link>
-        {/**<Link href={'/user'} id="cart" className="absolute right-[140px] md:h-14 h-14 flex center z-40 md:z-50">
-          <div className="flex items-center space-x-1 text-gray-700 hover:text-gray-900">
-            <div className="relative">
-              <BsPerson className="w-7 h-7 flex-shrink-0" />
-            </div>
-          </div>
-        </Link>**/}
       </div>
     )
 }
