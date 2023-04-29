@@ -186,6 +186,7 @@ export async function getStaticPaths() {
             categories: product.metadata.categories.replaceAll('"', '').split(',')
         }
     }));
+    console.log(products)
     const paths = products.map((product: ItemProps) => ({
         params: { id: product.id },
     }))
@@ -207,6 +208,7 @@ export async function getStaticProps({ params }: any) {
             }
         }));
         const props = products?.find((product: ItemProps) => product.id === params.id) ?? {};
+        console.log(props)
         return {
             props,
         };

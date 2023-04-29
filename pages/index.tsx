@@ -13,7 +13,7 @@ export default function Home() {
             <div className='w-full h-screen grid grid-cols-1 md:grid-cols-2 p-2'>
                 <div className='w-full h-full relative'>
                     <Image 
-                        src={capa2}
+                        src={capa3}
                         alt='item'
                         priority
                         fill
@@ -24,7 +24,7 @@ export default function Home() {
                 </div>
                 <div className='w-full h-full relative'>
                     <Image 
-                        src={capa3}
+                        src={capa4}
                         alt='item'
                         fill
                         className='object-cover'
