@@ -7,8 +7,8 @@ import { BsCartDash, BsCartPlus } from 'react-icons/bs';
 import Head from 'next/head';
 import { formatCurrency } from '@/lib/utils';
 import Item from '@/components/item';
-const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 let products = require('../../public/items-sample.json');
+const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 interface ItemProps {
     id: string,
     name: string,
