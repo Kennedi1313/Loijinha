@@ -4,8 +4,8 @@ import Item from '../components/item'
 import data from '../public/items-sample.json'
 import capa1 from '../public/capa_1.png'
 import capa2 from '../public/capa_2.png'
-import capa3 from '../public/capa_3.jpg'
-import capa4 from '../public/capa_4.jpg'
+import capa3 from '../public/capa_3.png'
+import capa4 from '../public/capa_4.png'
 
 export default function Home() {
     return (
@@ -13,7 +13,7 @@ export default function Home() {
             <div className='w-full h-screen grid grid-cols-1 md:grid-cols-2 p-2'>
                 <div className='w-full h-full relative'>
                     <Image 
-                        src={capa1}
+                        src={capa2}
                         alt='item'
                         priority
                         fill
@@ -24,7 +24,7 @@ export default function Home() {
                 </div>
                 <div className='w-full h-full relative'>
                     <Image 
-                        src={capa2}
+                        src={capa3}
                         alt='item'
                         fill
                         className='object-cover'
