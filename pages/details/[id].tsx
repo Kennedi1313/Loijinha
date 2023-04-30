@@ -8,7 +8,7 @@ import Head from 'next/head';
 import { formatCurrency } from '@/lib/utils';
 import Item from '@/components/item';
 let products = require('../../public/items-sample.json');
-const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
+//const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 interface ItemProps {
     id: string,
     name: string,
@@ -173,19 +173,18 @@ export default function Details(props: ItemProps) {
 }
 
 export async function getStaticPaths() {
-    const { data: prices } = await stripe.prices.list({ active: true });
-    products = await Promise.all(prices.map(async (price: any) => {
-        const product = await stripe.products.retrieve(price.product)
-        return {
-            id: price.id,
-            name: product.name,
-            gender: product.metadata.gender,
-            price: price.unit_amount,
-            srcImg: product.images[0],
-            categories: product.metadata.categories.replaceAll('"', '').split(',')
-        }
-    }));
-    console.log(products)
+    // const { data: prices } = await stripe.prices.list({ active: true });
+    // products = await Promise.all(prices.map(async (price: any) => {
+    //     const product = await stripe.products.retrieve(price.product)
+    //     return {
+    //         id: price.id,
+    //         name: product.name,
+    //         gender: product.metadata.gender,
+    //         price: price.unit_amount,
+    //         srcImg: product.images[0],
+    //         categories: product.metadata.categories.replaceAll('"', '').split(',')
+    //     }
+    // }));
     const paths = products.map((product: ItemProps) => ({
         params: { id: product.id },
     }))
@@ -194,21 +193,20 @@ export async function getStaticPaths() {
   
 export async function getStaticProps({ params }: any) {
     try {
-        await delay(500);
-        const { data: prices } = await stripe.prices.list({ active: true });
-        products = await Promise.all(prices.map(async (price: any) => {
-            const product = await stripe.products.retrieve(price.product)
-            return {
-                id: price.id,
-                name: product.name,
-                gender: product.metadata.gender,
-                price: price.unit_amount,
-                srcImg: product.images[0],
-                categories: product.metadata.categories.replaceAll('"', '').split(',')
-            }
-        }));
+        //await delay(500);
+        //const { data: prices } = await stripe.prices.list({ active: true });
+        //products = await Promise.all(prices.map(async (price: any) => {
+        //     const product = await stripe.products.retrieve(price.product)
+        //     return {
+        //         id: price.id,
+        //         name: product.name,
+        //         gender: product.metadata.gender,
+        //         price: price.unit_amount,
+        //         srcImg: product.images[0],
+        //         categories: product.metadata.categories.replaceAll('"', '').split(',')
+        //     }
+        // }));
         const props = products?.find((product: ItemProps) => product.id === params.id) ?? {};
-        console.log(props)
         return {
             props,
         };

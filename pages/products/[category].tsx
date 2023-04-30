@@ -2,7 +2,7 @@ import Item from '../../components/item'
 import SearchMenu from '../../components/searchMenu'
 import { useRouter } from "next/router";
 let products = require('../../public/items-sample.json');
-const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
+//const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export default function Home({ products }: any) {
   const { query: queryParams } = useRouter();
@@ -46,18 +46,18 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async () => {
-  const { data: prices } = await stripe.prices.list({ active: true });
-  const products = await Promise.all(prices.map(async (price: any) => {
-    const product = await stripe.products.retrieve(price.product)
-    return {
-      id: price.id,
-      name: product.name,
-      gender: product.metadata.gender,
-      price: price.unit_amount,
-      srcImg: product.images[0],
-      categories: product.metadata.categories.replaceAll('"', '').split(',')
-    }
-  }));
+  // const { data: prices } = await stripe.prices.list({ active: true });
+  // const products = await Promise.all(prices.map(async (price: any) => {
+  //   const product = await stripe.products.retrieve(price.product)
+  //   return {
+  //     id: price.id,
+  //     name: product.name,
+  //     gender: product.metadata.gender,
+  //     price: price.unit_amount,
+  //     srcImg: product.images[0],
+  //     categories: product.metadata.categories.replaceAll('"', '').split(',')
+  //   }
+  // }));
 
   return {
     props: {
