@@ -164,11 +164,11 @@ export default function Details() {
                     <div className="flex flex-col justify-between border-t py-4 mt-8 gap-2">
                         <p>Calcule o frete:</p>
                         <div  className="flex flex-row justify-between gap-2">
-                            <input className='border-gray-200 border-solid border-[1px] p-2 md:w-1/2 rounded-md' 
+                            <input className='border-gray-200 border-solid border-[1px] p-2 w-full md:w-1/2 rounded-md' 
                                 type="destino" 
                                 value={destino} 
                                 onChange={e => setDestino(e.target.value)} />
-                            <button className='text-white bg-black-1000 w-full md:w-1/2 self-end rounded-md px-5 py-3 
+                            <button className='text-white bg-black-1000 w-fit md:w-1/2 self-end rounded-md px-5 py-3 
                                 md:block disabled:opacity-50 disabled:cursor-not-allowed' 
                                 onClick={calcFreteByDestino}>Calcular
                             </button>
@@ -178,13 +178,12 @@ export default function Details() {
                         <div className="flex flex-col justify-between mt-4 gap-2">
                             <p>Opções:</p>
                             <div className='flex flex-col justify-between gap-2'>
-                                <label className='flex flex-row gap-2'>
+                                <label className='flex flex-row gap-2 items-center'>
                                     <input type='radio' value="sedex" name='service' 
-                                        checked
                                         onChange={e => setServico(e.target.value)}/>
                                         Sedex: {shippingOptions?.sedex.estimate} dias úteis - {shippingOptions?.sedex.value}
                                 </label>
-                                <label className='flex flex-row gap-2'>
+                                <label className='flex flex-row gap-2 items-center'>
                                     <input type='radio' value="pac" name='service' 
                                         onChange={e => setServico(e.target.value)}/>
                                         PAC: {shippingOptions?.pac.estimate} dias úteis - {shippingOptions?.pac.value}
