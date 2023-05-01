@@ -1,14 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
-import { Product, useShoppingCart } from '@/hooks/use-shopping-cart';
+import { useShoppingCart } from '@/hooks/use-shopping-cart';
 import Image from 'next/image'
 import { BsCartDash, BsCartPlus } from 'react-icons/bs';
 import Head from 'next/head';
 import { formatCurrency } from '@/lib/utils';
 import Item from '@/components/item';
 let products = require('../../public/items-sample.json');
-//const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 interface ItemProps {
     id: string,
     name: string,
@@ -22,12 +21,13 @@ export default function Details(props: ItemProps) {
     const router = useRouter();
     const { cartCount, addItem } = useShoppingCart();
     const [qty, setQty] = useState(1);
-
+    const [adding, setAdding] = useState(false);
     const toastId = useRef<string>();
     const actualCartCount = useRef(cartCount);
     const [size, setSize] = useState('');
 
     const handleOnAddToCart = () => {
+        setAdding(true);
         if (size)
             addItem(props, qty, size);
         else 
@@ -57,6 +57,7 @@ export default function Details(props: ItemProps) {
         } else {
             actualCartCount.current = cartCount;
         }
+        setAdding(false);
         toast.success(`${qty} ${props.name} adicionado (a)`, {
             id: toastId.current,
         })
@@ -145,7 +146,8 @@ export default function Details(props: ItemProps) {
                             </div>
                             <button 
                                 type="button"
-                                className='text-white bg-black-1000 rounded-md px-5 py-3 w-full md:w-fit mt-8 block' 
+                                disabled={adding}
+                                className='text-white bg-black-1000 rounded-md px-5 py-3 w-full md:w-fit mt-8 block disabled:opacity-50 disabled:cursor-not-allowed' 
                                 onClick={handleOnAddToCart}>
                                 Adicionar ao Carrinho ({qty}) 
                             </button>
@@ -173,18 +175,6 @@ export default function Details(props: ItemProps) {
 }
 
 export async function getStaticPaths() {
-    // const { data: prices } = await stripe.prices.list({ active: true });
-    // products = await Promise.all(prices.map(async (price: any) => {
-    //     const product = await stripe.products.retrieve(price.product)
-    //     return {
-    //         id: price.id,
-    //         name: product.name,
-    //         gender: product.metadata.gender,
-    //         price: price.unit_amount,
-    //         srcImg: product.images[0],
-    //         categories: product.metadata.categories.replaceAll('"', '').split(',')
-    //     }
-    // }));
     const paths = products.map((product: ItemProps) => ({
         params: { id: product.id },
     }))
@@ -193,19 +183,6 @@ export async function getStaticPaths() {
   
 export async function getStaticProps({ params }: any) {
     try {
-        //await delay(500);
-        //const { data: prices } = await stripe.prices.list({ active: true });
-        //products = await Promise.all(prices.map(async (price: any) => {
-        //     const product = await stripe.products.retrieve(price.product)
-        //     return {
-        //         id: price.id,
-        //         name: product.name,
-        //         gender: product.metadata.gender,
-        //         price: price.unit_amount,
-        //         srcImg: product.images[0],
-        //         categories: product.metadata.categories.replaceAll('"', '').split(',')
-        //     }
-        // }));
         const props = products?.find((product: ItemProps) => product.id === params.id) ?? {};
         return {
             props,
@@ -215,6 +192,4 @@ export async function getStaticProps({ params }: any) {
         return { notFound: true };
     }
 }
-
-const delay = (ms: any) => new Promise(res => setTimeout(res, ms));
 

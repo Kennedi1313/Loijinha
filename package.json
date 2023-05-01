@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.8",
+    "@emotion/styled": "^11.10.8",
+    "@mui/material": "^5.12.2",
     "@next-auth/firebase-adapter": "^2.0.1",
     "@stripe/stripe-js": "^1.52.1",
     "@types/node": "18.14.6",

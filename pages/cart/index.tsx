@@ -20,6 +20,7 @@ export default function Details() {
     const [hasMounted, setHasMounted] = useState(false);
 
     const redirectToCheckout = async () => {
+        setRedirecting(true);
         const { data: { id } } = await axios.post('/api/checkout_sessions', {
             items: Object.entries(cartDetails).map(([_, { id, quantity }]) => ({
                 price: id,
@@ -152,7 +153,7 @@ export default function Details() {
                     <button
                         onClick={redirectToCheckout}
                         disabled={redirecting}
-                        className="text-white bg-black-1000 w-full md:w-1/2 self-end rounded-md px-5 py-3 md:mt-8 md:block"
+                        className="text-white bg-black-1000 w-full md:w-1/2 self-end rounded-md px-5 py-3 md:mt-8 md:block disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {redirecting ? 'Redirecionando...' : 'Fechar Pedido'}
                     </button>
