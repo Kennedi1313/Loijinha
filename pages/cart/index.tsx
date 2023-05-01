@@ -52,7 +52,6 @@ export default function Details() {
             servico
         });
         setShippingOptions(data.data);
-        setServico('sedex');
     }
 
     useEffect(() => {
