@@ -9,8 +9,7 @@ export default async function handler(req: any, res: any) {
         try {
           const sizes = req?.body?.sizes?.map((el: any) => {
             return el.price + ": " + el.size;
-          })
-          console.log(sizes)
+          });
           const session = await stripe.checkout.sessions.create({
               mode: 'payment',
               payment_method_types: ['card'],
@@ -19,22 +18,11 @@ export default async function handler(req: any, res: any) {
                   {
                     shipping_rate_data: {
                       type: 'fixed_amount',
-                      fixed_amount: {amount: 0, currency: 'brl'},
-                      display_name: 'Frete Grátis',
+                      fixed_amount: {amount: req?.body?.shipping?.value.replace(',', ''), currency: 'brl'},
+                      display_name: 'Frete',
                       delivery_estimate: {
-                        minimum: {unit: 'business_day', value: 5},
-                        maximum: {unit: 'business_day', value: 7},
-                      },
-                    },
-                  },
-                  {
-                    shipping_rate_data: {
-                      type: 'fixed_amount',
-                      fixed_amount: {amount: 1500, currency: 'brl'},
-                      display_name: 'Sedex',
-                      delivery_estimate: {
-                        minimum: {unit: 'business_day', value: 1},
-                        maximum: {unit: 'business_day', value: 1},
+                        minimum: { unit: 'business_day', value: req?.body?.shipping?.estimate as number },
+                        maximum: {unit: 'business_day', value: Number(req?.body?.shipping?.estimate) + 5 },
                       },
                     },
                   },

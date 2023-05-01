@@ -8,34 +8,53 @@ import {
     BsDash,
     BsPlus,
   } from 'react-icons/bs';
-import { formatCurrency } from '@/lib/utils';
+import { calcFrete, formatCurrency } from '@/lib/utils';
 import { useShoppingCart } from '@/hooks/use-shopping-cart';
 import axios from 'axios';
 import products from '../../public/items-sample.json'
 import Item from '@/components/item';
+import { toast } from 'react-hot-toast';
 
 export default function Details() {
     const { cartDetails, totalPrice, cartCount, addItem, removeItem, clearCart } = useShoppingCart();
     const [redirecting, setRedirecting] = useState(false);
     const [hasMounted, setHasMounted] = useState(false);
+    const [destino, setDestino] = useState('');
+    const [servico, setServico] = useState('');
+    const [shippingOptions, setShippingOptions] = useState(null as any);
+    const toastId = useRef<string>();
 
     const redirectToCheckout = async () => {
-        setRedirecting(true);
-        const { data: { id } } = await axios.post('/api/checkout_sessions', {
-            items: Object.entries(cartDetails).map(([_, { id, quantity }]) => ({
-                price: id,
-                quantity
-            })),
-            sizes: Object.entries(cartDetails).map(([_, { id, size }]) => ({
-                price: id,
-                size
-            }))
-        });
-        const stripe = await getStripe();
-        await stripe?.redirectToCheckout({ sessionId: id });
+        if(servico) {
+            setRedirecting(true);
+            const { data: { id } } = await axios.post('/api/checkout_sessions', {
+                items: Object.entries(cartDetails).map(([_, { id, quantity }]) => ({
+                    price: id,
+                    quantity
+                })),
+                sizes: Object.entries(cartDetails).map(([_, { id, size }]) => ({
+                    price: id,
+                    size
+                })),
+                shipping: servico == 'sedex' ? shippingOptions?.sedex : shippingOptions?.pac
+            });
+            const stripe = await getStripe();
+            await stripe?.redirectToCheckout({ sessionId: id });
+        } else 
+            toast.error(`Necessário informar o CEP para o cálculo do frete`, {
+                id: toastId.current,
+            })
     }
 
-    
+    const calcFreteByDestino = async() => {
+        const { data } = await axios.post('/api/correios', {
+            destino,
+            servico
+        });
+        setShippingOptions(data.data);
+        setServico('sedex');
+    }
+
     useEffect(() => {
       setHasMounted(true);
     }, []);
@@ -111,18 +130,18 @@ export default function Details() {
                         {/* Quantity */}
                         <div className="flex items-center space-x-3">
                             <button
-                            onClick={() => removeItem(product)}
-                            disabled={product?.quantity <= 1}
-                            className="disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-current hover:bg-rose-100 hover:text-rose-500 rounded-md p-1"
+                                onClick={() => removeItem(product)}
+                                disabled={product?.quantity <= 1}
+                                className="disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-current hover:bg-rose-100 hover:text-rose-500 rounded-md p-1"
                             >
-                            <BsDash className="w-6 h-6 flex-shrink-0" />
+                                <BsDash className="w-6 h-6 flex-shrink-0" />
                             </button>
                             <p className="font-semibold text-xl">{product.quantity}</p>
                             <button
-                            onClick={() => addItem(product, 1, product?.size)}
-                            className="hover:bg-green-100 hover:text-green-500 rounded-md p-1"
+                                onClick={() => addItem(product, 1, product?.size)}
+                                className="hover:bg-green-100 hover:text-green-500 rounded-md p-1"
                             >
-                            <BsPlus className="w-6 h-6 flex-shrink-0 " />
+                                <BsPlus className="w-6 h-6 flex-shrink-0 " />
                             </button>
                         </div>
 
@@ -143,6 +162,38 @@ export default function Details() {
                     </div>
                     ))}
 
+                    <div className="flex flex-col justify-between border-t py-4 mt-8 gap-2">
+                        <p>Calcule o frete:</p>
+                        <div  className="flex flex-row justify-between gap-2">
+                            <input className='border-gray-200 border-solid border-[1px] p-2 md:w-1/2 rounded-md' 
+                                type="destino" 
+                                value={destino} 
+                                onChange={e => setDestino(e.target.value)} />
+                            <button className='text-white bg-black-1000 w-full md:w-1/2 self-end rounded-md px-5 py-3 
+                                md:block disabled:opacity-50 disabled:cursor-not-allowed' 
+                                onClick={calcFreteByDestino}>Calcular
+                            </button>
+                        </div>
+            
+                        { shippingOptions ?
+                        <div className="flex flex-col justify-between mt-4 gap-2">
+                            <p>Opções:</p>
+                            <div className='flex flex-col justify-between gap-2'>
+                                <label className='flex flex-row gap-2'>
+                                    <input type='radio' value="sedex" name='service' 
+                                        checked
+                                        onChange={e => setServico(e.target.value)}/>
+                                        Sedex: {shippingOptions?.sedex.estimate} dias úteis - {shippingOptions?.sedex.value}
+                                </label>
+                                <label className='flex flex-row gap-2'>
+                                    <input type='radio' value="pac" name='service' 
+                                        onChange={e => setServico(e.target.value)}/>
+                                        PAC: {shippingOptions?.pac.estimate} dias úteis - {shippingOptions?.pac.value}
+                                </label>
+                            </div>
+                        </div> : '' }
+                    </div>
+
                     <div className="flex flex-col justify-between items-center md:items-end border-t py-4 mt-8 gap-2">
                     <p className="text-xl self-end">
                         Total:{' '}
@@ -153,7 +204,7 @@ export default function Details() {
                     <button
                         onClick={redirectToCheckout}
                         disabled={redirecting}
-                        className="text-white bg-black-1000 w-full md:w-1/2 self-end rounded-md px-5 py-3 md:mt-8 md:block disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="text-white bg-black-1000 w-full self-end rounded-md px-5 py-3 md:mt-8 md:block disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {redirecting ? 'Redirecionando...' : 'Fechar Pedido'}
                     </button>
