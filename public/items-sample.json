@@ -73,5 +73,38 @@
         "jogos",
         "geek"
       ]
+    },
+    {
+      "id": "price_1N3kufLIpYNBRSs4C6hEobC6",
+      "name": "Akatsuki",
+      "gender": "male",
+      "price": 4990,
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3RfZHFVVXFPSXhLU3FQQ3RRQXVzMDJ3UGhJ00etgsZ9lR",
+      "categories": [
+        "anime",
+        "geek"
+      ]
+    },
+    {
+      "id": "price_1N3kthLIpYNBRSs4WEqTqMCg",
+      "name": "L",
+      "gender": "male",
+      "price": 4990,
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3RfVnBiU2hNYkxISlRxMkZHRWJjTVBKWTN300rt82sG64",
+      "categories": [
+        "anime",
+        "geek"
+      ]
+    },
+    {
+      "id": "price_1N3kswLIpYNBRSs459mcASEy",
+      "name": "Cartas",
+      "gender": "male",
+      "price": 4990,
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3RfZDZnUWpMcVdCVGtraWhMV1ZPN1dUTlhh00mEfnLINd",
+      "categories": [
+        "anime",
+        "geek"
+      ]
     }
   ]

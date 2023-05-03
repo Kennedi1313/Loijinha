@@ -42,7 +42,7 @@ export default function Home() {
                 <Link className='text-white bg-black-1000 rounded-full px-5 py-3' href={''}>Saiba Mais</Link>
             </div>
             
-            <div className='my-8 p-2 md:p-4 md:mx-16'>
+            <div className='my-8 p-2 md:p-4 md:container md:max-w-screen-lg mx-auto'>
                 <h1 className='font-extrabold text-black-1000 text-2xl'>MAIS COMPRADAS</h1>
                 <div className='grid grid-cols-2 md:grid-cols-4 gap-2 my-2'>
                     {data.slice(0, 4).map(item => {

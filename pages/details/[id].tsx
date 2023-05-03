@@ -27,10 +27,10 @@ export default function Details(props: ItemProps) {
     const [size, setSize] = useState('');
 
     const handleOnAddToCart = () => {
-        setAdding(true);
-        if (size)
+        if (size) {
+            setAdding(true);
             addItem(props, qty, size);
-        else 
+        } else 
             toast.error(`Necessário informar o tamanho do produto`, {
                 id: toastId.current,
             })
