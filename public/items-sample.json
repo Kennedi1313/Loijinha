@@ -14,7 +14,7 @@
       "name": "Pera",
       "gender": "male",
       "price": 4990,
-      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3Rfc2lKOXBGS2E2WUJHYnNiZEw2VE1rcmFv00BVHOzDig",
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3RfZ1NZSzVDaEVHN1JJTnp2eUpCYllmcW1i00rNBSc9Jt",
       "categories": [
         "geek"
       ]
@@ -103,7 +103,46 @@
       "price": 4990,
       "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3RfZDZnUWpMcVdCVGtraWhMV1ZPN1dUTlhh00mEfnLINd",
       "categories": [
-        "anime",
+        "geek"
+      ]
+    },
+    {
+      "id": "price_1N3mm9LIpYNBRSs4MtQv71Ow",
+      "name": "Relampago Marquinhos",
+      "gender": "male",
+      "price": 4990,
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3RfRW5DS2xESzBjQjVaR3UwbjBtMFlkVWVr00e43LpL4t",
+      "categories": [
+        "geek"
+      ]
+    },
+    {
+      "id": "price_1N3mlFLIpYNBRSs4iF8RZkQW",
+      "name": "Teu c#",
+      "gender": "male",
+      "price": 4990,
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3RfcFhxMEg3Q2Q4YVhwcnhwYlhObXlRZ2lF00lPosPLKp",
+      "categories": [
+        "geek"
+      ]
+    },
+    {
+      "id": "price_1N3mkgLIpYNBRSs4GwL0AFTX",
+      "name": "The Godfather",
+      "gender": "male",
+      "price": 4990,
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3RfZDVHMk53aHc0dTlrd3c3MnNUUmhEblY200re3lRfU2",
+      "categories": [
+        "geek"
+      ]
+    },
+    {
+      "id": "price_1N3mjjLIpYNBRSs4WJHeaySj",
+      "name": "Fulerage",
+      "gender": "male",
+      "price": 4990,
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3RfNlV6V1JyTnJTQVJPUmVJMXVOd0ZPMmxV00iT2S6hW2",
+      "categories": [
         "geek"
       ]
     }
