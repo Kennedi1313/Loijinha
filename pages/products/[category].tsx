@@ -44,7 +44,7 @@ export default function Home({ products }: any) {
 export async function getStaticPaths() {
   const paths = [
     {params: { category: 'filmes' }},
-    {params: { category: 'series' }},
+    {params: { category: 'animes' }},
     {params: { category: 'jogos' }},
     {params: { category: 'geek' }}
   ]

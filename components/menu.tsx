@@ -60,7 +60,7 @@ export default function Menu() {
           <MenuItemNode onClick={toggleMenu} name="Filmes" src="/products/filmes">
           </MenuItemNode>
 
-          <MenuItemNode onClick={toggleMenu} name="Séries" src="/products/series">
+          <MenuItemNode onClick={toggleMenu} name="Animes" src="/products/animes">
           </MenuItemNode>
           
           <MenuItemNode onClick={toggleMenu} name="Jogos" src="/products/jogos">
