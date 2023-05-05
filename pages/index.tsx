@@ -35,7 +35,7 @@ export default function Home() {
             </div>
             <div className='w-full p-4 flex flex-col items-center'>
                 <h1 className='text-2xl mb-4 p-0 md:text-5xl font-extrabold md:w-80 text-center'>POWER OF MINIMALISM</h1>
-                <span className='font-bold'>#MINIMALIST #HPLOVERS #NOVIDADES</span>
+                <span className='font-bold'>#MINIMALIST #GEEKLOVERS #NOVIDADES</span>
             </div>
             <div className='flex flex-row w-full justify-center items-center my-2 gap-3'>
                 <Link className='text-white bg-black-1000 rounded-full px-5 py-3' href={''}>Ver Coleção</Link>

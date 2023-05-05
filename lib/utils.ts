@@ -13,45 +13,19 @@ export const isClient = typeof window === 'object';
 export const fetcher = (url: any) => axios.get(url).then(res => res.data);
 
 export const calcFrete = async (destino: string) => {
-  var x2js = new X2JS();
   const headers = {
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Origin': '*',
+    'api-key': 'ee948c424e1165aa154a8431eb4456da', 
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
   }
-  const sedexObj = await axios.get(getUrlCorreios(destino, '04014'), {headers});
-  const sedexJsonObj: any = x2js.xml2js(sedexObj.data);
+  const fretes = await axios.post('https://camisadimona.com.br/api/v2/shipping',{
+      zipcode: destino,
+      quantity: "1"
+    }, 
+    {headers});
 
-  const pacObj = await axios.get(getUrlCorreios(destino, '04510'), {headers});
-  const pacJsonObj: any = x2js.xml2js(pacObj.data);
   return {
-    data: {
-      sedex: {
-        value: sedexJsonObj?.Servicos?.cServico?.Valor,
-        estimate: sedexJsonObj?.Servicos?.cServico?.PrazoEntrega
-      }, 
-      pac: {
-        value: pacJsonObj?.Servicos?.cServico?.Valor,
-        estimate: pacJsonObj?.Servicos?.cServico?.PrazoEntrega
-      }
-    }
+    data: JSON.stringify(fretes.data)
   };
-}
-
-function getUrlCorreios(destino: string, servico: string) {
-  return `http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?
-    nCdEmpresa=
-    &sDsSenha=
-    &sCepOrigem=59091200
-    &sCepDestino=${destino}
-    &nVlPeso=1
-    &nCdFormato=1
-    &nVlComprimento=20
-    &nVlAltura=5
-    &nVlLargura=15
-    &sCdMaoPropria=n
-    &nVlValorDeclarado=0
-    &sCdAvisoRecebimento=n
-    &nCdServico=${servico}
-    &nVlDiametro=0
-    &StrRetorno=xml`;
 }

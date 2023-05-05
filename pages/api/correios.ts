@@ -1,5 +1,4 @@
 import { calcFrete } from "@/lib/utils";
-import X2JS from "x2js";
 
 export default async function handler (req: any, res: any) {
     if (req.method === 'POST') {

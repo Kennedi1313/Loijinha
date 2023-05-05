@@ -20,24 +20,29 @@ export default function Details() {
     const [redirecting, setRedirecting] = useState(false);
     const [hasMounted, setHasMounted] = useState(false);
     const [destino, setDestino] = useState('');
-    const [servico, setServico] = useState('');
-    const [shippingOptions, setShippingOptions] = useState(null as any);
+    const [servico, setServico] = useState(0);
+    const [shippingOptions, setShippingOptions] = useState([{}] as [{name: string, value: string, delivery_method_id: number, business_days: number}]);
+    const [shippingLoading, setShippingLoading] = useState(false);
     const toastId = useRef<string>();
 
     const redirectToCheckout = async () => {
         if(servico) {
+            console.log(shippingOptions)
+            console.log(shippingOptions.filter(el => el.delivery_method_id === servico))
             setRedirecting(true);
             const { data: { id } } = await axios.post('/api/checkout_sessions', {
                 items: Object.entries(cartDetails).map(([_, { id, quantity }]) => ({
                     price: id,
                     quantity
                 })),
-                sizes: Object.entries(cartDetails).map(([_, { id, size }]) => ({
+                metadata: Object.entries(cartDetails).map(([_, { id, size, model }]) => ({
                     price: id,
-                    size
+                    size,
+                    model
                 })),
-                shipping: servico == 'sedex' ? shippingOptions?.sedex : shippingOptions?.pac
-            });
+                shipping: shippingOptions.filter(el => el.delivery_method_id === servico)[0]
+                }
+            );
             const stripe = await getStripe();
             await stripe?.redirectToCheckout({ sessionId: id });
         } else 
@@ -47,11 +52,12 @@ export default function Details() {
     }
 
     const calcFreteByDestino = async() => {
+        setShippingLoading(true);
         const { data } = await axios.post('/api/correios', {
-            destino,
-            servico
+            destino
         });
-        setShippingOptions(data.data);
+        setShippingOptions(JSON.parse(data.data));
+        setShippingLoading(false);
     }
 
     useEffect(() => {
@@ -137,7 +143,7 @@ export default function Details() {
                             </button>
                             <p className="font-semibold text-xl">{product.quantity}</p>
                             <button
-                                onClick={() => addItem(product, 1, product?.size)}
+                                onClick={() => addItem(product, 1, product?.size, product?.model)}
                                 className="hover:bg-green-100 hover:text-green-500 rounded-md p-1"
                             >
                                 <BsPlus className="w-6 h-6 flex-shrink-0 " />
@@ -168,26 +174,23 @@ export default function Details() {
                                 type="destino" 
                                 value={destino} 
                                 onChange={e => setDestino(e.target.value)} />
-                            <button className='text-white bg-black-1000 w-fit md:w-1/2 self-end rounded-md px-5 py-3 
+                            <button disabled={shippingLoading} className='text-white bg-black-1000 w-fit md:w-1/2 self-end rounded-md px-5 py-3 
                                 md:block disabled:opacity-50 disabled:cursor-not-allowed' 
-                                onClick={calcFreteByDestino}>Calcular
+                                onClick={calcFreteByDestino}>{shippingLoading ? 'Calculando...' : 'Calcular'}
                             </button>
                         </div>
             
-                        { shippingOptions ?
+                        { shippingOptions[0].delivery_method_id ?
                         <div className="flex flex-col justify-between mt-4 gap-2">
                             <p>Opções:</p>
                             <div className='flex flex-col justify-between gap-2'>
-                                <label className='flex flex-row gap-2 items-center'>
-                                    <input type='radio' value="sedex" name='service' 
-                                        onChange={e => setServico(e.target.value)}/>
-                                        Sedex: {shippingOptions?.sedex.estimate} dias úteis - {shippingOptions?.sedex.value}
-                                </label>
-                                <label className='flex flex-row gap-2 items-center'>
-                                    <input type='radio' value="pac" name='service' 
-                                        onChange={e => setServico(e.target.value)}/>
-                                        PAC: {shippingOptions?.pac.estimate} dias úteis - {shippingOptions?.pac.value}
-                                </label>
+                                {shippingOptions.map((option: any) => { return (
+                                    <label key={option.delivery_method_id} className='flex flex-row gap-2 items-center'>
+                                    <input type='radio' value={option.delivery_method_id} name='service' 
+                                        onChange={e => setServico(option.delivery_method_id)}/>
+                                        {option.name}: {option.business_days} dias úteis - R$ {option.value}
+                                    </label>)
+                                })}
                             </div>
                         </div> : '' }
                     </div>

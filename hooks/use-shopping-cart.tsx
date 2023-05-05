@@ -19,8 +19,9 @@ export interface State {
       price: number,
       quantity: number,
       scrImg: string,
-      size: string
-    } | { quantity: number, id: string, price: number, size: string }
+      size: string, 
+      model: string
+    } | { quantity: number, id: string, price: number, size: string, model: string }
   },
   cartCount: number,
   totalPrice: number,
@@ -36,20 +37,11 @@ export interface Action {
   type: string,
   quantity: number,
   product: Product,
-  size: string
+  size: string, 
+  model: string
 }
 
-interface InitContextProps {
-  state: State;
-  dispatch: Dispatch<Action>;
-}
-
-interface CartProviderProps {
-  reducer: Reducer<Product, Action>;
-  initState: Product;
-}
-
-const addItem = (state: State = {} as State, product: Product|null = null, quantity = 0, size: string = '') => {
+const addItem = (state: State = {} as State, product: Product|null = null, quantity = 0, size: string = '', model: string = '') => {
   if (quantity <= 0 || !product) return state;
 
   let entry = state?.cartDetails?.[product.id];
@@ -63,7 +55,8 @@ const addItem = (state: State = {} as State, product: Product|null = null, quant
         [product.id]: {
           ...entry,
           quantity: entry.quantity + quantity,
-          size
+          size,
+          model
         }
       },
       cartCount: Math.max(0, state.cartCount + quantity),
@@ -78,7 +71,8 @@ const addItem = (state: State = {} as State, product: Product|null = null, quant
       [product.id]: {
         ...product,
         quantity,
-        size
+        size,
+        model
       },
     },
     cartCount: Math.max(0, state.cartCount + quantity),
@@ -132,7 +126,7 @@ const clearCart = () => {
 const cartReducer: Reducer<State, Action> = (state: State = {} as State, action: Action) => {
   switch (action.type) {
     case 'ADD_ITEM':
-      return addItem(state, action.product, action.quantity, action.size);
+      return addItem(state, action.product, action.quantity, action.size, action.model);
     case 'REMOVE_ITEM':
       return removeItem(state, action.product, action.quantity);
     case 'CLEAR_CART':
@@ -177,14 +171,14 @@ export const CartProvider = ({ currency = 'BRL', children = null }: Props) => {
 export const useShoppingCart = () => {
   const [cart, dispatch] = useContext(CartContext);
 
-  const addItem = (product: Product, quantity = 1, size: string) => {
-    dispatch({ type: 'ADD_ITEM', product, quantity, size });
+  const addItem = (product: Product, quantity = 1, size: string, model: string) => {
+    dispatch({ type: 'ADD_ITEM', product, quantity, size, model });
   }
 
   const removeItem = (product: Product, quantity = 1) =>
-    dispatch({ type: 'REMOVE_ITEM', product, quantity, size: '' });
+    dispatch({ type: 'REMOVE_ITEM', product, quantity, size: '', model: '' });
 
-  const clearCart = () => dispatch({ type: 'CLEAR_CART', product: {} as Product, quantity: 0, size: '' });
+  const clearCart = () => dispatch({ type: 'CLEAR_CART', product: {} as Product, quantity: 0, size: '', model: '' });
 
   const shoppingCart = {
     ...cart,
