@@ -145,5 +145,15 @@
       "categories": [
         "geek"
       ]
+    },
+    {
+      "id": "price_1N5cZwLIpYNBRSs4ZZwBXPt9",
+      "name": "Sentido",
+      "gender": "male",
+      "price": 4990,
+      "srcImg": "https://files.stripe.com/links/MDB8YWNjdF8xTXc4dlhMSXBZTkJSU3M0fGZsX3Rlc3RfN1MxRGVxYXlNUWlaVjVmbzAwNjlwYTRx00ageJNYWG",
+      "categories": [
+        "geek"
+      ]
     }
   ]

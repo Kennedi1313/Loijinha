@@ -8,6 +8,7 @@ import Footer from '../components/footer';
 import { Toaster } from 'react-hot-toast';
 import { Analytics } from '@vercel/analytics/react';
 import { SessionProvider } from 'next-auth/react'
+import ContactFloating from '@/components/contactFloating';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -20,6 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <main className='md:top-[4.5rem] top-14 relative'>
             <PromotionBanner/>
               <Component {...pageProps} />
+              <ContactFloating></ContactFloating>
               <Footer></Footer>
             </main>
           </div>
