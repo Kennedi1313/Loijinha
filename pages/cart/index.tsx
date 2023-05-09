@@ -106,7 +106,7 @@ export default function Details() {
                         className="flex flex-col gap-4 mt-2 md:flex-row justify-between space-x-4 hover:shadow-lg hover:border-opacity-50 border border-opacity-0 rounded-md p-2 md:p-4"
                     >
                         {/* Image + Name */}
-                        <Link href={`/products/${product.id}`}>
+                        <Link href={`/details/${product.id}`}>
                         <div className="flex items-center space-x-4 group">
                             <div className="relative w-20 h-20 group-hover:scale-110 transition-transform">
                             <Image

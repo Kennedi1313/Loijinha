@@ -6,6 +6,7 @@ import capa1 from '../public/capa_1.png'
 import capa2 from '../public/capa_2.png'
 import capa3 from '../public/capa_3.png'
 import capa4 from '../public/capa_4.png'
+import { BsHeart } from 'react-icons/bs'
 
 export default function Home() {
     return (
@@ -43,7 +44,8 @@ export default function Home() {
             </div>
             
             <div className='my-8 p-2 md:p-4 md:container md:max-w-screen-lg mx-auto'>
-                <h1 className='font-extrabold text-black-1000 text-2xl'>MAIS COMPRADAS</h1>
+            <h1 className='font-extrabold text-black-1000 text-2xl flex flex-row items-center gap-2 mb-4'>
+                        <BsHeart></BsHeart> MAIS CURTIDAS</h1>
                 <div className='grid grid-cols-2 md:grid-cols-4 gap-2 my-2'>
                     {data.slice(0, 4).map(item => {
                         return (
