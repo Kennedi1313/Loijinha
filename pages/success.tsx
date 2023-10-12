@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import { useShoppingCart } from '@/hooks/use-shopping-cart';
+import { useShoppingCart } from '@/hooks/use-shopping-favorites';
 import { fetcher } from '@/lib/utils';
 import { BsCheck } from 'react-icons/bs';
 import Link from 'next/link';

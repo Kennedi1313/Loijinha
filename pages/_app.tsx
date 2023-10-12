@@ -1,6 +1,6 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { CartProvider } from '@/hooks/use-shopping-cart';
+import { FavoritesProvider } from '@/hooks/use-shopping-favorites';
 import Header from '../components/header';
 import Menu from '../components/menu';
 import PromotionBanner from '../components/promotionBanner';
@@ -14,18 +14,17 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
     {/**<SessionProvider session={pageProps.session}>**/}
-      <CartProvider>
+      <FavoritesProvider>
         <div>
-            {/**<Header/>**/}
-            <Menu/>
-            <main className='md:top-[4.5rem] top-14 relative'>
-            <PromotionBanner/>
-              <Component {...pageProps} />
+            {/**<Header/> className="bg-[url('/bg.png')] bg-repeat-y"**/}
+            <main >
+            {/*<PromotionBanner/>*/}
+              <Component {...pageProps}/>
               <ContactFloating></ContactFloating>
               <Footer></Footer>
             </main>
           </div>
-        </CartProvider>
+        </FavoritesProvider>
         <Toaster />
         <Analytics />
       {/**</SessionProvider>**/}

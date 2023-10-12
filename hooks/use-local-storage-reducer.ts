@@ -1,6 +1,6 @@
 import { Dispatch, Reducer, useEffect, useReducer, useRef } from 'react';
 import { isClient } from '@/lib/utils';
-import { Action, State } from './use-shopping-cart';
+import { Action, State } from './use-shopping-favorites';
 
 const useLocalStorageReducer = (key = '', reducer: Reducer<State, Action>, initialValue: State|null = null) => {
   const [state, dispatch] = useReducer(reducer, initialValue, () => {

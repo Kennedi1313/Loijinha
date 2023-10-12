@@ -2,15 +2,15 @@ import React, { useContext, useReducer, useMemo, Reducer, Dispatch, ReactElement
 import useLocalStorageReducer from './use-local-storage-reducer';
 
 // Reducers
-const initialCartValues: State = {
-  cartDetails: {},
-  cartCount: 0,
+const initialFavoritesValues: State = {
+  favoritesDetails: {},
+  favoritesCount: 0,
   totalPrice: 0,
   currency: 'BRL'
 };
 
 export interface State {
-  cartDetails: {
+  favoritesDetails: {
     [key: string]: {
       categories: string [],
       gender: string,
@@ -19,11 +19,9 @@ export interface State {
       price: number,
       quantity: number,
       scrImg: string,
-      size: string, 
-      model: string
-    } | { quantity: number, id: string, price: number, size: string, model: string }
+    } | { quantity: number, id: string, price: number }
   },
-  cartCount: number,
+  favoritesCount: number,
   totalPrice: number,
   currency: string | undefined,
 }
@@ -36,46 +34,40 @@ export interface Product {
 export interface Action {
   type: string,
   quantity: number,
-  product: Product,
-  size: string, 
-  model: string
+  product: Product
 }
 
-const addItem = (state: State = {} as State, product: Product|null = null, quantity = 0, size: string = '', model: string = '') => {
+const addItemToFavorites = (state: State = {} as State, product: Product|null = null, quantity = 0) => {
   if (quantity <= 0 || !product) return state;
 
-  let entry = state?.cartDetails?.[product.id];
+  let entry = state?.favoritesDetails?.[product.id];
 
   // Update item
   if (entry) {
     return {
       ...state,
-      cartDetails: {
-        ...state.cartDetails,
+      favoritesDetails: {
+        ...state.favoritesDetails,
         [product.id]: {
           ...entry,
           quantity: entry.quantity + quantity,
-          size,
-          model
         }
       },
-      cartCount: Math.max(0, state.cartCount + quantity),
+      favoritesCount: Math.max(0, state.favoritesCount + quantity),
       totalPrice: Math.max(state.totalPrice + product.price * quantity),
     };
   }
   // Add item
   return {
     ...state,
-    cartDetails: {
-      ...state.cartDetails,
+    favoritesDetails: {
+      ...state.favoritesDetails,
       [product.id]: {
         ...product,
-        quantity,
-        size,
-        model
+        quantity
       },
     },
-    cartCount: Math.max(0, state.cartCount + quantity),
+    favoritesCount: Math.max(0, state.favoritesCount + quantity),
     totalPrice: Math.max(state.totalPrice + product.price * quantity),
   };
 };
@@ -83,16 +75,16 @@ const addItem = (state: State = {} as State, product: Product|null = null, quant
 const removeItem = (state: State = {} as State, product: Product|null = null, quantity = 0) => {
   if (quantity <= 0 || !product) return state;
 
-  let entry = state?.cartDetails?.[product.id];
+  let entry = state?.favoritesDetails?.[product.id];
 
   if (entry) {
     // Remove item
     if (quantity >= entry.quantity) {
-      const { [product.id]: id, ...details } = state.cartDetails;
+      const { [product.id]: id, ...details } = state.favoritesDetails;
       return {
         ...state,
-        cartDetails: details,
-        cartCount: Math.max(0, state.cartCount - entry.quantity),
+        favoritesDetails: details,
+        favoritesCount: Math.max(0, state.favoritesCount - entry.quantity),
         totalPrice: Math.max(
           0,
           state.totalPrice - product.price * entry.quantity
@@ -103,14 +95,14 @@ const removeItem = (state: State = {} as State, product: Product|null = null, qu
     else {
       return {
         ...state,
-        cartDetails: {
-          ...state.cartDetails,
+        favoritesDetails: {
+          ...state.favoritesDetails,
           [product.id]: {
             ...entry,
             quantity: entry.quantity - quantity,
           },
         },
-        cartCount: Math.max(0, state.cartCount - quantity),
+        favoritesCount: Math.max(0, state.favoritesCount - quantity),
         totalPrice: Math.max(0, state.totalPrice - product.price * quantity),
       };
     }
@@ -119,18 +111,18 @@ const removeItem = (state: State = {} as State, product: Product|null = null, qu
   }
 };
 
-const clearCart = () => {
-  return initialCartValues;
+const clearFavorites = () => {
+  return initialFavoritesValues;
 };
 
-const cartReducer: Reducer<State, Action> = (state: State = {} as State, action: Action) => {
+const favoritesReducer: Reducer<State, Action> = (state: State = {} as State, action: Action) => {
   switch (action.type) {
     case 'ADD_ITEM':
-      return addItem(state, action.product, action.quantity, action.size, action.model);
+      return addItemToFavorites(state, action.product, action.quantity);
     case 'REMOVE_ITEM':
       return removeItem(state, action.product, action.quantity);
-    case 'CLEAR_CART':
-      return clearCart();
+    case 'CLEAR_FAVORITES':
+      return clearFavorites();
     default:
       return state;
   }
@@ -142,50 +134,50 @@ interface Props {
 }
 
 // Context + Provider
-export const CartContext = React.createContext({} as [State, Dispatch<Action>]);
+export const FavoritesContext = React.createContext({} as [State, Dispatch<Action>]);
 
-export const CartProvider = ({ currency = 'BRL', children = null }: Props) => {
-  const [cart, dispatch] = useLocalStorageReducer(
-    'cart',
-    cartReducer,
-    initialCartValues
+export const FavoritesProvider = ({ currency = 'BRL', children = null }: Props) => {
+  const [favorites, dispatch] = useLocalStorageReducer(
+    'favorites',
+    favoritesReducer,
+    initialFavoritesValues
   );
 
   const contextValue =  useMemo(
     () => [
       {
-        ...cart,
+        ...favorites,
         currency,
       },
       dispatch,
     ] as [State, Dispatch<Action>],
-    [cart, currency]
+    [favorites, currency]
   );
   
   return (
-    <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>
+    <FavoritesContext.Provider value={contextValue}>{children}</FavoritesContext.Provider>
   );
 };
 
 // Hook
-export const useShoppingCart = () => {
-  const [cart, dispatch] = useContext(CartContext);
+export const useShoppingFavorites = () => {
+  const [favorites, dispatch] = useContext(FavoritesContext);
 
-  const addItem = (product: Product, quantity = 1, size: string, model: string) => {
-    dispatch({ type: 'ADD_ITEM', product, quantity, size, model });
+  const addItemToFavorites = (product: Product, quantity = 1) => {
+    dispatch({ type: 'ADD_ITEM', product, quantity });
   }
 
   const removeItem = (product: Product, quantity = 1) =>
-    dispatch({ type: 'REMOVE_ITEM', product, quantity, size: '', model: '' });
+    dispatch({ type: 'REMOVE_ITEM', product, quantity });
 
-  const clearCart = () => dispatch({ type: 'CLEAR_CART', product: {} as Product, quantity: 0, size: '', model: '' });
+  const clearFavorites = () => dispatch({ type: 'CLEAR_FAVORITES', product: {} as Product, quantity: 0});
 
-  const shoppingCart = {
-    ...cart,
-    addItem,
+  const shoppingFavorites = {
+    ...favorites,
+    addItemToFavorites,
     removeItem,
-    clearCart,
+    clearFavorites,
   };
 
-  return shoppingCart;
+  return shoppingFavorites;
 };
