@@ -59,7 +59,7 @@ export async function getStaticPaths() {
     {params: { category: 'aneis' }},
     {params: { category: 'brincos' }},
     {params: { category: 'colares' }},
-    {params: { category: 'conjuntos' }},
+    {params: { category: 'acessorios' }},
     {params: { category: 'pulseiras' }},
     {params: { category: 'bolsas' }},
     {params: { category: 'sandalias' }},

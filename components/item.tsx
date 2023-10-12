@@ -39,19 +39,18 @@ export default function Item(props: ItemProps) {
     }, [adding]);
     return (
     <div>
-        <Link href={'/details/' + props.id} className='flex flex-col gap-1 h-[22rem] w-full
-            border-[1px] border-gray-200 p-4 rounded-md bg-white'>
+        <Link href={'/details/' + props.id} className='flex flex-col gap-1 h-[22rem] w-full bg-white'>
             <div className=' w-full h-[14rem] relative rounded-md'>
                 <Image 
                     src={props.srcImg}
                     alt='item'
                     fill
-                    className='object-cover rounded-md bg-gray-100'
+                    className='object-cover bg-gray-100'
                     sizes="(max-width: 768px) 100vw,
                         (max-width: 1200px) 50vw,
                         33vw"/>
             </div>
-            <div className='flex flex-col gap-1 justify-between h-[8rem]'>
+            <div className='flex flex-col gap-1 p-2 justify-between h-[8rem]'>
                 <span className='text-md font-semibold'>{props.name}</span> 
                 {/* <div className='text-sm flex flex-row text-yellow-400'>
                     <BsStarFill></BsStarFill><BsStarFill></BsStarFill><BsStarFill></BsStarFill><BsStarFill></BsStarFill><BsStar></BsStar>
