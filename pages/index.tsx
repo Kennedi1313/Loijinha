@@ -27,18 +27,7 @@ export default function Home() {
             <div className='my-8 p-2 md:p-4 md:container md:max-w-screen-lg mx-auto'>
             <h1 className='font-extrabold text-black-1000 text-2xl flex flex-row items-center gap-2 mb-4'>
                         <BsHeart></BsHeart> MAIS CURTIDAS</h1>
-                <div className='grid grid-cols-2 md:grid-cols-4 gap-2 my-2'>
-                    {data.slice(0, 4).map(item => {
-                        return (
-                        <Item 
-                            key={item.id}
-                            id={item.id}
-                            name={item.name} 
-                            gender={item.gender}
-                            price={item.price} 
-                            srcImg={item.srcImg}/>)
-                    })}
-                </div>
+                
             </div>
         </>
     )
