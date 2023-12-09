@@ -4,21 +4,16 @@ import { toast } from 'react-hot-toast';
 import { useShoppingFavorites } from '@/hooks/use-shopping-favorites';
 import Image from 'next/image'
 import { BsCartDash, BsCartPlus, BsHeart, BsHeartFill, BsStar, BsStarFill, BsWhatsapp } from 'react-icons/bs';
-import { TbHeart, TbHeartFilled, TbPhoneCall, TbRulerMeasure, TbSearch } from 'react-icons/tb'
 import Head from 'next/head';
 import { formatCurrency } from '@/lib/utils';
-import Item from '@/components/item';
-import logo from '../../public/logo2.png'
-import Link from 'next/link';
 import Menu from '@/components/menu';
-let products = require('../../public/items-sample.json');
 interface ItemProps {
     id: string,
     name: string,
     description: string,
     price: number,
     srcImg: string,
-    size: string
+    profileImageId: string
 }
 
 export default function Details(props: ItemProps) {
@@ -58,11 +53,11 @@ export default function Details(props: ItemProps) {
         ) : (
         <>
             <Menu></Menu>
-            <div className='md:container md:max-w-screen-lg mx-auto p-2 my-28 md:px-8'>
+            <div className='md:container md:max-w-screen-lg mx-auto p-2 my-32 md:px-8'>
                 <div className='flex flex-col md:flex-row justify-between items-center space-y-8 container pt-2 md:pt-12 md:space-y-0 md:space-x-12'>
                     <div className='relative w-full h-96 md:w-[30rem] md:h-[30rem] bg-white'>
                         <Image 
-                            src={props.srcImg}
+                            src={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${props.id}/${props.profileImageId}.jpg`}
                             alt='item'
                             fill
                             className='object-cover rounded-md'
@@ -104,15 +99,19 @@ export default function Details(props: ItemProps) {
 }
 
 export async function getStaticPaths() {
+    const res = await fetch("http://62.72.11.102:8088/api/v1/products");
+    let products = await res.json();
     const paths = products.map((product: ItemProps) => ({
-        params: { id: product.id },
+        params: { id: product.id.toString() },
     }))
     return { paths, fallback: true }
 }
   
 export async function getStaticProps({ params }: any) {
     try {
-        const props = products?.find((product: ItemProps) => product.id === params.id) ?? {};
+        const res = await fetch("http://62.72.11.102:8088/api/v1/products");
+        let products = await res.json();
+        const props = products?.find((product: ItemProps) => product.id.toString() === params.id) ?? {};
         return {
             props,
         };

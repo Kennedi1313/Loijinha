@@ -62,37 +62,30 @@ export default function Menu() {
                 z-50 bg-rose-1000 border-solid border-brown-1000 border-t-[3px]
                 shadow-sm md:shadow-gray-400 items-center">
             <ul className='flex flex-col md:flex-row items-center justify-center w-full'>
-              <Link href={'/products/index'} 
-                className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>TUDO
-              </Link>
+              
               <Link href={'/products/aneis'} 
                 className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>ANÉIS
+                onClick={toggleMenu}>ANEL
               </Link>
               <Link href={'/products/brincos'} 
                 className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>BRINCOS
+                onClick={toggleMenu}>BRINCO
               </Link>
               <Link href={'/products/colares'} 
                 className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>COLARES
+                onClick={toggleMenu}>COLAR
               </Link>
-              <Link href={'/products/acessorios'} 
+              <Link href={'/products/correntes'} 
                 className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>ACESSÓRIOS
+                onClick={toggleMenu}>CORRENTE
               </Link>
               <Link href={'/products/pulseiras'} 
                 className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>PULSEIRAS
+                onClick={toggleMenu}>PULSEIRA
               </Link>
-              <Link href={'/products/bolsas'} 
+              <Link href={'/products/conjuntos'} 
                 className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>BOLSAS
-              </Link>
-              <Link href={'/products/sandalias'} 
-                className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>SANDÁLIAS
+                onClick={toggleMenu}>CONJUNTO
               </Link>
             </ul>
           </div>

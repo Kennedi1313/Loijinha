@@ -9,7 +9,6 @@ import { BsHeartFill, BsStar, BsStarFill, BsWhatsapp } from 'react-icons/bs'
 interface ItemProps {
     id: string,
     name: string,
-    gender: string,
     price: number,
     srcImg: string
 }
@@ -39,7 +38,7 @@ export default function Item(props: ItemProps) {
     }, [adding]);
     return (
     <div>
-        <Link href={'/details/' + props.id} className='flex flex-col gap-1 h-[22rem] w-full bg-white'>
+        <Link href={'/details/' + props.id} className='flex flex-col gap-1 h-[20rem] w-full bg-white'>
             <div className=' w-full h-[14rem] relative rounded-md'>
                 <Image 
                     src={props.srcImg}
@@ -50,13 +49,12 @@ export default function Item(props: ItemProps) {
                         (max-width: 1200px) 50vw,
                         33vw"/>
             </div>
-            <div className='flex flex-col gap-1 p-2 justify-between h-[8rem]'>
+            <div className='flex flex-col gap-1 p-2 justify-between h-[6rem]'>
                 <span className='text-md font-semibold'>{props.name}</span> 
                 {/* <div className='text-sm flex flex-row text-yellow-400'>
                     <BsStarFill></BsStarFill><BsStarFill></BsStarFill><BsStarFill></BsStarFill><BsStarFill></BsStarFill><BsStar></BsStar>
                 </div> */}
                 <div className='flex flex-col'>
-                    <span className='text-sm text-red-600 line-through'>{formatCurrency(props.price + 2000)}</span>
                     <span className='text-xl font-semibold'>{formatCurrency(props.price)}</span>
                 </div>
             </div>

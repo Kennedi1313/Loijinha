@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react';
 import Item from '../../components/item'
-import Head from 'next/head';
-import Image from 'next/image';
-import logo from '../../public/logo2.png'
-import Link from 'next/link';
-import { TbHeartFilled, TbPhoneCall, TbSearch } from 'react-icons/tb';
+import { TbSearch } from 'react-icons/tb';
 import Menu from '@/components/menu';
-let productsArray = require('../../public/items-sample.json');
 
 export default function Home({ products }: any) {
   const [productList, setProductList] = useState(products);
@@ -31,7 +26,7 @@ export default function Home({ products }: any) {
                         
               </div>
             </div>
-          <div className="mt-36 md:container md:max-w-screen-lg mx-auto flex items-center justify-center 
+          <div className="mt-40 md:container md:max-w-screen-lg mx-auto flex items-center justify-center 
             px-2 md:px-8 py-5 my-2">
             {/*<SideMenu/>*/}
             <div className='md:container center grid lg:grid-cols-4 grid-cols-2 w-full gap-2 gap-y-6'>
@@ -41,9 +36,8 @@ export default function Home({ products }: any) {
                     key={item.id}
                     id={item.id}
                     name={item.name} 
-                    gender={item.gender}
                     price={item.price} 
-                    srcImg={item.srcImg}/>)
+                    srcImg={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${item.id}/${item.profileImageId}.jpg`}/>)
               })}
             </div>
           </div>
@@ -55,84 +49,63 @@ export default function Home({ products }: any) {
 
 export async function getStaticPaths() {
   const paths = [
-    {params: { category: 'index' }},
     {params: { category: 'aneis' }},
     {params: { category: 'brincos' }},
     {params: { category: 'colares' }},
-    {params: { category: 'acessorios' }},
+    {params: { category: 'correntes' }},
     {params: { category: 'pulseiras' }},
-    {params: { category: 'bolsas' }},
-    {params: { category: 'sandalias' }},
+    {params: { category: 'conjuntos' }},
   ]
   return { paths, fallback: false }
 }
 
-export async function getStaticProps({ params }: any) {
-  try {
-      //const props = products?.find((product: any) => product.id === params.category) ?? {};
+// export async function getStaticProps({ params }: any) {
+//   try {
+//       //const props = products?.find((product: any) => product.id === params.category) ?? {};
       
-      productsArray.sort((a: any, b: any) => {
-        const nameA = a.name.toUpperCase(); // ignore upper and lowercase
-        const nameB = b.name.toUpperCase(); // ignore upper and lowercase
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
+//       productsArray.sort((a: any, b: any) => {
+//         const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+//         const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+//         if (nameA < nameB) {
+//           return -1;
+//         }
+//         if (nameA > nameB) {
+//           return 1;
+//         }
       
-        // names must be equal
-        return 0;
-      });
+//         // names must be equal
+//         return 0;
+//       });
 
-      if (params.category == 'index')
-        return {
-          props: {
-            products: productsArray
-          }
-        }
+//       if (params.category == 'index')
+//         return {
+//           props: {
+//             products: productsArray
+//           }
+//         }
 
-      let productsArrayFiltered = productsArray.filter((product: any) =>  {
-        return product.categories.includes(params.category)
-      })
-
-      return {
-          props: {
-            products: productsArrayFiltered
-          },
-      };
-  } catch (error) {
-      console.log(error)
-      return { notFound: true };
-  }
-}
-
-// export const getStaticProps = async ({ params }: any) => {
-
-//   const headers = { Authorization: `Bearer ${process.env.PRINTIFUL_KEY}` };
-//   const res = await fetch("https://api.printful.com/store/products", {
-//     headers,
-//   });
-//   const products = await res.json();
-//   const catalog = await Promise.all(products.result.map( async (product: any) => {
-//     const resDetailed = await fetch(`https://api.printful.com/store/products/${product.id}`, {headers,});
-
-//       const productsDetailed = await resDetailed.json();
+//       let productsArrayFiltered = productsArray.filter((product: any) =>  {
+//         return product.category === params.category
+//       })
 
 //       return {
-//         id: product.id,
-//         name: product.name, 
-//         gender: null,
-//         price: Number(productsDetailed.result.sync_variants[0].retail_price) * 100,
-//         srcImg: product.thumbnail_url
-//       }
-//   }));
-
-//   console.log(catalog)
-  
-//   return {
-//     props: {
-//       products: catalog
-//     }
+//           props: {
+//             products: productsArrayFiltered
+//           },
+//       };
+//   } catch (error) {
+//       console.log(error)
+//       return { notFound: true };
 //   }
-//}
+// }
+
+ export const getStaticProps = async ({ params }: any) => {
+   const res = await fetch("http://62.72.11.102:8088/api/v1/products");
+   let products = await res.json();
+   products = products?.filter((product: any) => product.category === params.category) ?? {}
+   return {
+     props: {
+       products
+     }
+   }
+}
