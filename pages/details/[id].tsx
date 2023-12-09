@@ -53,14 +53,14 @@ export default function Details(props: ItemProps) {
         ) : (
         <>
             <Menu></Menu>
-            <div className='md:container md:max-w-screen-lg mx-auto p-2 my-32 md:px-8'>
-                <div className='flex flex-col md:flex-row justify-between items-center space-y-8 container pt-2 md:pt-12 md:space-y-0 md:space-x-12'>
-                    <div className='relative w-full h-96 md:w-[30rem] md:h-[30rem] bg-white'>
-                        <Image 
+            <div className='md:container md:max-w-screen-lg mx-auto p-2 my-32 md:px-8 h-full'>
+                <div className='flex flex-col md:flex-row justify-between items-center space-y-8 container pt-2 
+                    md:pt-12 md:space-y-0 md:space-x-12 h-full'>
+                    <div className='relative w-full md:w-[30rem] h-full bg-white'>
+                        <img 
                             src={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${props.id}/${props.profileImageId}.jpg`}
                             alt='item'
-                            fill
-                            className='object-cover rounded-md'
+                            className='object-scale-down rounded-md'
                             sizes="(max-width: 768px) 100vw,
                                 (max-width: 1200px) 100vw,
                                 33vw"/>
@@ -77,7 +77,7 @@ export default function Details(props: ItemProps) {
                         
                         </div>
                         <div className='flex flex-col w-full cursor-pointer'>
-                            <a href={"https://api.whatsapp.com/send?phone=27995074930&text=Olá,%20tudo%20bem?%20Gostaria%20de%20comprar%20este%20produto:%20http://localhost:3000/details/" + props.id}
+                            <a href={"https://api.whatsapp.com/send?phone=84981916989&text=Olá,%20tudo%20bem?%20Gostaria%20de%20comprar%20este%20produto:%20https://amandita.vercel.app/details/" + props.id}
                                 target='blank'
                                 className='rounded-md border-[1px] border-green-whatsapp flex flex-row text-green-whatsapp 
                                     bg-green-100 gap-2 justify-center items-center p-2 h-12 mt-4 w-full'>
