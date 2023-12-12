@@ -2,7 +2,7 @@ import { BsArrowUpCircle, BsWhatsapp } from 'react-icons/bs'
 
 export default function ContactFloating() {
     return (
-        <a href="https://api.whatsapp.com/send?phone=27995074930&text=Olá,%20tudo%20bem?" 
+        <a href="https://api.whatsapp.com/send?phone=8498594171&text=Olá,%20tudo%20bem?%20Gostaria%20de%20algumas%20informações." 
             target='blank' 
             className='fixed right-3 bottom-14 w-14 h-14 rounded-full 
                 bg-rose-1000 flex items-center justify-center 

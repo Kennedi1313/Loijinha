@@ -77,7 +77,7 @@ export default function Details(props: ItemProps) {
                         
                         </div>
                         <div className='flex flex-col w-full cursor-pointer'>
-                            <a href={"https://api.whatsapp.com/send?phone=84981916989&text=Olá,%20tudo%20bem?%20Gostaria%20de%20comprar%20este%20produto:%20https://amandita.vercel.app/details/" + props.id}
+                            <a href={"https://api.whatsapp.com/send?phone=8498594171&text=Olá,%20tudo%20bem?%20Gostaria%20de%20comprar%20este%20produto:%20https://amandita.vercel.app/details/" + props.id}
                                 target='blank'
                                 className='rounded-md border-[1px] border-green-whatsapp flex flex-row text-green-whatsapp 
                                     bg-green-100 gap-2 justify-center items-center p-2 h-12 mt-4 w-full'>

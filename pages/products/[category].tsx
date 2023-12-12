@@ -59,46 +59,6 @@ export async function getStaticPaths() {
   return { paths, fallback: false }
 }
 
-// export async function getStaticProps({ params }: any) {
-//   try {
-//       //const props = products?.find((product: any) => product.id === params.category) ?? {};
-      
-//       productsArray.sort((a: any, b: any) => {
-//         const nameA = a.name.toUpperCase(); // ignore upper and lowercase
-//         const nameB = b.name.toUpperCase(); // ignore upper and lowercase
-//         if (nameA < nameB) {
-//           return -1;
-//         }
-//         if (nameA > nameB) {
-//           return 1;
-//         }
-      
-//         // names must be equal
-//         return 0;
-//       });
-
-//       if (params.category == 'index')
-//         return {
-//           props: {
-//             products: productsArray
-//           }
-//         }
-
-//       let productsArrayFiltered = productsArray.filter((product: any) =>  {
-//         return product.category === params.category
-//       })
-
-//       return {
-//           props: {
-//             products: productsArrayFiltered
-//           },
-//       };
-//   } catch (error) {
-//       console.log(error)
-//       return { notFound: true };
-//   }
-// }
-
  export const getStaticProps = async ({ params }: any) => {
    const res = await fetch("http://62.72.11.102:8088/api/v1/products");
    let products = await res.json();

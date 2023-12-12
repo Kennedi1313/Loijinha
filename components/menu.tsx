@@ -94,7 +94,7 @@ export default function Menu() {
                    bg-rose-1000 border-solid border-brown-1000 border-t-[10px] items-center">
             <div className='w-1/4 md:w-1/3'>
             </div>
-            <Link href={'/products/index'} className='w-52 h-20 relative mx-6 overflow-hidden'>
+            <Link href={'/'} className='w-52 h-20 relative mx-6 overflow-hidden'>
               <Image 
                   src={logo}
                   alt='item'

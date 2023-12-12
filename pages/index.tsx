@@ -1,35 +1,58 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import { useEffect, useState } from 'react';
 import Item from '../components/item'
-import data from '../public/items-sample.json'
-import { BsHeart } from 'react-icons/bs'
+import { TbSearch } from 'react-icons/tb';
+import Menu from '@/components/menu';
 
-export default function Home() {
+export default function Home({ products }: any) {
+  const [productList, setProductList] = useState(products);
+  useEffect(() => {
+    setProductList(products);
+  }, [products]);
     return (
-        <>
-            <div className='w-full h-screen grid grid-cols-1 md:grid-cols-2 p-2'>
-                <div className='w-full h-full relative'>
-                    
-                </div>
-                <div className='w-full h-full relative'>
-                    
-                </div>
+      <>
+        { productList ? 
+        <div>
+            <Menu></Menu>
+            <div className='fixed top-24 md:top-[1.85rem] z-40 md:z-50 flex justify-end px-2 md:pr-32 items-center text-gray-500 w-full 
+              bg-white md:bg-transparent h-16 md:h-12 md:w-[30%] md:right-0'>
+              <div className='flex flex-row rounded-full w-full md:w-full border-solid border-[2px] border-brown-1000'>
+                          <TbSearch className='text-2xl font-bold m-2 text-brown-1000'></TbSearch>
+                          <input type="text" name="search" id="search" 
+                            className='w-full rounded-full py-1 px-2 active:border-0 dark:text-black outline-none' 
+                            onChange={(e) => setProductList(
+                              products.filter((product: any) =>  {
+                                return product.name.toUpperCase().includes(e.target.value.toUpperCase())}
+                              ))}/>
+                        
+              </div>
             </div>
-            <div className='w-full p-4 flex flex-col items-center'>
-                <h1 className='text-2xl mb-4 p-0 md:text-5xl font-extrabold md:w-80 text-center'>POWER OF MINIMALISM</h1>
-                <span className='font-bold'>#MINIMALIST #GEEKLOVERS #NOVIDADES</span>
+          <div className="mt-40 md:container md:max-w-screen-lg mx-auto flex items-center justify-center 
+            px-2 md:px-8 py-5 my-2">
+            {/*<SideMenu/>*/}
+            <div className='md:container center grid lg:grid-cols-4 grid-cols-2 w-full gap-2 gap-y-6'>
+              {productList.map((item: any) => {
+                return (
+                  <Item 
+                    key={item.id}
+                    id={item.id}
+                    name={item.name} 
+                    price={item.price} 
+                    srcImg={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${item.id}/${item.profileImageId}.jpg`}/>)
+              })}
             </div>
-            <div className='flex flex-row w-full justify-center items-center my-2 gap-3'>
-                <Link className='text-white bg-black-1000 rounded-full px-5 py-3' href={'/products'}>Ver Coleção</Link>
-                <Link className='text-white bg-black-1000 rounded-full px-5 py-3' href={'/products'}>Saiba Mais</Link>
-            </div>
-            
-            <div className='my-8 p-2 md:p-4 md:container md:max-w-screen-lg mx-auto'>
-            <h1 className='font-extrabold text-black-1000 text-2xl flex flex-row items-center gap-2 mb-4'>
-                        <BsHeart></BsHeart> MAIS CURTIDAS</h1>
-                
-            </div>
-        </>
+          </div>
+        </div>
+        : <h1>NENHUM PRODUTO CADASTRADO NESSA CATEGORIA</h1>}
+      </>
     )
-    
+}
+
+ export const getStaticProps = async ({ params }: any) => {
+   const res = await fetch("http://62.72.11.102:8088/api/v1/products");
+   let products = await res.json();
+   return {
+     props: {
+       products
+     }
+   }
 }
