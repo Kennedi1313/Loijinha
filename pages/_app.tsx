@@ -9,7 +9,6 @@ import { Toaster } from 'react-hot-toast';
 import { Analytics } from '@vercel/analytics/react';
 import { SessionProvider } from 'next-auth/react'
 import ContactFloating from '@/components/contactFloating';
-import { SpeedInsights } from "@vercel/speed-insights/next"
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -22,7 +21,6 @@ export default function App({ Component, pageProps }: AppProps) {
               <Component {...pageProps}/>
               <ContactFloating></ContactFloating>
               <Footer></Footer>
-              <SpeedInsights />
             </main>
           </div>
         </FavoritesProvider>
