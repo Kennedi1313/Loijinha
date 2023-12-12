@@ -40,8 +40,11 @@ async function generate() {
     parser: 'html',
   });
 
+  Promise.all([formatted]).then((values) => {
+    console.log(values);
+  });
   // eslint-disable-next-line no-sync
-  writeFileSync('public/sitemap.xml', formatted);
+  writeFileSync('public/sitemap.xml',  (await formatted).toString());
 }
 
 generate();
