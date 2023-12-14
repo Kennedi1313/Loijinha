@@ -27,9 +27,9 @@ export default function Home({ products }: any) {
               </div>
             </div>
           <div className="mt-40 md:container md:max-w-screen-lg mx-auto flex items-center justify-center 
-            px-2 md:px-8 py-5 my-2">
+            px-2 py-5 my-2">
             {/*<SideMenu/>*/}
-            <div className='md:container center grid lg:grid-cols-4 grid-cols-2 w-full gap-2 gap-y-6'>
+            <div className='md:container center grid lg:grid-cols-4 grid-cols-2 w-full gap-1 gap-y-6'>
               {productList.map((item: any) => {
                 return (
                   <Item 

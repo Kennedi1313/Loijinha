@@ -5,7 +5,8 @@ import prettier from 'prettier';
 async function generate() {
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
   const pages = await globby([
-    'pages/*.js',
+    'pages/**/*.tsx',
+    'pages/*.tsx',
     'data/**/*.mdx',
     '!data/*.mdx',
     '!pages/_*.js',
@@ -27,7 +28,7 @@ async function generate() {
 
             return `
               <url>
-                  <loc>${`https://leerob.io${route}`}</loc>
+                  <loc>${`https://amandita.vercel.app${route}`}</loc>
               </url>
             `;
           })

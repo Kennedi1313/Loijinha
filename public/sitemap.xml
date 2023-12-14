@@ -1,2 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> </urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://amandita.vercel.app/index.tsx</loc>
+  </url>
+
+  <url>
+    <loc>https://amandita.vercel.app/_app.tsx</loc>
+  </url>
+
+  <url>
+    <loc>https://amandita.vercel.app/_document.tsx</loc>
+  </url>
+
+  <url>
+    <loc>https://amandita.vercel.app/details/[id].tsx</loc>
+  </url>
+
+  <url>
+    <loc>https://amandita.vercel.app/favorites/index.tsx</loc>
+  </url>
+
+  <url>
+    <loc>https://amandita.vercel.app/products/skeleton_category.tsx</loc>
+  </url>
+
+  <url>
+    <loc>https://amandita.vercel.app/products/[category].tsx</loc>
+  </url>
+</urlset>

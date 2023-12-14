@@ -15,9 +15,6 @@ export default function App({ Component, pageProps }: AppProps) {
     {/**<SessionProvider session={pageProps.session}>**/}
       <FavoritesProvider>
         <div>
-            <head>
-              <meta name="google-site-verification" content="mghPEugrbz3VbC_q2WQWAF5h-wZVHYf-7nbbenYIbbI" />
-            </head>
             {/**<Header/> className="bg-[url('/bg.png')] bg-repeat-y"**/}
             <main >
             {/*<PromotionBanner/>*/}
