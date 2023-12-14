@@ -26,8 +26,8 @@ export default function Home({ products }: any) {
                         
               </div>
             </div>
-          <div className="mt-40 md:container md:max-w-screen-lg mx-auto flex items-center justify-center 
-            px-2 py-5 my-2">
+          <div className="mt-40 md:max-w-screen-lg mx-auto flex items-center justify-center 
+            px-1 md:px-0 py-5 my-2">
             {/*<SideMenu/>*/}
             <div className='md:container center grid lg:grid-cols-4 grid-cols-2 w-full gap-1 gap-y-6'>
               {productList.map((item: any) => {
@@ -50,6 +50,7 @@ export default function Home({ products }: any) {
  export const getStaticProps = async ({ params }: any) => {
    const res = await fetch("http://62.72.11.102:8088/api/v1/products");
    let products = await res.json();
+   products = products?.filter((product: any) => product.quantity > 0) ?? {}
    return {
      props: {
        products

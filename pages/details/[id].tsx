@@ -69,7 +69,16 @@ export default function Details(props: ItemProps) {
                         <p className='text-2xl font-semibold'>{props.name}</p> 
                         <div className="mt-4 border-t pt-4">
                             <p className="text-gray-500">Preço:</p>
-                            <p className="text-xl font-semibold">{formatCurrency(props.price)}</p>
+                            <div className='flex flex-col'>
+                                <span className='text-xl font-semibold text-gray-800'>
+                                    {formatCurrency(props.price * 0.95)}
+                                    <span className='text-sm font-thin'> no pix</span>
+                                </span>
+                                {props.price >= 10000
+                                ? <span className='text-sm font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 3x sem juros</span>
+                                : ''
+                                }
+                            </div>
                         </div>
                         <div className='mt-4 border-t pt-4'>
                             <p className="text-gray-500">Descrição:</p>
@@ -79,16 +88,16 @@ export default function Details(props: ItemProps) {
                         <div className='flex flex-col w-full cursor-pointer'>
                             <a href={"https://api.whatsapp.com/send?phone=8498594171&text=Olá,%20tudo%20bem?%20Gostaria%20de%20comprar%20este%20produto:%20https://amandita.vercel.app/details/" + props.id}
                                 target='blank'
-                                className='rounded-md border-[1px] border-green-whatsapp flex flex-row text-green-whatsapp 
-                                    bg-green-100 gap-2 justify-center items-center p-2 h-12 mt-4 w-full'>
+                                className='rounded-md flex flex-row text-white 
+                                    bg-green-whatsapp gap-2 justify-center items-center p-2 h-12 mt-4 w-full'>
                                     <BsWhatsapp className='w-5 h-5'></BsWhatsapp>
-                                    <span className='font-bold text-[12px]'>COMPRAR AGORA</span>
+                                    <span className='font-bold text-[14px]'>COMPRAR PELO WHATSAPP</span>
                             </a>
-                            <div className='rounded-md border-[1px] border-rose-400 flex flex-row text-rose-400 
-                                    bg-rose-100 gap-2 justify-center items-center p-2 h-12 mt-2 w-full'
+                            <div className='rounded-md border-[1px] border-rose-400 flex flex-row text-white 
+                                    bg-rose-400 gap-2 justify-center items-center p-2 h-12 mt-2 w-full'
                                 onClick={handleOnAddToFavorites}>
                                 <BsHeartFill className='w-5 h-5'></BsHeartFill>
-                                <span className='font-bold text-[12px]'>ADICIONAR AOS FAVORITOS</span>
+                                <span className='font-bold text-[14px]'>ADICIONAR AOS FAVORITOS</span>
                             </div>
                         </div>
                     </div>

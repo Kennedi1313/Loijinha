@@ -57,9 +57,16 @@ export default function Item(props: ItemProps) {
                 
             </div>
             <div className='flex flex-col gap-1 p-2 justify-between h-[6rem]'>
-                <span className='text-md font-semibold'>{props.name}</span> 
+                <span className='text-md font-thin text-gray-800'>{props.name}</span> 
                 <div className='flex flex-col'>
-                    <span className='text-xl font-semibold'>{formatCurrency(props.price)}</span>
+                    <span className='text-xl font-semibold text-gray-800'>
+                        {formatCurrency(props.price * 0.95)}
+                        <span className='text-sm font-thin'> no pix</span>
+                    </span>
+                    {props.price >= 10000
+                     ? <span className='text-sm font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 3x sem juros</span>
+                    : ''
+                    }
                 </div>
             </div>
         </Link>
@@ -72,16 +79,6 @@ export default function Item(props: ItemProps) {
                 : <BsHeart className='w-5 h-5 text-rose-400'></BsHeart> 
             }
         </button>
-        <div className='flex flex-col w-full gap-1 z-50 mt-1'>
-            <a href={"https://api.whatsapp.com/send?phone=8498594171&text=Olá,%20tudo%20bem?%20Gostaria%20de%20comprar%20este%20produto:%20https://amandita.vercel.app/details/" + props.id} 
-                className='rounded-md border-[1px] border-gray-200 flex flex-row 
-                bg-white gap-2 justify-between md:justify-center items-center h-8 p-5 w-full'
-                    target='blank' >
-                <BsWhatsapp className='w-5 h-5 text-green-whatsapp'></BsWhatsapp>
-                <p className='font-bold text-[11px]'>COMPRAR AGORA</p>
-            </a>
-            
-        </div>
     </div>
     )
 }
