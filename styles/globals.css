@@ -2,6 +2,12 @@
 @tailwind utilities;
 @tailwind components;
 
+@font-face {
+  font-family: "DreamAvenue";   /*Can be any text*/
+  src: local("DreamAvenue"),
+    url("../fonts/DreamAvenue.ttf") format("truetype");
+}
+
 body {
     -webkit-font-smoothing: antialiased;
 }

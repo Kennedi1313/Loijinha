@@ -9,15 +9,38 @@ import { Toaster } from 'react-hot-toast';
 import { Analytics } from '@vercel/analytics/react';
 import { SessionProvider } from 'next-auth/react'
 import ContactFloating from '@/components/contactFloating';
+import { Helmet, HelmetProvider } from "react-helmet-async";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-    {/**<SessionProvider session={pageProps.session}>**/}
-      <FavoritesProvider>
-        <div>
-            {/**<Header/> className="bg-[url('/bg.png')] bg-repeat-y"**/}
+      <HelmetProvider>
+      
+        <Helmet>
+          <title>Amandita Pratas | Joias em prata 925</title>
+          <meta
+            name="description"
+            content="Clique e conheça a mais nova loja de joias em prata 925 de Natal/RN!"
+          />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="www.amanditapratas.com.br" />
+          <meta
+            property="og:title"
+            content="Amandita Pratas | Joias em prata 925"
+          />
+          <meta
+            property="og:description"
+            content="Clique e conheça a mais nova loja de joias em prata 925 de Natal/RN!"
+          />
+          <meta
+            property="og:image"
+            content="https://amandita-uploads.s3.sa-east-1.amazonaws.com/profile-images/22/aa399f2b-a880-4f19-bf40-6e5d05efa696.jpg"
+          />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="google-site-verification" content="mghPEugrbz3VbC_q2WQWAF5h-wZVHYf-7nbbenYIbbI" />
+        </Helmet>
+        <FavoritesProvider>
+          <div>
             <main >
-            {/*<PromotionBanner/>*/}
               <Component {...pageProps}/>
               <ContactFloating></ContactFloating>
               <Footer></Footer>
@@ -26,7 +49,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </FavoritesProvider>
         <Toaster />
         <Analytics />
-      {/**</SessionProvider>**/}
+      </HelmetProvider>
     </>
   ) 
 }

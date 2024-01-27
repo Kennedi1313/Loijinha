@@ -39,9 +39,6 @@ export default function Menu() {
         z-50 bg-rose-1000">
         <Head>
           <title>Amandita</title>
-          <meta name="description" content="Clique e conheça a mais nova loja de acessórios em prata 925 de Natal!" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta name="google-site-verification" content="mghPEugrbz3VbC_q2WQWAF5h-wZVHYf-7nbbenYIbbI" />
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
           <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -49,7 +46,7 @@ export default function Menu() {
           <link href="https://fonts.googleapis.com/css2?family=Unlock&display=swap" rel="stylesheet"></link>
         </Head>
         <button id="toggle-button"
-          className="fixed left-3 w-12 h-14 block md:hidden z-[100] top-6"
+          className="fixed right-0 w-12 h-14 block md:hidden z-[100] top-5"
           onClick={toggleMenu}>
           <FaBars id='bar-icon' className="w-6 h-8"></FaBars>
           <FaTimes id='times-icon' className="w-6 h-8 hidden"></FaTimes>
@@ -57,44 +54,43 @@ export default function Menu() {
       
         <menu id="menu" className="
           fixed hidden top-0 left-0 shadow-sm
-          md:top-0 md:h-fit bg-rose-1000 md:py-0 md:block md:w-full">
+          md:top-0 md:h-fit bg-white md:py-0 md:block md:w-full">
 
           <div className="top-24 fixed w-[70%] md:w-full p-2 md:h-14 justify-center
-                z-50 bg-rose-1000 border-solid border-brown-1000 border-t-[3px]
+                z-50 bg-white border-solid border-brown-1000 border-t-[3px]
                 shadow-sm md:shadow-gray-400 items-center">
-            <ul className='flex flex-col md:flex-row items-center justify-center w-full'>
+            <div className='flex flex-col md:flex-row items-center justify-center w-full gap-2'>
               
               <Link href={'/products/aneis'} 
                 className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>ANEL
+                onClick={toggleMenu}>Anel
               </Link>
               <Link href={'/products/brincos'} 
                 className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>BRINCO
+                onClick={toggleMenu}>Brinco
               </Link>
               <Link href={'/products/colares'} 
                 className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>COLAR
+                onClick={toggleMenu}>Colar
               </Link>
               <Link href={'/products/correntes'} 
                 className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>CORRENTE
+                onClick={toggleMenu}>Corrente
               </Link>
               <Link href={'/products/pulseiras'} 
                 className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>PULSEIRA
+                onClick={toggleMenu}>Pulseira
               </Link>
               <Link href={'/products/conjuntos'} 
                 className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>CONJUNTO
+                onClick={toggleMenu}>Conjunto
               </Link>
-            </ul>
+            </div>
           </div>
         </menu>
         <div id="menu-container" className="fixed top-0 w-full h-24 flex flex-row justify-start md:justify-between
-                   bg-rose-1000 border-solid border-brown-1000 border-t-[10px] items-center">
-            <div className='w-1/4 md:w-1/3'>
-            </div>
+                   bg-rose-1000 items-center">
+            
             <Link href={'/'} className='w-52 h-20 relative mx-6 overflow-hidden'>
               <Image 
                   src={logo}
@@ -106,7 +102,7 @@ export default function Menu() {
                   (max-width: 1200px) 50vw,
                   33vw"/>
             </Link>
-            <Link className='w-1/4 md:w-1/3 flex justify-end md:justify-start mr-2' href={'/favorites'}>
+            <Link className='w-1/4 md:w-1/3 flex justify-end mr-20 md:mr-8' href={'/favorites'}>
               <TbHeartFilled className='text-4xl font-bold text-rose-400'></TbHeartFilled>
             </Link>
           </div>

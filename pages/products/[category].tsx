@@ -1,10 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Item from '../../components/item'
 import { TbSearch } from 'react-icons/tb';
 import Menu from '@/components/menu';
-
+import Pagination from '@/components/pagination';
+let PageSize = 12;
 export default function Home({ products }: any) {
   const [productList, setProductList] = useState(products);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return productList.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, productList]);
   useEffect(() => {
     setProductList(products);
   }, [products]);
@@ -13,16 +21,18 @@ export default function Home({ products }: any) {
         { productList ? 
         <div>
             <Menu></Menu>
-            <div className='fixed top-24 md:top-[1.85rem] z-40 md:z-50 flex justify-end px-2 md:pr-32 items-center text-gray-500 w-full 
-              bg-white md:bg-transparent h-16 md:h-12 md:w-[30%] md:right-0'>
+            <div className='fixed top-24 md:top-6 z-40 md:z-50 flex justify-end px-2 md:right-32 items-center text-gray-500 w-full 
+              bg-white md:bg-transparent h-16 md:h-12 md:w-[30%]'>
               <div className='flex flex-row rounded-full w-full md:w-full border-solid border-[2px] border-brown-1000'>
                           <TbSearch className='text-2xl font-bold m-2 text-brown-1000'></TbSearch>
-                          <input type="text" name="search" id="search" 
+                          <input type="email" name="email" id="search" autoComplete="off"
                             className='w-full rounded-full py-1 px-2 active:border-0 dark:text-black outline-none' 
-                            onChange={(e) => setProductList(
+                            onChange={(e) => {
+                              setCurrentPage(1)
+                              setProductList(
                               products.filter((product: any) =>  {
                                 return product.name.toUpperCase().includes(e.target.value.toUpperCase())}
-                              ))}/>
+                              ))}}/>
                         
               </div>
             </div>
@@ -30,7 +40,7 @@ export default function Home({ products }: any) {
             px-1 md:px-0 py-5 my-2">
             {/*<SideMenu/>*/}
             <div className='center grid lg:grid-cols-4 grid-cols-2 w-full gap-1 gap-y-6'>
-              {productList.map((item: any) => {
+              {currentTableData.map((item: any) => {
                 return (
                   <Item 
                     key={item.id}
@@ -41,6 +51,13 @@ export default function Home({ products }: any) {
               })}
             </div>
           </div>
+          <Pagination
+                className="pagination-bar"
+                currentPage={currentPage}
+                totalCount={productList.length}
+                pageSize={PageSize}
+                onPageChange={(page: number) => setCurrentPage(page)}
+              />
         </div>
         : <h1>NENHUM PRODUTO CADASTRADO NESSA CATEGORIA</h1>}
       </>

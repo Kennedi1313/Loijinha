@@ -72,7 +72,7 @@ export default function Details() {
                         <div className="flex items-center space-x-4 group">
                             <div className="relative w-20 h-20 group-hover:scale-110 transition-transform">
                             <Image
-                                src={product.srcImg}
+                                src={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${product.id}/${product.profileImageId}.jpg`}
                                 alt={product.name}
                                 fill
                                 className='object-cover rounded-md'
@@ -113,7 +113,6 @@ export default function Details() {
                         <div className="font-semibold text-xl md:ml-16 items-center justify-center flex flex-row">
                             <BsX className="w-4 h-4 text-gray-500 inline-block" />
                             <div className='flex flex-col justify-start items-start ml-1'>
-                                <span className="text-sm font-light text-gray-600">De {formatCurrency(product.price + 2000)} por</span>
                                 {formatCurrency(product.price)}
                             </div>
                             
@@ -134,7 +133,6 @@ export default function Details() {
                     <p className="text-xl self-end flex flex-row gap-2 justify-center items-end">
                         Total:{' '}
                         <span className="font-semibold flex flex-col">
-                            <span className='font-thin text-sm text-gray-600 line-through'>{formatCurrency(totalPrice + (2000*favoritesCount))}</span>
                             {formatCurrency(totalPrice)}
                         </span>
                     </p>
