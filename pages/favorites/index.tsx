@@ -72,7 +72,7 @@ export default function Details() {
                         <div className="flex items-center space-x-4 group">
                             <div className="relative w-20 h-20 group-hover:scale-110 transition-transform">
                             <Image
-                                src={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${product.id}/${product.profileImageId}.jpg`}
+                                src={product.srcImg}
                                 alt={product.name}
                                 fill
                                 className='object-cover rounded-md'
