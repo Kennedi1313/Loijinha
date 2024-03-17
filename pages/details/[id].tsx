@@ -136,8 +136,8 @@ export default function Details(props: ItemProps) {
 }
 
 export async function getStaticPaths() {
-    //const res = await fetch("http://62.72.11.102:8088/api/v1/products");
-    const res = await fetch("http://localhost:8080/api/v1/products");
+    const res = await fetch("http://62.72.11.102:8088/api/v1/products");
+    //const res = await fetch("http://localhost:8080/api/v1/products");
     let products = await res.json();
     const paths = products.map((product: ItemProps) => ({
         params: { id: product.id.toString() },
