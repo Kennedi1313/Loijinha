@@ -20,7 +20,7 @@ export default function Footer() {
                 </div>
             </div>
             <div className='border-solid border-brown-1000 w-3/5 border-b-[1px] mb-10 text-center'> 
-                <span className='font-semibold'>✨ VISITE NOSSA LOJA FÍSICA ✨</span> 
+                <span className='font-semibold'>✨ VISITE A LOJA FÍSICA ✨</span> 
             </div>
             <div className='w-full h-[20rem] mb-12'>
                 

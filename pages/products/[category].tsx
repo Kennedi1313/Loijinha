@@ -21,9 +21,9 @@ export default function Home({ products }: any) {
         { productList ? 
         <div>
             <Menu></Menu>
-            <div className='fixed top-24 md:top-6 z-40 md:z-50 flex justify-end px-2 md:right-32 items-center text-gray-500 w-full 
+            <div className='fixed top-28 md:top-12 md:left-1/2 z-40 md:z-50 flex justify-end px-2 md:right-32 items-center text-gray-500 w-full 
               bg-white md:bg-transparent h-16 md:h-12 md:w-[30%]'>
-              <div className='flex flex-row rounded-full w-full md:w-full border-solid border-[2px] border-brown-1000'>
+              <div className='flex flex-row rounded-full w-full md:w-full border-solid border-[1px] border-brown-1000'>
                           <TbSearch className='text-2xl font-bold m-2 text-brown-1000'></TbSearch>
                           <input type="email" name="email" id="search" autoComplete="off"
                             className='w-full rounded-full py-1 px-2 active:border-0 dark:text-black outline-none' 
@@ -71,13 +71,16 @@ export async function getStaticPaths() {
     {params: { category: 'colares' }},
     {params: { category: 'correntes' }},
     {params: { category: 'pulseiras' }},
+    {params: { category: 'tornozeleiras' }},
+    {params: { category: 'pingentes' }},
     {params: { category: 'conjuntos' }},
   ]
   return { paths, fallback: false }
 }
 
  export const getStaticProps = async ({ params }: any) => {
-   const res = await fetch("http://62.72.11.102:8088/api/v1/products");
+   //const res = await fetch("http://62.72.11.102:8088/api/v1/products");
+   const res = await fetch("http://localhost:8080/api/v1/products");
    let products = await res.json();
    products = products?.filter((product: any) => product.quantity > 0 && product.category === params.category) ?? {}
    return {

@@ -45,15 +45,15 @@ export default function Item(props: ItemProps) {
     }, [adding]);
     return (
     <div className='relative'>
-        <Link href={'/details/' + props.id} className='flex flex-col gap-1 w-full h-[23rem] md:h-[28rem] bg-white'>
-            <div className=' w-full relative rounded-md'>
-                <img 
+        <Link href={'/details/' + props.id} className='flex flex-col gap-1 w-full h-[25rem] md:h-[30rem] bg-white'>
+            <div className='h-[20rem] w-full relative'>
+                <Image 
                     src={props.srcImg}
-                    alt='item'
-                    className='object-cover bg-gray-100 h-[17rem] md:h-[21rem]'
-                    sizes="(max-width: 768px) 100vw,
-                        (max-width: 1200px) 50vw,
-                        33vw"/>
+                    alt={props.name}
+                    quality={50}
+                    className='bg-gray-100 object-cover'
+                    fill
+                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw"/>
                 
             </div>
             <div className='flex flex-col p-1 justify-between h-[6.5rem] overflow-hidden tex'>
@@ -70,7 +70,7 @@ export default function Item(props: ItemProps) {
                 </div>
             </div>
         </Link>
-        <button className='rounded-full absolute right-1 bottom-[7.5rem] border-[1px] border-gray-200 flex flex-row text-black
+        <button className='rounded-full absolute right-1 top-1 border-[1px] border-gray-200 flex flex-row text-black
             bg-white opacity-80 justify-center items-center p-3'
             disabled={adding}
             onClick={() => { isInFavorites() ? removeItem(props) : handleOnAddToFavorites()}}>

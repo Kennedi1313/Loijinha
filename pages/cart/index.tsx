@@ -1,8 +1,5 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
-import Link from 'next/link'
-import logo from '../../public/logo2.png'
-import Head from 'next/head'
 import {
     BsXCircle,
     BsX,
@@ -12,14 +9,13 @@ import {
     BsWhatsapp,
   } from 'react-icons/bs';
 import { formatCurrency } from '@/lib/utils';
-import { useShoppingFavorites } from '@/hooks/use-shopping-favorites';
-import products from '../../public/items-sample.json'
-import Item from '@/components/item';
-import { TbHeartFilled, TbPhoneCall } from 'react-icons/tb';
+import { useShoppingCart } from '@/hooks/use-shopping-cart';
 import Menu from '@/components/menu';
+import ProtectedRoute from '../protectedRoute';
+import Link from 'next/link';
 
-export default function Details() {
-    const { favoritesDetails, totalPrice, favoritesCount, addItemToFavorites, removeItem, clearFavorites } = useShoppingFavorites();
+const Cart = () => {
+    const { cartDetails, totalPrice, cartCount, addItemToCart, removeItem, clearCart } = useShoppingCart();
     const [redirecting, setRedirecting] = useState(false);
     const [hasMounted, setHasMounted] = useState(false);
     useEffect(() => {
@@ -33,13 +29,13 @@ export default function Details() {
         <>
             <Menu></Menu>
             <div className="md:container xl:max-w-screen-xl mx-auto py-12 p-2 md:px-6 mt-36 min-h-[40vh]">
-                {favoritesCount > 0 ? (
+                {cartCount > 0 ? (
                 <>
-                    <h2 className="text-4xl font-semibold">Seus Favoritos</h2>
+                    <h2 className="text-4xl font-semibold">Seu Carrinho</h2>
                     <p className="mt-1 text-xl">
-                    {favoritesCount} itens{' '}
+                    {cartCount} itens{' '}
                     <button
-                        onClick={clearFavorites}
+                        onClick={clearCart}
                         className="opacity-50 hover:opacity-100 text-base capitalize"
                     >
                         (Limpar tudo)
@@ -49,7 +45,7 @@ export default function Details() {
                 ) : (
                 <>
                     <h2 className="text-4xl font-semibold">
-                    Nenhum produto adicionado aos favoritos.
+                    Nenhum produto adicionado ao carrinho.
                     </h2>
                     <div className="mt-1 text-xl">
                     Encontre alguns produtos{' '}
@@ -60,9 +56,9 @@ export default function Details() {
                 </>
                 )}
 
-                {favoritesCount > 0 ? (
+                {cartCount > 0 ? (
                 <div className="mt-12">
-                    {Object.entries(favoritesDetails).map(([key, product]: [any, any]) => (
+                    {Object.entries(cartDetails).map(([key, product]: [any, any]) => (
                     <div
                         key={key}
                         className="flex flex-col gap-4 mt-2 md:flex-row justify-between space-x-4 hover:shadow-lg hover:border-opacity-50 border border-opacity-0 rounded-md p-2 md:p-4"
@@ -71,15 +67,16 @@ export default function Details() {
                         <Link href={`/details/${product.id}`}>
                         <div className="flex items-center space-x-4 group">
                             <div className="relative w-20 h-20 group-hover:scale-110 transition-transform">
-                            <Image
-                                src={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${product.id}/${product.profileImageId}.jpg`}
-                                alt={product.name}
-                                fill
-                                className='object-cover rounded-md'
-                                sizes="(max-width: 768px) 100vw,
-                                (max-width: 1200px) 50vw,
-                                33vw"
-                            />
+                                <Image
+                                    src={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${product.id}/${product.profileImageId}.jpg`}
+                                    alt={product.name}
+                                    fill
+                                    loading="lazy"
+                                    className='object-cover rounded-md'
+                                    sizes="(max-width: 768px) 100vw,
+                                    (max-width: 1200px) 50vw,
+                                    33vw"
+                                />
                             </div>
                             <div>
                                 <p className="font-semibold text-xl group-hover:underline">
@@ -102,7 +99,7 @@ export default function Details() {
                             </button>
                             <p className="font-semibold text-xl">{product.quantity}</p>
                             <button
-                                onClick={() => addItemToFavorites(product, 1)}
+                                onClick={() => addItemToCart(product, 1)}
                                 className="hover:bg-green-100 hover:text-green-500 rounded-md p-1"
                             >
                                 <BsPlus className="w-6 h-6 flex-shrink-0 " />
@@ -136,6 +133,35 @@ export default function Details() {
                             {formatCurrency(totalPrice)}
                         </span>
                     </p>
+                    <div className='flex flex-col w-full p-2 mb-2'>
+                        <h1 className='text-2xl mb-2'>Forma de envio:</h1>
+                        <div className="w-full">
+                            <label className="flex gap-2 flex-row">
+                                <input
+                                    type="radio"
+                                    name="react-tips"
+                                    value="retirada"
+                                    checked={true}/>
+                                Retirada na loja (grátis)
+                            </label>
+                        </div>
+                        <div className="form-check">
+                            <label className="flex flex-row gap-2">
+                                <input
+                                    type="radio"
+                                    name="react-tips"
+                                    value="entrega"/>
+                                Entrega para Natal (R$ 10,00)
+                            </label>
+                        </div>
+                    </div>
+                    <button
+                        onClick={() => {}}
+                        disabled={redirecting}
+                        className="text-white bg-black-1000 w-full self-end rounded-md px-5 py-3 md:mt-8 md:block disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {redirecting ? 'Redirecionando...' : 'Revisar Pedido'}
+                    </button>
                     
                     </div>
                 </div>
@@ -145,3 +171,5 @@ export default function Details() {
         </>
     )
 }
+
+export default ProtectedRoute(Cart);

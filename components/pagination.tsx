@@ -40,7 +40,7 @@ const Pagination = (props: Props) => {
 
   let lastPage = paginationRange[paginationRange.length - 1];
   return (
-    <ul
+    <div
       className="flex flex-row gap-2 w-full items-center justify-center mt-8"
     >
       <a href='#'
@@ -52,11 +52,11 @@ const Pagination = (props: Props) => {
       </a>
       {paginationRange?.map((pageNumber : any) => {
         if (pageNumber === DOTS) {
-          return <li className="pagination-item dots">&#8230;</li>;
+          return <div key={pageNumber} className="pagination-item dots">&#8230;</div>;
         }
 
         return (
-          <a href='#'
+          <a href='#' key={pageNumber}
             className={pageNumber === currentPage ? "pointer-events-none border-solid border-b-2 border-gray-500 p-2" : 
             "p-2"
             }
@@ -73,7 +73,7 @@ const Pagination = (props: Props) => {
       >
         <BsArrowRight></BsArrowRight>
       </a>
-    </ul>
+    </div>
   );
 };
 

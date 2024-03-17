@@ -6,17 +6,19 @@ import { formatCurrency } from '@/lib/utils';
 import Link from 'next/link';
 import logo from '../public/logo2.png'
 import { useEffect, useState } from "react";
-import { BsCart, BsPerson } from 'react-icons/bs'
+import { BsArrowRight, BsCart, BsHeart, BsMenuApp, BsMenuButton, BsPerson, BsPersonBadge, BsPersonDash } from 'react-icons/bs'
 import { FaBars, FaTimes, FaXRay, FaXing } from 'react-icons/fa'
+import { HiOutlineBars3 } from "react-icons/hi2";
 import Head from 'next/head'
 import { TbHeartFilled } from "react-icons/tb";
+import PromotionBanner from "./promotionBanner";
+import { TfiClose } from "react-icons/tfi";
 
 export default function Menu() {
   const [hasMounted, setHasMounted] = useState(false);
   function toggleMenu() {
       var menu = document.getElementById('menu');
       menu?.classList.toggle('hidden');
-      menu?.classList.toggle('w-[70%]');
       menu?.classList.toggle('h-screen');
       var toggle = document.getElementById('toggle-button');
       toggle?.classList.toggle('color-white');
@@ -46,52 +48,61 @@ export default function Menu() {
           <link href="https://fonts.googleapis.com/css2?family=Unlock&display=swap" rel="stylesheet"></link>
         </Head>
         <button id="toggle-button"
-          className="fixed right-0 w-12 h-14 block md:hidden z-[100] top-5"
+          className="fixed block md:hidden left-4 w-12 h-14 z-[100] top-11"
           onClick={toggleMenu}>
-          <FaBars id='bar-icon' className="w-6 h-8"></FaBars>
-          <FaTimes id='times-icon' className="w-6 h-8 hidden"></FaTimes>
+          <HiOutlineBars3 id='bar-icon' className="w-7 h-7 font-extralight"></HiOutlineBars3>
+          <TfiClose id='times-icon' className="w-7 h-7 p-1 hidden"></TfiClose>
         </button>
       
-        <menu id="menu" className="
-          fixed hidden top-0 left-0 shadow-sm
-          md:top-0 md:h-fit bg-white md:py-0 md:block md:w-full">
-
-          <div className="top-24 fixed w-[70%] md:w-full p-2 md:h-14 justify-center
-                z-50 bg-white border-solid border-brown-1000 border-t-[3px]
-                shadow-sm md:shadow-gray-400 items-center">
-            <div className='flex flex-col md:flex-row items-center justify-center w-full gap-2'>
+        <menu id="menu" className="fixed hidden md:block top-0 left-0 shadow-sm z-40">
+          <div className="top-28 fixed w-full justify-center
+                z-40 bg-black/50 h-full md:h-12 md:shadow-md md:shadow-gray-300/30 items-center
+                border-t-[1px] border-solid border-brown-1000">
+            <div className='z-50 flex flex-col  items-center justify-start 
+               h-full w-[70%] gap-2 bg-white p-2
+               md:w-full md:flex-row md:justify-center md:align-middle md:h-12'>
               
               <Link href={'/products/aneis'} 
-                className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
+                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
                 onClick={toggleMenu}>Anel
               </Link>
               <Link href={'/products/brincos'} 
-                className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
+                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
                 onClick={toggleMenu}>Brinco
               </Link>
               <Link href={'/products/colares'} 
-                className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
+                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
                 onClick={toggleMenu}>Colar
               </Link>
               <Link href={'/products/correntes'} 
-                className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
+                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
                 onClick={toggleMenu}>Corrente
               </Link>
               <Link href={'/products/pulseiras'} 
-                className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
+                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
                 onClick={toggleMenu}>Pulseira
               </Link>
+              <Link href={'/products/tornozeleiras'} 
+                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
+                onClick={toggleMenu}>Tornozeleira
+              </Link>
+              <Link href={'/products/pingentes'} 
+                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
+                onClick={toggleMenu}>Pingente
+              </Link>
               <Link href={'/products/conjuntos'} 
-                className='p-2 no-underline border-solid border-b-2 border-brown-1000 md:border-none w-full md:w-fit text-center text-black-1000 cursor-pointer'
+                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
                 onClick={toggleMenu}>Conjunto
               </Link>
             </div>
           </div>
         </menu>
-        <div id="menu-container" className="fixed top-0 w-full h-24 flex flex-row justify-start md:justify-between
-                   bg-rose-1000 items-center">
-            
-            <Link href={'/'} className='w-52 h-20 relative mx-6 overflow-hidden'>
+        
+        <PromotionBanner></PromotionBanner>
+        <div id="menu-container" className="fixed top-8 w-full h-20 flex flex-row justify-between md:justify-between
+                   bg-rose-1000 items-center z-50">
+            <div className="w-1/4 block md:hidden"></div>
+            <Link href={'/'} className='w-44 h-20 relative md:left-8 md:mx-6 overflow-hidden'>
               <Image 
                   src={logo}
                   alt='item'
@@ -102,9 +113,21 @@ export default function Menu() {
                   (max-width: 1200px) 50vw,
                   33vw"/>
             </Link>
-            <Link className='w-1/4 md:w-1/3 flex justify-end mr-20 md:mr-8' href={'/favorites'}>
-              <TbHeartFilled className='text-4xl font-bold text-rose-400'></TbHeartFilled>
-            </Link>
+            <div className="md:w-2/4 hidden md:block"></div>
+            <div className="w-1/4 flex flex-row justify-center gap-2 md:gap-6">
+              <Link className='flex justify-end' href={'/favorites'}>
+                <TbHeartFilled className='text-[27px] font-bold text-rose-400'></TbHeartFilled>
+                <BsHeart className='text-2xl font-bold text-brown-1000 -ml-[25px] mt-[2px]'></BsHeart>
+              </Link>
+              { /*
+                <Link className='flex justify-end' href={'/cart'}>
+                  <BsCart className='text-2xl font-bold text-brown-1000'></BsCart>
+                </Link>
+                <Link className='flex justify-end' href={'/account'}>
+                  <BsPerson className='text-2xl font-bold text-brown-1000'></BsPerson>
+                </Link>
+              */}
+            </div>
           </div>
           
       </div>

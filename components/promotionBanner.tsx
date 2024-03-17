@@ -1,19 +1,26 @@
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
-import { FaGlasses, FaMoneyBill, FaTruckPickup, FaTshirt } from 'react-icons/fa'
-import { BsCash, BsCashStack, BsSunglasses, BsTruck } from 'react-icons/bs'
+import { BsInstagram, BsPinMapFill, BsTruckFrontFill } from 'react-icons/bs'
 export default function PromotionBanner() {
     const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay()])
     return (
-        <div className='w-full text-center p-4 text-lg bg-brown-1000 text-white embla' ref={emblaRef}>
+        <div className='w-full text-center text-sm p-2 font-semibold bg-brown-1000 text-white embla z-50 fixed' ref={emblaRef}>
             <div className="embla__container">
                 <div className="embla__slide">
-                    <BsTruck className='inline mx-2'></BsTruck>
-                    Envios para <strong>todo</strong> o Brasil!
+                    <BsTruckFrontFill className='inline mx-2'></BsTruckFrontFill>
+                    Entregas para Natal/RN
                 </div>
-                <div className="embla__slide"><FaGlasses className='inline mx-2'></FaGlasses>Estampas <strong>exclusivas</strong></div>
-                <div className="embla__slide"><BsCashStack className='inline mx-2'></BsCashStack><strong>Promoções</strong> de lançamento</div>
-                <div className="embla__slide"><FaTshirt className='inline mx-2'></FaTshirt>Impressão de alta <strong>qualidade</strong></div>
+                <div className="embla__slide">
+                    <BsPinMapFill className='inline mx-2'></BsPinMapFill>
+                    Visite nossa loja física
+                </div>
+                <div className="embla__slide">
+                    <BsInstagram className='inline mx-2'></BsInstagram>
+                    Siga nosso instagram
+                </div>
+                <div className="embla__slide">
+                    Toda a loja em até 3x sem juros*
+                </div>
             </div>
         </div>
     )

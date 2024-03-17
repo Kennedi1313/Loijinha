@@ -10,6 +10,8 @@ import { Analytics } from '@vercel/analytics/react';
 import { SessionProvider } from 'next-auth/react'
 import ContactFloating from '@/components/contactFloating';
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { CartProvider } from '@/hooks/use-shopping-cart';
+import AuthProvider from '@/components/Context/authContext';
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -38,6 +40,8 @@ export default function App({ Component, pageProps }: AppProps) {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="google-site-verification" content="mghPEugrbz3VbC_q2WQWAF5h-wZVHYf-7nbbenYIbbI" />
         </Helmet>
+        <AuthProvider>
+        <CartProvider>
         <FavoritesProvider>
           <div>
             <main >
@@ -47,6 +51,8 @@ export default function App({ Component, pageProps }: AppProps) {
             </main>
           </div>
         </FavoritesProvider>
+        </CartProvider>
+        </AuthProvider>
         <Toaster />
         <Analytics />
       </HelmetProvider>
