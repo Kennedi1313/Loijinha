@@ -79,8 +79,8 @@ export async function getStaticPaths() {
 }
 
  export const getStaticProps = async ({ params }: any) => {
-   //const res = await fetch("http://62.72.11.102:8088/api/v1/products");
-   const res = await fetch("http://localhost:8080/api/v1/products");
+   const res = await fetch("http://62.72.11.102:8088/api/v1/products");
+   //const res = await fetch("http://localhost:8080/api/v1/products");
    let products = await res.json();
    products = products?.filter((product: any) => product.quantity > 0 && product.category === params.category) ?? {}
    return {
