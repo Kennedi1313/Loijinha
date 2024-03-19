@@ -108,24 +108,18 @@ export default function Details(props: ItemProps) {
                         
                         </div>
                         <div className='flex flex-col w-full cursor-pointer'>
-                            <div className='rounded-md flex flex-row text-white 
-                                    bg-brown-1000 gap-2 justify-center items-center p-2 h-12 mt-4 w-full'
-                                    onClick={handleOnAddToCart}>
-                                    <BsCart className='w-5 h-5'></BsCart>
-                                    <span className='font-bold text-[14px]'>ADICIONAR AO CARRINHO</span>
-                            </div>
-                            <a href={"https://api.whatsapp.com/send?phone=8498594171&text=Olá,%20tudo%20bem?%20Gostaria%20de%20comprar%20este%20produto:%20https://amandita.vercel.app/details/" + props.id}
+                            <a href={"https://api.whatsapp.com/send?phone=8498594171&text=Olá,%20tudo%20bem?%20Gostaria%20de%20comprar%20este%20produto:%20https://www.amanditapratas.com.br/details/" + props.id}
                                 target='blank'
                                 className='rounded-md flex flex-row text-white 
                                     bg-green-whatsapp gap-2 justify-center items-center p-2 h-12 mt-2 w-full'>
                                     <BsWhatsapp className='w-5 h-5'></BsWhatsapp>
-                                    <span className='font-bold text-[14px]'>COMPRAR PELO WHATSAPP</span>
+                                    <span className='font-bold text-[14px]'>Consultar disponibilidade</span>
                             </a>
                             <div className='rounded-md border-[1px] border-rose-400 flex flex-row text-white 
                                     bg-rose-400 gap-2 justify-center items-center p-2 h-12 mt-2 w-full'
                                 onClick={handleOnAddToFavorites}>
                                 <BsHeartFill className='w-5 h-5'></BsHeartFill>
-                                <span className='font-bold text-[14px]'>ADICIONAR AOS FAVORITOS</span>
+                                <span className='font-bold text-[14px]'>Adicionar aos favoritos</span>
                             </div>
                         </div>
                     </div>
