@@ -43,7 +43,7 @@ export default function Home({ products }: any) {
             </div>
           <div className="md:mt-36 mt-32 blur-[6px] h-80 md:h-96 bg-cover bg-no-repeat bg-center"></div>
           <div className='bg-rose-1000 text-brown-1000 font-bold 
-               absolute md:1/2 top-80 left-1/2 md:p-10
+               absolute md:1/2 top-80 left-1/2 p-10
                md:max-w-screen-lg w-full text-center -translate-x-1/2 -translate-y-1/2 h-min md:h-64 
                align-center justify-center flex flex-col gap-3'>
               <h1 className='text-6xl font-dream-avenue font-semibold'>JOIAS EM PRATA 925</h1>
