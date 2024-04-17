@@ -41,16 +41,14 @@ export default function Home({ products }: any) {
                         
               </div>
             </div>
-          <div className="md:mt-36 mt-32 blur-[6px] h-80 md:h-96 bg-cover bg-no-repeat bg-center"></div>
-          <div className='bg-rose-1000 text-brown-1000 font-bold 
-               absolute md:1/2 top-80 left-1/2 p-10
-               md:max-w-screen-lg w-full text-center -translate-x-1/2 -translate-y-1/2 h-min md:h-64 
-               align-center justify-center flex flex-col gap-3'>
-              <h1 className='text-6xl font-dream-avenue font-semibold'>JOIAS EM PRATA 925</h1>
-              <h2 className='text-2xl font-normal'>CONFIRA AS NOSSAS PEÇAS E DESPERTE O SEU BRILHO</h2>
-            </div>
-          <div className="bg-white z-10 -mt-2 mx-full flex items-center align-middle justify-center 
-            px-1 md:px-0 py-5 my-2 relative">
+          <div className="md:mt-32 mt-32 blur-[6px] h-80 md:h-96 bg-cover bg-no-repeat bg-center"></div>
+          <div className="bg-[url('/colecao_dia_das_maes_retrato.png')] md:bg-[url('/colecao_dia_das_maes.png')]
+             text-brown-1000 font-bold 
+               absolute top-44 md:top-40 w-full text-center h-[40rem] md:h-[36rem]
+               align-center justify-center flex flex-col gap-3 bg-contain bg-center bg-no-repeat bg-rose-1000">
+          </div>
+          <div className="bg-white z-10 mx-full flex items-center align-middle justify-center 
+            px-1 md:px-0 py-5 my-2 relative mt-80 md:mt-52 ">
             {/*<SideMenu/>*/}
             <div className=' z-30 md:max-w-screen-lg mx-auto center grid lg:grid-cols-4 grid-cols-2 w-full gap-1 gap-y-6'>
               {currentTableData.map((item: any) => {

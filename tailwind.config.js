@@ -15,7 +15,8 @@ module.exports = {
         'unlock': ['Unlock', 'Roboto']
       },
       backgroundImage: {
-        'medalhas': "url('https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/60/f6b9b5ba-032a-4c66-97cb-2667cbdecefa.jpg')"
+        'retrato': "url('/colecao_dia_das_maes_retrato.png')",
+        'vertical': "url('/colecao_dia_das_maes.png')"
       }
     },
     
