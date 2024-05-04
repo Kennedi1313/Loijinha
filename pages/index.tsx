@@ -16,7 +16,9 @@ export default function Home({ products, itemsCount }: any) {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch(`http://62.72.11.102:8088/api/v1/products?page=${currentPage}&size=${pageSize}`);
+      const res = await fetch(`http://62.72.11.102:8088/api/v1/products?page=${currentPage}&size=${pageSize}`,
+      { referrerPolicy: "unsafe-url" }
+      );
       let products = await res.json();
       setProductList(products.content);
     } catch (error) {
