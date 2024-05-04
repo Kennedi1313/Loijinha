@@ -74,6 +74,8 @@ export default function App({ Component, pageProps }: AppProps) {
           />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="google-site-verification" content="mghPEugrbz3VbC_q2WQWAF5h-wZVHYf-7nbbenYIbbI" />
+          {<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+          }
         </Helmet>
         <AuthProvider>
         <PaginationProvider>
