@@ -26,7 +26,7 @@ const Pagination = (props: Props) => {
     pageSize
   });
 
-  if (currentPage === 0 || paginationRange.length < 2) {
+  if (paginationRange.length < 2) {
     return null;
   }
 
@@ -44,7 +44,7 @@ const Pagination = (props: Props) => {
       className="flex flex-row gap-2 w-full items-center justify-center mt-8"
     >
       <a href='#'
-        className={currentPage === 1 ? "pointer-events-none opacity-30 border-solid border-2 border-gray-500 p-2 rounded-md" : 
+        className={currentPage === 0 ? "pointer-events-none opacity-30 border-solid border-2 border-gray-500 p-2 rounded-md" : 
         "border-solid border-2 border-gray-500 p-2 rounded-md"}
         onClick={onPrevious}
       >
@@ -62,7 +62,7 @@ const Pagination = (props: Props) => {
             }
             onClick={() => onPageChange(pageNumber)}
           >
-            {pageNumber}
+            {pageNumber + 1}
           </a>
         );
       })}

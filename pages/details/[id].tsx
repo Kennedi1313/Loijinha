@@ -130,10 +130,10 @@ export default function Details(props: ItemProps) {
 }
 
 export async function getStaticPaths() {
+    //const res = await fetch("http://62.72.11.102:8088/api/v1/products");
     const res = await fetch("http://62.72.11.102:8088/api/v1/products");
-    //const res = await fetch("http://localhost:8080/api/v1/products");
     let products = await res.json();
-    const paths = products.map((product: ItemProps) => ({
+    const paths = products.content.map((product: ItemProps) => ({
         params: { id: product.id.toString() },
     }))
     return { paths, fallback: true }
@@ -141,12 +141,11 @@ export async function getStaticPaths() {
   
 export async function getStaticProps({ params }: any) {
     try {
-        const res = await fetch("http://62.72.11.102:8088/api/v1/products");
-        //const res = await fetch("http://localhost:8080/api/v1/products");
+        //const res = await fetch("http://62.72.11.102:8088/api/v1/products");
+        const res = await fetch("http://62.72.11.102:8088/api/v1/products/" + params.id);
         let products = await res.json();
-        const props = products?.find((product: ItemProps) => product.id.toString() === params.id) ?? {};
         return {
-            props,
+            props: products,
         };
     } catch (error) {
         console.log(error)

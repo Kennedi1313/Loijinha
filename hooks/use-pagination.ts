@@ -30,7 +30,7 @@ export const usePagination = ({
       paginationComponent, we return the range [1..totalPageCount]
     */
     if (totalPageNumbers >= totalPageCount) {
-      return range(1, totalPageCount);
+      return range(0, totalPageCount - 1);
     }
 
     const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);

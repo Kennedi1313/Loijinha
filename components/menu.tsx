@@ -10,9 +10,10 @@ import { BsArrowRight, BsCart, BsHeart, BsMenuApp, BsMenuButton, BsPerson, BsPer
 import { FaBars, FaTimes, FaXRay, FaXing } from 'react-icons/fa'
 import { HiOutlineBars3 } from "react-icons/hi2";
 import Head from 'next/head'
-import { TbHeartFilled } from "react-icons/tb";
+import { TbHeartFilled, TbSearch } from "react-icons/tb";
 import PromotionBanner from "./promotionBanner";
 import { TfiClose } from "react-icons/tfi";
+import { usePagination } from "./Context/paginationContext";
 
 declare global {
   interface Window {
@@ -35,6 +36,9 @@ export default function Menu() {
       times?.classList.toggle('hidden');
   }
 
+  const { updateCategory } = usePagination();
+
+  const [searchQuery, setSearchQuery] = useState('');
   const { totalPrice, favoritesCount } = useShoppingFavorites();
   useEffect(() => {
     setHasMounted(true);
@@ -47,7 +51,6 @@ export default function Menu() {
       <div id="menu-container" className="fixed top-0 w-full h-20 
         z-50 bg-rose-1000">
         <Head>
-        
           <title>Amandita</title>
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
@@ -58,10 +61,8 @@ export default function Menu() {
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0KBT96YWS"></script>
           <script>
             window.dataLayer = window.dataLayer || [];
-            
             function gtag(){ window.dataLayer ? window.dataLayer.push(arguments) : []}
             gtag('js', new Date());
-
             gtag('config', 'G-Q0KBT96YWS');
           </script>
         <button id="toggle-button"
@@ -79,37 +80,37 @@ export default function Menu() {
                h-full w-[70%] gap-2 bg-white p-2
                md:w-full md:flex-row md:justify-center md:align-middle md:h-12'>
               
-              <Link href={'/products/aneis'} 
+              <Link href={'/products/aneis'}
                 className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>Anel
+                onClick={() => { toggleMenu(); updateCategory('aneis');}}>Anel
               </Link>
               <Link href={'/products/brincos'} 
                 className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>Brinco
+                onClick={() => { toggleMenu(); updateCategory('brincos');}}>Brinco
               </Link>
               <Link href={'/products/colares'} 
                 className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>Colar
+                onClick={() => { toggleMenu(); updateCategory('colares');}}>Colar
               </Link>
               <Link href={'/products/correntes'} 
                 className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>Corrente
+                onClick={() => { toggleMenu(); updateCategory('correntes');}}>Corrente
               </Link>
               <Link href={'/products/pulseiras'} 
                 className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>Pulseira
+                onClick={() => { toggleMenu(); updateCategory('pulseiras');}}>Pulseira
               </Link>
               <Link href={'/products/tornozeleiras'} 
                 className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>Tornozeleira
+                onClick={() => { toggleMenu(); updateCategory('tornozeleiras');}}>Tornozeleira
               </Link>
               <Link href={'/products/pingentes'} 
                 className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>Pingente
+                onClick={() => { toggleMenu(); updateCategory('pingentes');}}>Pingente
               </Link>
               <Link href={'/products/conjuntos'} 
                 className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
-                onClick={toggleMenu}>Conjunto
+                onClick={() => { toggleMenu(); updateCategory('conjuntos');}}>Conjunto
               </Link>
             </div>
           </div>
@@ -119,7 +120,9 @@ export default function Menu() {
         <div id="menu-container" className="fixed top-8 w-full h-20 flex flex-row justify-between md:justify-between
                    bg-rose-1000 items-center z-50">
             <div className="w-1/4 block md:hidden"></div>
-            <Link href={'/'} className='w-44 h-20 relative md:left-8 md:mx-6 overflow-hidden'>
+            <Link href={'/'} 
+                  className='w-44 h-20 relative md:left-8 md:mx-6 overflow-hidden'
+                  onClick={() => { updateCategory('');}}>
               <Image 
                   src={logo}
                   alt='item'
@@ -146,7 +149,17 @@ export default function Menu() {
               */}
             </div>
           </div>
-          
+          <div className='fixed top-28 md:top-12 md:left-1/2 z-40 md:z-50 flex px-2 md:right-32 items-center text-gray-500 w-full 
+              bg-white md:bg-transparent h-16 md:h-12 md:w-[30%]'>
+              <div className='flex flex-row rounded-full w-full md:w-full border-solid border-[1px] border-brown-1000'>
+                          <Link href={`/search/${searchQuery}`}>
+                            <TbSearch className='text-2xl font-bold m-2 text-brown-1000'></TbSearch>
+                          </Link>
+                          <input type="text" name="query" id="search" autoComplete="off"
+                            className='w-full rounded-full py-1 px-2 active:border-0 dark:text-black outline-none' 
+                            onChange={async (e) => {setSearchQuery(e.target.value)}}/>     
+              </div>
+            </div>
       </div>
     )
 }

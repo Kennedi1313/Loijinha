@@ -1,18 +1,53 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { FavoritesProvider } from '@/hooks/use-shopping-favorites';
-import Header from '../components/header';
-import Menu from '../components/menu';
-import PromotionBanner from '../components/promotionBanner';
 import Footer from '../components/footer';
 import { Toaster } from 'react-hot-toast';
 import { Analytics } from '@vercel/analytics/react';
-import { SessionProvider } from 'next-auth/react'
 import ContactFloating from '@/components/contactFloating';
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { CartProvider } from '@/hooks/use-shopping-cart';
 import AuthProvider from '@/components/Context/authContext';
+import { PaginationProvider } from '@/components/Context/paginationContext';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import Menu from '@/components/menu';
+
+
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = (url: any, { shallow }: any) => {
+        if (url.startsWith("/details")) {
+          sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+          sessionStorage.setItem('page', window.location.href);
+        }
+    };
+
+    const handleRouteComplete = (e: any) => {
+      let url = window.location.href;
+      if (!url.includes("/details")) {
+        const scrollPosition = sessionStorage.getItem('scrollPosition');
+        const previousPage = sessionStorage.getItem('page');
+        if ('scrollRestoration' in window.history && scrollPosition && 
+        previousPage && previousPage == url) {
+          window.history.scrollRestoration = 'manual';
+          window.scrollTo(0, parseInt(scrollPosition, 10));
+          sessionStorage.setItem('page', "");
+        }
+      }
+    };
+
+    router.events.on('routeChangeStart', handleRouteChange);
+    router.events.on('routeChangeComplete', handleRouteComplete);
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange);
+      router.events.off('routeChangeComplete', handleRouteComplete);
+    };
+  }, []);
+
   return (
     <>
       <HelmetProvider>
@@ -41,9 +76,11 @@ export default function App({ Component, pageProps }: AppProps) {
           <meta name="google-site-verification" content="mghPEugrbz3VbC_q2WQWAF5h-wZVHYf-7nbbenYIbbI" />
         </Helmet>
         <AuthProvider>
+        <PaginationProvider>
         <CartProvider>
         <FavoritesProvider>
           <div>
+            <Menu></Menu>
             <main >
               <Component {...pageProps}/>
               <ContactFloating></ContactFloating>
@@ -52,6 +89,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </div>
         </FavoritesProvider>
         </CartProvider>
+        </PaginationProvider>
         </AuthProvider>
         <Toaster />
         <Analytics />
