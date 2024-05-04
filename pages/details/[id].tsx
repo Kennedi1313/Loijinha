@@ -131,7 +131,7 @@ export default function Details(props: ItemProps) {
 
 export async function getStaticPaths() {
     //const res = await fetch("http://62.72.11.102:8088/api/v1/products");
-    const res = await fetch("http://62.72.11.102:8088/api/v1/products");
+    const res = await fetch("https://62.72.11.102:8088/api/v1/products");
     let products = await res.json();
     const paths = products.content.map((product: ItemProps) => ({
         params: { id: product.id.toString() },
@@ -142,7 +142,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: any) {
     try {
         //const res = await fetch("http://62.72.11.102:8088/api/v1/products");
-        const res = await fetch("http://62.72.11.102:8088/api/v1/products/" + params.id);
+        const res = await fetch("https://62.72.11.102:8088/api/v1/products/" + params.id);
         let products = await res.json();
         return {
             props: products,
