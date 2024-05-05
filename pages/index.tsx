@@ -53,8 +53,8 @@ export default function Home({ products, itemsCount }: any) {
           <Pagination
                 className="pagination-bar"
                 currentPage={currentPage}
-                totalCount={itemsCount}
-                pageSize={productListSize}
+                totalCount={productListSize}
+                pageSize={pageSize}
                 onPageChange={(page: number) => {
                   setCurrentPage(page)}}
               />

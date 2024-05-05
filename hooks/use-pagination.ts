@@ -20,7 +20,7 @@ export const usePagination = ({
   currentPage
 } : Props) => {
   const paginationRange = useMemo(() => {
-    const totalPageCount = Math.ceil(totalCount / pageSize);
+    const totalPageCount = Math.ceil((totalCount / pageSize) - 1);
 
     // Pages count is determined as siblingCount + firstPage + lastPage + currentPage + 2*DOTS
     const totalPageNumbers = siblingCount + 5;
@@ -30,7 +30,7 @@ export const usePagination = ({
       paginationComponent, we return the range [1..totalPageCount]
     */
     if (totalPageNumbers >= totalPageCount) {
-      return range(0, totalPageCount - 1);
+      return range(0, totalPageCount);
     }
 
     const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
