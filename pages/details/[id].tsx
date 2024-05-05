@@ -13,6 +13,7 @@ interface ItemProps {
     name: string,
     description: string,
     price: number,
+    quantity: number,
     srcImg: string,
     profileImageId: string
 }
@@ -87,18 +88,32 @@ export default function Details(props: ItemProps) {
                                 (max-width: 1200px) 100vw,
                                 33vw"/>
                     </div>
-                    <div className='flex-1 flex-col max-w-md w-full rounded-md gap-2'>
+                    
+                    <div className='flex flex-col max-w-md w-full rounded-md gap-2'>
+                        {props.quantity == 0 ? 
+                            <span className='text-xl font-semibold rounded-lg bg-red-600 py-2 px-4 text-white w-fit'>
+                                Produto Indisponível!
+                            </span> 
+                            : <></>}
                         <p className='text-2xl font-semibold'>{props.name}</p> 
                         <div className="mt-4 border-t pt-4">
                             <p className="text-gray-500">Preço:</p>
                             <div className='flex flex-col'>
                                 <span className='text-xl font-semibold text-gray-800'>
-                                    {formatCurrency(props.price * 0.95)}
-                                    <span className='text-sm font-thin'> no pix</span>
+                                    {props.price > 5000 
+                                    ?   
+                                        <span>
+                                            <span>{ formatCurrency(props.price * 0.95) }</span>
+                                            <span className='text-sm font-thin'> no pix</span>
+                                        </span>
+                                    : formatCurrency(props.price)
+                                    }
                                 </span>
                                 {props.price >= 10000
                                 ? <span className='text-sm font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 3x sem juros</span>
-                                : <span className='text-sm font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 1x sem juros</span>
+                                : props.price >= 5000 
+                                    ? <span className='text-xs font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 1x sem juros</span>
+                                    : <span className='text-xs font-thin text-gray-700'>em até 1x sem juros</span>
                                 }
                             </div>
                         </div>
@@ -108,13 +123,23 @@ export default function Details(props: ItemProps) {
                         
                         </div>
                         <div className='flex flex-col w-full cursor-pointer'>
-                            <a href={"https://api.whatsapp.com/send?phone=8498594171&text=Olá,%20tudo%20bem?%20Gostaria%20de%20comprar%20este%20produto:%20https://www.amanditapratas.com.br/details/" + props.id}
-                                target='blank'
-                                className='rounded-md flex flex-row text-white 
-                                    bg-green-whatsapp gap-2 justify-center items-center p-2 h-12 mt-2 w-full'>
-                                    <BsWhatsapp className='w-5 h-5'></BsWhatsapp>
-                                    <span className='font-bold text-[14px]'>Consultar disponibilidade</span>
-                            </a>
+                            {props.quantity > 0 ?
+                                <a href={"https://api.whatsapp.com/send?phone=8498594171&text=Olá,%20tudo%20bem?%20Gostaria%20de%20comprar%20este%20produto:%20https://www.amanditapratas.com.br/details/" + props.id}
+                                    target='blank'
+                                    className='rounded-md flex flex-row text-white 
+                                        bg-green-whatsapp gap-2 justify-center items-center p-2 h-12 mt-2 w-full'>
+                                        <BsWhatsapp className='w-5 h-5'></BsWhatsapp>
+                                        <span className='font-bold text-[14px]'>Consultar disponibilidade</span>
+                                </a>
+                                :
+                                <a href={"https://api.whatsapp.com/send?phone=8498594171&text=Olá,%20tudo%20bem?%20Gostaria%20de%20ser%20avisado%20quando%20este%20produto%20chegar%20em%20estoque:%20https://www.amanditapratas.com.br/details/" + props.id}
+                                    target='blank'
+                                    className='rounded-md flex flex-row text-white 
+                                        bg-green-whatsapp gap-2 justify-center items-center p-2 h-12 mt-2 w-full'>
+                                        <BsWhatsapp className='w-5 h-5'></BsWhatsapp>
+                                        <span className='font-bold text-[14px]'>Me avise quando chegar</span>
+                                </a>
+                            }
                             <div className='rounded-md border-[1px] border-rose-400 flex flex-row text-white 
                                     bg-rose-400 gap-2 justify-center items-center p-2 h-12 mt-2 w-full'
                                 onClick={handleOnAddToFavorites}>

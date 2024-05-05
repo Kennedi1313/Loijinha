@@ -10,6 +10,7 @@ interface ItemProps {
     id: string,
     name: string,
     price: number,
+    quantity: number,
     srcImg: string
 }
 
@@ -60,12 +61,20 @@ export default function Item(props: ItemProps) {
                 <span className='text-md leading-5 font-thin text-gray-800'>{props.name}</span> 
                 <div className='flex flex-col'>
                     <span className='text-xl font-semibold text-gray-800'>
-                        {formatCurrency(props.price * 0.95)}
-                        <span className='text-sm font-thin'> no pix</span>
+                    {props.price >= 5000 
+                    ?   
+                        <span>
+                            <span>{ formatCurrency(props.price * 0.95) }</span>
+                            <span className='text-sm font-thin'> no pix</span>
+                        </span>
+                    : formatCurrency(props.price)
+                    }
                     </span>
                     {props.price >= 10000
-                     ? <span className='text-xs font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 3x sem juros</span>
-                    : <span className='text-xs font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 1x sem juros</span>
+                    ? <span className='text-xs font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 3x sem juros</span>
+                    : props.price >= 5000 
+                        ? <span className='text-xs font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 1x sem juros</span>
+                        : <span className='text-xs font-thin text-gray-700'>em até 1x sem juros</span>
                     }
                 </div>
             </div>
@@ -79,6 +88,25 @@ export default function Item(props: ItemProps) {
                 : <BsHeart className='w-5 h-5 opacity-100 text-rose-400'></BsHeart> 
             }
         </button>
+        { props.quantity == 0 ?
+                <span className='font-bold text-[14px] absolute left-2 top-2 rounded-lg bg-red-600 py-2 px-4 text-white w-fit'>
+                    Produto Indisponível
+                </span> 
+            : <></>
+        }
+
+        { props.quantity == 0 ?
+            <a href={"https://api.whatsapp.com/send?phone=8498594171&text=Olá,%20tudo%20bem?%20Gostaria%20de%20ser%20avisado%20quando%20este%20produto%20chegar%20em%20estoque:%20https://www.amanditapratas.com.br/details/" + props.id}
+                target='blank'
+                className='rounded-md flex flex-row text-white 
+                    bg-green-whatsapp gap-2 justify-center items-center py-2 px-4
+                    absolute left-5 bottom-44'>
+                    <BsWhatsapp className='w-5 h-5'></BsWhatsapp>
+                    <span className='font-bold text-[14px]'>Me avise quando chegar</span>
+            </a>
+        : <></>
+        }
+
     </div>
     )
 }
