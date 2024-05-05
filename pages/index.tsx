@@ -8,6 +8,7 @@ import Link from 'next/link';
 export default function Home({ products, itemsCount }: any) {
   const { currentPage, setCurrentPage } = usePagination();
   const [productList, setProductList] = useState(products);
+  const [productListSize, setProductListSize] = useState(itemsCount);
   const pageSize = 8; 
 
   useEffect(() => {
@@ -19,6 +20,7 @@ export default function Home({ products, itemsCount }: any) {
       const res = await fetch(`https://api.amanditapratas.com.br/api/v1/products?page=${currentPage}&size=${pageSize}`);
       let products = await res.json();
       setProductList(products.content);
+      setProductListSize(products.totalElements);
     } catch (error) {
       console.error('Error fetching products:', error);
     }
@@ -26,7 +28,7 @@ export default function Home({ products, itemsCount }: any) {
 
     return (
       <>
-        { productList ? 
+        { productList && productListSize > 0 ? 
         <div>
           <div className="md:mt-32 mt-32 blur-[6px] h-80 md:h-96 bg-cover bg-no-repeat bg-center"></div>
           <div className="bg-[url('/colecao_dia_das_maes_retrato.png')] md:bg-[url('/colecao_dia_das_maes.png')]
@@ -51,7 +53,7 @@ export default function Home({ products, itemsCount }: any) {
                 className="pagination-bar"
                 currentPage={currentPage}
                 totalCount={itemsCount}
-                pageSize={pageSize}
+                pageSize={productListSize}
                 onPageChange={(page: number) => {
                   setCurrentPage(page)}}
               />

@@ -7,6 +7,7 @@ import { usePagination } from '@/components/Context/paginationContext';
 let PageSize = 12;
 export default function Home({ products, category, itemsCount }: any) {
   const [productList, setProductList] = useState(products);
+  const [productListSize, setProductListSize] = useState(itemsCount);
   const { currentPage, setCurrentPage } = usePagination();
   const pageSize = 8; 
 
@@ -19,6 +20,7 @@ export default function Home({ products, category, itemsCount }: any) {
       const res = await fetch(`https://api.amanditapratas.com.br/api/v1/products/by-category?category=${category}&page=${currentPage}&size=${pageSize}`);
       let products = await res.json();
       setProductList(products.content);
+      setProductListSize(products.totalElements);
     } catch (error) {
       console.error('Error fetching products:', error);
     }
@@ -26,7 +28,7 @@ export default function Home({ products, category, itemsCount }: any) {
 
   return (
       <>
-        { productList && itemsCount > 0 ? 
+        { productList && productListSize > 0 ? 
         <div>
           <div className="mt-40 md:max-w-screen-lg mx-auto flex items-center justify-center px-1 md:px-0 py-5 my-2">
             <div className='center grid lg:grid-cols-4 grid-cols-2 w-full gap-1 gap-y-6'>
@@ -44,7 +46,7 @@ export default function Home({ products, category, itemsCount }: any) {
           <Pagination
                 className="pagination-bar"
                 currentPage={currentPage}
-                totalCount={itemsCount}
+                totalCount={productListSize}
                 pageSize={pageSize}
                 onPageChange={(page: number) => setCurrentPage(page)}
               />
