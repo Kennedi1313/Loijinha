@@ -79,7 +79,7 @@ export default function Item(props: ItemProps) {
                 </div>
             </div>
         </Link>
-        <button className='rounded-full absolute right-1 top-1 border-[1px] border-gray-200 flex flex-row text-black
+        <button className='rounded-full absolute right-1 top-2 border-[1px] border-gray-200 flex flex-row text-black
             bg-white opacity-80 justify-center items-center p-3'
             disabled={adding}
             onClick={() => { isInFavorites() ? removeItem(props) : handleOnAddToFavorites()}}>
@@ -89,7 +89,7 @@ export default function Item(props: ItemProps) {
             }
         </button>
         { props.quantity == 0 ?
-                <span className='font-bold text-[14px] absolute left-2 top-2 rounded-lg bg-red-600 py-2 px-4 text-white w-fit'>
+                <span className='font-bold text-[14px] absolute left-[3%] w-[60%] top-2 rounded-lg bg-red-600 py-2 px-4 text-white md:w-fit'>
                     Produto Indisponível
                 </span> 
             : <></>
@@ -100,7 +100,7 @@ export default function Item(props: ItemProps) {
                 target='blank'
                 className='rounded-md flex flex-row text-white 
                     bg-green-whatsapp gap-2 justify-center items-center py-2 px-4
-                    absolute left-5 bottom-44'>
+                    absolute left-[3%] w-[94%] md:h-10 bottom-[27%] md:bottom-[35%]'>
                     <BsWhatsapp className='w-5 h-5'></BsWhatsapp>
                     <span className='font-bold text-[14px]'>Me avise quando chegar</span>
             </a>
