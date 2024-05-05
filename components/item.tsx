@@ -65,7 +65,7 @@ export default function Item(props: ItemProps) {
                     </span>
                     {props.price >= 10000
                      ? <span className='text-xs font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 3x sem juros</span>
-                    : <span> </span>
+                    : <span className='text-xs font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 1x sem juros</span>
                     }
                 </div>
             </div>
