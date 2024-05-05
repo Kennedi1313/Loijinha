@@ -16,7 +16,7 @@ export default function Home({ products, itemsCount }: any) {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch(`http://62.72.11.102:8088/api/v1/products?page=${currentPage}&size=${pageSize}`);
+      const res = await fetch(`https://api.amanditapratas.com.br/api/v1/products?page=${currentPage}&size=${pageSize}`);
       let products = await res.json();
       setProductList(products.content);
     } catch (error) {
@@ -63,7 +63,7 @@ export default function Home({ products, itemsCount }: any) {
 
  export const getStaticProps = async ({ params }: any) => {
    //const res = await fetch("http://62.72.11.102:8088/api/v1/products");
-   const res = await fetch(`http://62.72.11.102:8088/api/v1/products?page=${0}&size=${8}`);
+   const res = await fetch(`https://api.amanditapratas.com.br/api/v1/products?page=${0}&size=${8}`);
    let products = await res.json();
    return {
      props: {
