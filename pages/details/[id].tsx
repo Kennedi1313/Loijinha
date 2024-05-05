@@ -98,7 +98,7 @@ export default function Details(props: ItemProps) {
                                 </span>
                                 {props.price >= 10000
                                 ? <span className='text-sm font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 3x sem juros</span>
-                                : ''
+                                : <span className='text-sm font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 1x sem juros</span>
                                 }
                             </div>
                         </div>
