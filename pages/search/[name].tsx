@@ -18,7 +18,7 @@ export default function Search() {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch(`http://62.72.11.102:8088/api/v1/products/by-name?query=${query}&page=${currentPage}&size=${pageSize}`);
+      const res = await fetch(`https://api.amanditapratas.com.br/api/v1/products/by-name?query=${query}&page=${currentPage}&size=${pageSize}`);
       let products = await res.json();
       setProductList(products.content);
     } catch (error) {
