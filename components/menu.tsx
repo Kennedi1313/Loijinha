@@ -73,7 +73,7 @@ export default function Menu() {
         </button>
       
         <menu id="menu" className="fixed hidden md:block top-0 left-0 shadow-sm z-40">
-          <div className="top-28 fixed w-full justify-center
+          <div className="top-44 md:top-28 fixed w-full justify-center
                 z-40 bg-black/50 h-full md:h-12 md:shadow-md md:shadow-gray-300/30 items-center
                 border-t-[1px] border-solid border-brown-1000">
             <div className='z-50 flex flex-col  items-center justify-start 
@@ -103,10 +103,6 @@ export default function Menu() {
               <Link href={'/products/tornozeleiras'} 
                 className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
                 onClick={() => { toggleMenu(); updateCategory('tornozeleiras');}}>Tornozeleira
-              </Link>
-              <Link href={'/products/pingentes'} 
-                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
-                onClick={() => { toggleMenu(); updateCategory('pingentes');}}>Pingente
               </Link>
               <Link href={'/products/conjuntos'} 
                 className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
