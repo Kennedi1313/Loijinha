@@ -15,12 +15,6 @@ import PromotionBanner from "./promotionBanner";
 import { TfiClose } from "react-icons/tfi";
 import { usePagination } from "./Context/paginationContext";
 
-declare global {
-  interface Window {
-    // TODO: replace this with a more specific type based on usage
-    dataLayer: any[];
-  }
-}
 
 export default function Menu() {
   const [hasMounted, setHasMounted] = useState(false);
@@ -58,13 +52,6 @@ export default function Menu() {
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin={''}/>
           <link href="https://fonts.googleapis.com/css2?family=Unlock&display=swap" rel="stylesheet"></link>
         </Head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0KBT96YWS"></script>
-          <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){ window.dataLayer ? window.dataLayer.push(arguments) : []}
-            gtag('js', new Date());
-            gtag('config', 'G-Q0KBT96YWS');
-          </script>
         <button id="toggle-button"
           className="fixed block md:hidden left-4 w-12 h-14 z-[100] top-11"
           onClick={toggleMenu}>
