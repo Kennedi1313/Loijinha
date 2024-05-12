@@ -59,13 +59,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <HelmetProvider>
       
         <Helmet>
-          <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0KBT96YWS"></script>
-          <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){ window.dataLayer ? window.dataLayer.push(arguments) : []}
-            gtag('js', new Date());
-            gtag('config', 'G-Q0KBT96YWS');
-          </script>
           <title>Amandita Pratas | Joias em prata 925</title>
           <meta
             name="description"
