@@ -45,13 +45,6 @@ export default function Menu() {
       <div id="menu-container" className="fixed top-0 w-full h-20 
         z-50 bg-rose-1000">
         <Head>
-          <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0KBT96YWS"></script>
-          <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){ window.dataLayer ? window.dataLayer.push(arguments) : []}
-            gtag('js', new Date());
-            gtag('config', 'G-Q0KBT96YWS');
-          </script>
           <title>Amandita</title>
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
