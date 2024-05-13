@@ -5,6 +5,7 @@ import Menu from '@/components/menu';
 import Pagination from '@/components/pagination';
 import { usePagination } from '@/components/Context/paginationContext';
 import Link from 'next/link';
+import { BsInstagram } from 'react-icons/bs';
 export default function Home({ products, itemsCount }: any) {
   const { currentPage, setCurrentPage } = usePagination();
   const [productList, setProductList] = useState(products);
@@ -31,12 +32,13 @@ export default function Home({ products, itemsCount }: any) {
         { productList && productListSize > 0 ? 
         <div>
           <div className="md:mt-32 mt-32 blur-[6px] h-80 md:h-96 bg-cover bg-no-repeat bg-center"></div>
-          <div className="bg-[url('/colecao_dia_das_maes_retrato.png')] md:bg-[url('/colecao_dia_das_maes.png')]
+          <div className="bg-[url('/2.png')] md:bg-[url('/3.png')]
              text-brown-1000 font-bold 
-               absolute top-44 md:top-40 w-full text-center h-[40rem] md:h-[36rem]
-               align-center justify-center flex flex-col gap-3 bg-contain bg-center bg-no-repeat bg-[#F2EEEB]">
+               absolute top-44 md:top-40 w-full text-center h-[48rem] md:h-[36rem]
+               align-center justify-center flex flex-col gap-3 bg-cover md:bg-contain bg-center bg-no-repeat bg-[#F2EEEB]">
           </div>
-          <div className="bg-white z-10 mx-full flex items-center align-middle justify-center px-1 md:px-0 py-5 my-2 relative mt-80 md:mt-52 ">
+          <div className="bg-white z-10 mx-full flex flex-col items-center align-middle justify-center px-1 md:px-0 py-5 my-2 relative mt-80 md:mt-52 ">
+            <h1 className='pb-5 text-4xl mt-12 w-full underline md:text-center'>Novidades</h1>
             <div className=' z-30 md:max-w-screen-lg mx-auto center grid lg:grid-cols-4 grid-cols-2 w-full gap-1 gap-y-6'>
               {productList.map((item: any) => {
                 return (
@@ -49,17 +51,19 @@ export default function Home({ products, itemsCount }: any) {
                     srcImg={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${item.id}/${item.profileImageId}.jpg`}/>)
               })}
             </div>
+            <h1 className='pb-5 text-4xl mt-12 w-full underline md:text-center'>Loja física</h1> 
+            <div className='w-full h-[20rem] mb-12'>
+                <iframe src="https://storage.googleapis.com/maps-solutions-k9mybl2fxd/locator-plus/88wu/locator-plus.html"
+                    width="100%" height="100%"
+                    style={{border:0}}
+                    loading="lazy">
+                </iframe>
+            </div>
           </div>
-          <Pagination
-                className="pagination-bar"
-                currentPage={currentPage}
-                totalCount={productListSize}
-                pageSize={pageSize}
-                onPageChange={(page: number) => {
-                  setCurrentPage(page)}}
-              />
+
         </div>
         : <h1>NENHUM PRODUTO CADASTRADO</h1>}
+
       </>
     )
 }
