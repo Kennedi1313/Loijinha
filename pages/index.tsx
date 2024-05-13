@@ -38,7 +38,7 @@ export default function Home({ products, itemsCount }: any) {
                align-center justify-center flex flex-col gap-3 bg-cover md:bg-contain bg-center bg-no-repeat bg-[#F2EEEB]">
           </div>
           <div className="bg-white z-10 mx-full flex flex-col items-center align-middle justify-center px-1 md:px-0 py-5 my-2 relative mt-80 md:mt-52 ">
-            <h1 className='pb-5 text-4xl mt-12 w-full underline md:text-center'>Novidades</h1>
+            <h1 className='pb-5 text-4xl mt-12 w-full md:text-center'>Novidades</h1>
             <div className=' z-30 md:max-w-screen-lg mx-auto center grid lg:grid-cols-4 grid-cols-2 w-full gap-1 gap-y-6'>
               {productList.map((item: any) => {
                 return (
@@ -51,7 +51,7 @@ export default function Home({ products, itemsCount }: any) {
                     srcImg={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${item.id}/${item.profileImageId}.jpg`}/>)
               })}
             </div>
-            <h1 className='pb-5 text-4xl mt-12 w-full underline md:text-center'>Loja física</h1> 
+            <h1 className='pb-5 text-4xl mt-12 w-full md:text-center'>Loja física</h1> 
             <div className='w-full h-[20rem] mb-12'>
                 <iframe src="https://storage.googleapis.com/maps-solutions-k9mybl2fxd/locator-plus/88wu/locator-plus.html"
                     width="100%" height="100%"
