@@ -4,6 +4,7 @@ import { TbSearch } from 'react-icons/tb';
 import Menu from '@/components/menu';
 import Pagination from '@/components/pagination';
 import { usePagination } from '@/components/Context/paginationContext';
+import Head from 'next/head';
 let PageSize = 12;
 export default function Home({ products, category, itemsCount }: any) {
   const [productList, setProductList] = useState(products);
@@ -13,6 +14,7 @@ export default function Home({ products, category, itemsCount }: any) {
 
   useEffect(() => {
     fetchProducts();
+    console.log(category)
   }, [currentPage, category]);
 
   const fetchProducts = async () => {
@@ -28,6 +30,9 @@ export default function Home({ products, category, itemsCount }: any) {
 
   return (
       <>
+        <Head>
+          <title>Amandita | {category[0].toUpperCase() + category.substring(1)}</title>
+        </Head>
         { productList && productListSize > 0 ? 
         <div>
           <div className="mt-40 md:max-w-screen-lg mx-auto flex items-center justify-center px-1 md:px-0 py-5 my-2">
@@ -64,6 +69,7 @@ export default function Home({ products, category, itemsCount }: any) {
 
 export async function getStaticPaths() {
   const paths = [
+    {params: { category: 'promocional' }},
     {params: { category: 'aneis' }},
     {params: { category: 'brincos' }},
     {params: { category: 'colares' }},

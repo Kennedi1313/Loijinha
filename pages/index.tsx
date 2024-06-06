@@ -5,6 +5,7 @@ import Menu from '@/components/menu';
 import Pagination from '@/components/pagination';
 import { usePagination } from '@/components/Context/paginationContext';
 import Link from 'next/link';
+import Head from 'next/head'
 import { BsInstagram } from 'react-icons/bs';
 export default function Home({ products, itemsCount }: any) {
   const { currentPage, setCurrentPage } = usePagination();
@@ -31,6 +32,9 @@ export default function Home({ products, itemsCount }: any) {
       <>
         { productList && productListSize > 0 ? 
         <div>
+          <Head>
+            <title>Amandita | Joias em Prata 925 | Natal/RN</title>
+          </Head>
           <div className="md:mt-32 mt-32 blur-[6px] h-80 md:h-96 bg-cover bg-no-repeat bg-center"></div>
           <div className="bg-[url('/2.png')] md:bg-[url('/3.png')]
              text-brown-1000 font-bold 

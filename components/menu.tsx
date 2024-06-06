@@ -45,7 +45,6 @@ export default function Menu() {
       <div id="menu-container" className="fixed top-0 w-full h-20 
         z-50 bg-rose-1000">
         <Head>
-          <title>Amandita</title>
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
           <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -61,38 +60,41 @@ export default function Menu() {
       
         <menu id="menu" className="fixed hidden md:block top-0 left-0 shadow-sm z-40">
           <div className="top-44 md:top-28 fixed w-full justify-center
-                z-40 bg-black/50 h-full md:h-12 md:shadow-md md:shadow-gray-300/30 items-center
+                z-40 bg-black/50 h-full md:h-12 items-center
                 border-t-[1px] border-solid border-brown-1000">
             <div className='z-50 flex flex-col  items-center justify-start 
                h-full w-[70%] gap-2 bg-white p-2
                md:w-full md:flex-row md:justify-center md:align-middle md:h-12'>
-              
+              <Link href={'/products/promocional'}
+                className='p-3 md:underline md:underline-offset-[16px] md:decoration-red-500 md:decoration-[3px] font-semibold border-solid border-b-[3px] md:border-none md:w-fit border-red-500 w-full text-left text-black-1000 cursor-pointer'
+                onClick={() => { toggleMenu(); updateCategory('promocional');}}> &nbsp;Dia dos Namorados&nbsp;
+              </Link>
               <Link href={'/products/aneis'}
-                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
+                className='p-3 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
                 onClick={() => { toggleMenu(); updateCategory('aneis');}}>Anel
               </Link>
               <Link href={'/products/brincos'} 
-                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
+                className='p-3 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
                 onClick={() => { toggleMenu(); updateCategory('brincos');}}>Brinco
               </Link>
               <Link href={'/products/colares'} 
-                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
+                className='p-3 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
                 onClick={() => { toggleMenu(); updateCategory('colares');}}>Colar
               </Link>
               <Link href={'/products/correntes'} 
-                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
+                className='p-3 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
                 onClick={() => { toggleMenu(); updateCategory('correntes');}}>Corrente
               </Link>
               <Link href={'/products/pulseiras'} 
-                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
+                className='p-3 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
                 onClick={() => { toggleMenu(); updateCategory('pulseiras');}}>Pulseira
               </Link>
               <Link href={'/products/tornozeleiras'} 
-                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
+                className='p-3 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
                 onClick={() => { toggleMenu(); updateCategory('tornozeleiras');}}>Tornozeleira
               </Link>
               <Link href={'/products/conjuntos'} 
-                className='p-2 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
+                className='p-3 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
                 onClick={() => { toggleMenu(); updateCategory('conjuntos');}}>Conjunto
               </Link>
             </div>
