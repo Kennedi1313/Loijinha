@@ -65,10 +65,10 @@ export default function Menu() {
             <div className='z-50 flex flex-col  items-center justify-start 
                h-full w-[70%] gap-2 bg-white p-2
                md:w-full md:flex-row md:justify-center md:align-middle md:h-12'>
-              <Link href={'/products/promocional'}
+              {/*<Link href={'/products/promocional'}
                 className='p-3 md:underline md:underline-offset-[16px] md:decoration-red-500 md:decoration-[3px] font-semibold border-solid border-b-[3px] md:border-none md:w-fit border-red-500 w-full text-left text-black-1000 cursor-pointer'
-                onClick={() => { toggleMenu(); updateCategory('promocional');}}> &nbsp;Dia dos Namorados&nbsp;
-              </Link>
+                onClick={() => { toggle Menu(); updateCategory('promocional');}}> &nbsp;Dia dos Namorados&nbsp;
+              </Link>*/}
               <Link href={'/products/aneis'}
                 className='p-3 no-underline border-solid border-b-[1px] md:border-none md:w-fit border-brown-1000 w-full text-left text-black-1000 cursor-pointer'
                 onClick={() => { toggleMenu(); updateCategory('aneis');}}>Anel
