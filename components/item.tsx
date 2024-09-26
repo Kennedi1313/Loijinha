@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast';
 import { BsHeart, BsHeartFill, BsStar, BsStarFill, BsWhatsapp } from 'react-icons/bs'
+import Share from './shareSocial'
 
 interface ItemProps {
     id: string,
@@ -88,6 +89,7 @@ export default function Item(props: ItemProps) {
                 : <BsHeart className='w-5 h-5 opacity-100 text-rose-400'></BsHeart> 
             }
         </button>
+        <Share productName={props.name} productUrl={"https://www.amanditapratas.com.br/details/" + props.id} />
         { props.quantity == 0 ?
                 <span className='font-bold text-[14px] absolute left-[3%] w-[60%] top-2 rounded-lg bg-red-600 py-2 px-4 text-white md:w-fit'>
                     Produto Indisponível
@@ -106,7 +108,6 @@ export default function Item(props: ItemProps) {
             </a>
         : <></>
         }
-
     </div>
     )
 }

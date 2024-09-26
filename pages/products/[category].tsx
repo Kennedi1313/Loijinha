@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import Item from '../../components/item'
 import { TbSearch } from 'react-icons/tb';
-import Menu from '@/components/menu';
 import Pagination from '@/components/pagination';
 import { usePagination } from '@/components/Context/paginationContext';
 import Head from 'next/head';

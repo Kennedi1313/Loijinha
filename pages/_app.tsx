@@ -12,8 +12,12 @@ import { PaginationProvider } from '@/components/Context/paginationContext';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Menu from '@/components/menu';
-import { GoogleTagManager } from '@next/third-parties/google'
-
+declare global {
+  interface Window {
+    // TODO: replace this with a more specific type based on usage
+    dataLayer: any[];
+  }
+} 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
@@ -85,7 +89,6 @@ export default function App({ Component, pageProps }: AppProps) {
             <Menu></Menu>
             <main >
               <Component {...pageProps}/>
-              <GoogleTagManager gtmId="G-Q0KBT96YWS" />
               <ContactFloating></ContactFloating>
               <Footer></Footer>
             </main>
