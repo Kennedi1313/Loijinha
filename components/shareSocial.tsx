@@ -9,7 +9,7 @@ interface ShareProps {
 const Share: React.FC<ShareProps> = ({ productName, productUrl }) => {
   const shareData = {
     title: productName,
-    text: `Check out this product: ${productName}`,
+    text: `${productName}`,
     url: productUrl,
   };
 
