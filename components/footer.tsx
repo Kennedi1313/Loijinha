@@ -7,21 +7,10 @@ import { MdMailOutline } from "react-icons/md";
 
 export default function Footer() {
     return (
-        <div className='flex flex-col items-center mt-20'>
-            <div className='bg-rose-1000 flex justify-center w-full'>
-                <div className='w-72 h-52 relative mt-2'>
-                    <Image 
-                        src={logo}
-                        alt='item'
-                        priority
-                        fill
-                        className='object-cover'
-                        sizes="(max-width: 768px) 50vw,
-                        (max-width: 1200px) 50vw,
-                        33vw"/>
-                </div>
+        <div className='flex flex-col items-center mt-14'>
+            <div className='border-solid border-t-[1px] border-gray-300 flex justify-center w-[95%]'>
             </div>
-            <div className='md:p-10 flex flex-col md:flex-row gap-3 w-full justify-around p-3'>
+            <div className='md:p-16 flex flex-col md:flex-row gap-5 w-full justify-around p-3 pt-10'>
                 <div className='flex flex-col w-full justify-center items-center'>
                     <span className='font-semibold'>Pague com </span>
                     <div className='w-full h-12 relative mt-2'>
@@ -36,7 +25,7 @@ export default function Footer() {
                             33vw"/>
                     </div>
                 </div>
-                <div className='flex flex-col w-full justify-center items-center md:items-center'>
+                <div className='flex flex-col w-full justify-center items-center md:items-center text-sm'>
                 <span className='font-semibold'>Contato</span>
                     <div>
                         
@@ -59,7 +48,7 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-            <div className='flex flex-col md:flex-row w-full items-center justify-center md:gap-2 p-3 md:p-4 text-sm'>
+            <div className='flex flex-col md:flex-row w-full items-center justify-center md:gap-2 p-5 md:p-4 text-xs'>
                 
                 <div className='flex'>
                     Copyright © 2024. Todos os direitos reservados. 
