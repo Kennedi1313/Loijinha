@@ -65,12 +65,12 @@ export default function Details() {
                     {Object.entries(favoritesDetails).map(([key, product]: [any, any]) => (
                     <div
                         key={key}
-                        className="flex flex-col gap-4 mt-2 md:flex-row justify-between space-x-4 hover:shadow-lg hover:border-opacity-50 border border-opacity-0 rounded-md p-2 md:p-4"
+                        className="flex flex-col gap-4 mt-2 md:flex-row justify-between space-x-4 border border-opacity-0 rounded-md p-2 md:p-4"
                     >
                         {/* Image + Name */}
                         <Link href={`/details/${product.id}`}>
                         <div className="flex items-center space-x-4 group">
-                            <div className="relative w-20 h-20 group-hover:scale-110 transition-transform">
+                            <div className="relative w-20 h-20 ">
                             <Image
                                 src={product.srcImg}
                                 alt={product.name}
@@ -129,9 +129,9 @@ export default function Details() {
                     </div>
                     ))}
 
-                    <div className="flex flex-col justify-between items-center md:items-end border-t py-4 mt-8 gap-2">
-                    <div className="text-xl self-end flex flex-row gap-2 justify-center items-end">
-                        <div className="mt-4 border-t pt-4">
+                    <div className="flex flex-col justify-between items-start md:items-end border-t py-4 mt-8 gap-2">
+                    <div className="text-xl md:self-end flex flex-row gap-2 justify-center items-end p-2">
+                        <div className="">
                             <p className="text-gray-500">Preço Total:</p>
                             <div className='flex flex-col'>
                                 <span className='text-xl font-semibold text-gray-800'>
