@@ -90,7 +90,7 @@ export default function Menu() {
         </Link>
 
         {/* Search Bar */}
-        <div className='fixed top-28 md:top-12 md:left-1/2 z-40 md:z-50 flex px-2 md:right-32 items-center text-gray-500 w-full bg-white md:bg-transparent h-16 md:h-12 md:w-[30%]'>
+        <div className='fixed top-28 md:top-12 md:left-1/2 z-40 md:z-50 flex md:right-32 items-center text-gray-500 w-full bg-white md:bg-transparent h-16 md:h-12 md:w-[30%]'>
           <SearchBar />
         </div>
 
