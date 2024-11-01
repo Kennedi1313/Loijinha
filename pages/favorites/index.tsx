@@ -130,12 +130,29 @@ export default function Details() {
                     ))}
 
                     <div className="flex flex-col justify-between items-center md:items-end border-t py-4 mt-8 gap-2">
-                    <p className="text-xl self-end flex flex-row gap-2 justify-center items-end">
-                        Total:{' '}
-                        <span className="font-semibold flex flex-col">
-                            {formatCurrency(totalPrice)}
-                        </span>
-                    </p>
+                    <div className="text-xl self-end flex flex-row gap-2 justify-center items-end">
+                        <div className="mt-4 border-t pt-4">
+                            <p className="text-gray-500">Preço Total:</p>
+                            <div className='flex flex-col'>
+                                <span className='text-xl font-semibold text-gray-800'>
+                                    {totalPrice > 5000 
+                                    ?   
+                                        <span>
+                                            <span>{ formatCurrency(totalPrice * 0.95) }</span>
+                                            <span className='text-sm font-thin'> no pix</span>
+                                        </span>
+                                    : formatCurrency(totalPrice)
+                                    }
+                                </span>
+                                {totalPrice >= 10000
+                                ? <span className='text-sm font-thin text-gray-700'>ou {formatCurrency(totalPrice)} em até 3x sem juros</span>
+                                : totalPrice >= 5000 
+                                    ? <span className='text-xs font-thin text-gray-700'>ou {formatCurrency(totalPrice)} em até 1x sem juros</span>
+                                    : <span className='text-xs font-thin text-gray-700'>em até 1x sem juros</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
                     
                     </div>
                 </div>
