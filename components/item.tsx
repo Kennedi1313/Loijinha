@@ -51,7 +51,7 @@ export default function Item(props: ItemProps) {
     }, [adding]);
     return (
     <div className='relative'>
-        <Link href={'/details/' + props.id} className='flex flex-col gap-1 w-full h-[25rem] md:h-[30rem] bg-white'>
+        <Link href={'/details/' + props.id} className='flex flex-col gap-1 w-full h-[27rem] md:h-[32rem] bg-white'>
             <div className='h-[20rem] w-full relative'>
                 <Image 
                     src={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${props.id}/${props.profileImageId}.jpg`}
