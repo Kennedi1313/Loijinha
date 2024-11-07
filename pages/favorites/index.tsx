@@ -19,12 +19,23 @@ import { TbHeartFilled, TbPhoneCall } from 'react-icons/tb';
 import Menu from '@/components/menu';
 
 export default function Details() {
-    const { favoritesDetails, totalPrice, favoritesCount, addItemToFavorites, removeItem, clearFavorites } = useShoppingFavorites();
+    const { favoritesDetails, favoritesCount, addItemToFavorites, removeItem, clearFavorites } = useShoppingFavorites();
     const [redirecting, setRedirecting] = useState(false);
     const [hasMounted, setHasMounted] = useState(false);
+    const [hasPromo, setHasPromo] = useState(false);
+    const [totalPrice, setTotalPrice] = useState(0);
+
     useEffect(() => {
-        setHasMounted(true);
-    }, []);
+        setHasMounted(true); 
+        let total = 0;
+        let promo = false
+        Object.entries(favoritesDetails).map(([key, product]: [any, any]) => {
+            total += (product.price * (1-(product.promo/100))) * product.quantity;
+            promo = promo || product.promo > 0;
+            setTotalPrice(total);
+            setHasPromo(promo);
+        });
+    }, [favoritesCount]);
 
     if (!hasMounted) {
         return null;
@@ -72,7 +83,7 @@ export default function Details() {
                         <div className="flex items-center space-x-4 group">
                             <div className="relative w-20 h-20 ">
                             <Image
-                                src={product.srcImg}
+                                src={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${product.id}/${product.profileImageId}.jpg`}
                                 alt={product.name}
                                 fill
                                 className='object-cover rounded-md'
@@ -113,7 +124,18 @@ export default function Details() {
                         <div className="font-semibold text-xl md:ml-16 items-center justify-center flex flex-row">
                             <BsX className="w-4 h-4 text-gray-500 inline-block" />
                             <div className='flex flex-col justify-start items-start ml-1'>
-                                {formatCurrency(product.price)}
+                                {
+                                    product.promo > 0
+                                    ?
+                                    <span className='flex flex-col'>
+                                        <span className='line-through text-sm text-red-600 font-normal'>{ formatCurrency(product.price) }</span>
+                                        <span>{ formatCurrency(product.price, product.promo) }</span>
+                                    </span>
+                                    :
+                                    <span>
+                                        <span>{ formatCurrency(product.price, product.promo) }</span>
+                                    </span>
+                                }
                             </div>
                             
                         </div>
@@ -135,7 +157,7 @@ export default function Details() {
                             <p className="text-gray-500">Preço Total:</p>
                             <div className='flex flex-col'>
                                 <span className='text-xl font-semibold text-gray-800'>
-                                    {totalPrice > 5000 
+                                    {!hasPromo && totalPrice > 5000 
                                     ?   
                                         <span>
                                             <span>{ formatCurrency(totalPrice * 0.95) }</span>
@@ -145,10 +167,10 @@ export default function Details() {
                                     }
                                 </span>
                                 {totalPrice >= 10000
-                                ? <span className='text-sm font-thin text-gray-700'>ou {formatCurrency(totalPrice)} em até 3x sem juros</span>
+                                ? <span className='text-sm font-thin text-gray-700'>ou 3x de {formatCurrency(totalPrice, 0, 3)} sem juros</span>
                                 : totalPrice >= 5000 
-                                    ? <span className='text-xs font-thin text-gray-700'>ou {formatCurrency(totalPrice)} em até 1x sem juros</span>
-                                    : <span className='text-xs font-thin text-gray-700'>em até 1x sem juros</span>
+                                    ? <span className='text-xs font-thin text-gray-700'>ou 1x de {formatCurrency(totalPrice)} sem juros</span>
+                                    : ""
                                 }
                             </div>
                         </div>

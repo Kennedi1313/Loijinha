@@ -43,8 +43,10 @@ export default function Home({ products, category, itemsCount }: any) {
                     id={item.id}
                     name={item.name} 
                     price={item.price} 
+                    description={item.description}
                     quantity={item.quantity}
-                    srcImg={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${item.id}/${item.profileImageId}.jpg`}/>)
+                    promo={item.promo}
+                    profileImageId={item.profileImageId}/>)
               })}
             </div>
           </div>

@@ -6,13 +6,16 @@ import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast';
 import { BsHeart, BsHeartFill, BsStar, BsStarFill, BsWhatsapp } from 'react-icons/bs'
 import Share from './shareSocial'
+import Price from './price'
 
 interface ItemProps {
     id: string,
     name: string,
+    description: string,
     price: number,
     quantity: number,
-    srcImg: string
+    profileImageId: string
+    promo: number
 }
 
 export default function Item(props: ItemProps) {
@@ -30,6 +33,7 @@ export default function Item(props: ItemProps) {
     }
     const handleOnAddToFavorites = () => {
             setAdding(true);
+            console.log(props)
             addItemToFavorites(props);
     };
 
@@ -50,7 +54,7 @@ export default function Item(props: ItemProps) {
         <Link href={'/details/' + props.id} className='flex flex-col gap-1 w-full h-[25rem] md:h-[30rem] bg-white'>
             <div className='h-[20rem] w-full relative'>
                 <Image 
-                    src={props.srcImg}
+                    src={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${props.id}/${props.profileImageId}.jpg`}
                     alt={props.name}
                     quality={50}
                     className='bg-gray-100 object-cover'
@@ -60,24 +64,7 @@ export default function Item(props: ItemProps) {
             </div>
             <div className='flex flex-col p-1 justify-between h-[6.5rem] overflow-hidden tex'>
                 <span className='text-md leading-5 font-thin text-gray-800'>{props.name}</span> 
-                <div className='flex flex-col'>
-                    <span className='text-xl font-semibold text-gray-800'>
-                    {props.price >= 5000 
-                    ?   
-                        <span>
-                            <span>{ formatCurrency(props.price * 0.95) }</span>
-                            <span className='text-sm font-thin'> no pix</span>
-                        </span>
-                    : formatCurrency(props.price)
-                    }
-                    </span>
-                    {props.price >= 10000
-                    ? <span className='text-xs font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 3x sem juros</span>
-                    : props.price >= 5000 
-                        ? <span className='text-xs font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 1x sem juros</span>
-                        : <span className='text-xs font-thin text-gray-700'>em até 1x sem juros</span>
-                    }
-                </div>
+                <Price price={props.price} promo={props.promo}></Price>
             </div>
         </Link>
         <button className='rounded-full absolute right-1 top-2 border-[1px] border-gray-200 flex flex-row text-black
@@ -90,6 +77,14 @@ export default function Item(props: ItemProps) {
             }
         </button>
         <Share productName={props.name} productUrl={"https://www.amanditapratas.com.br/details/" + props.id} />
+        
+        { props.quantity > 0 && props.promo > 0 ?
+                <span className='font-bold text-[14px] absolute left-[3%] w-[60%] top-2 rounded-lg bg-brown-1000 py-2 px-4 text-white md:w-fit'>
+                    -{props.promo}%
+                </span> 
+            : <></>
+        }
+        
         { props.quantity == 0 ?
                 <span className='font-bold text-[14px] absolute left-[3%] w-[60%] top-2 rounded-lg bg-red-600 py-2 px-4 text-white md:w-fit'>
                     Produto Indisponível

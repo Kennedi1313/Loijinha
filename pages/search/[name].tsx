@@ -43,8 +43,10 @@ export default function Search() {
                     id={item.id}
                     name={item.name}
                     quantity={item.quantity} 
+                    description={item.description}
                     price={item.price} 
-                    srcImg={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${item.id}/${item.profileImageId}.jpg`}/>)
+                    promo={item.promo}
+                    profileImageId={item.profileImageId}/>)
               })}
             </div>
           </div>

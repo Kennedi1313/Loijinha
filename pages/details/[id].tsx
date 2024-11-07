@@ -8,14 +8,15 @@ import Head from 'next/head';
 import { formatCurrency } from '@/lib/utils';
 import Menu from '@/components/menu';
 import { useShoppingCart } from '@/hooks/use-shopping-cart';
+import Price from '@/components/price';
 interface ItemProps {
     id: string,
     name: string,
     description: string,
     price: number,
     quantity: number,
-    srcImg: string,
     profileImageId: string
+    promo: number
 }
 
 export default function Details(props: ItemProps) {
@@ -98,24 +99,7 @@ export default function Details(props: ItemProps) {
                         <p className='text-2xl font-semibold'>{props.name}</p> 
                         <div className="mt-4 border-t pt-4">
                             <p className="text-gray-500">Preço:</p>
-                            <div className='flex flex-col'>
-                                <span className='text-xl font-semibold text-gray-800'>
-                                    {props.price > 5000 
-                                    ?   
-                                        <span>
-                                            <span>{ formatCurrency(props.price * 0.95) }</span>
-                                            <span className='text-sm font-thin'> no pix</span>
-                                        </span>
-                                    : formatCurrency(props.price)
-                                    }
-                                </span>
-                                {props.price >= 10000
-                                ? <span className='text-sm font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 3x sem juros</span>
-                                : props.price >= 5000 
-                                    ? <span className='text-xs font-thin text-gray-700'>ou {formatCurrency(props.price)} em até 1x sem juros</span>
-                                    : <span className='text-xs font-thin text-gray-700'>em até 1x sem juros</span>
-                                }
-                            </div>
+                            <Price price={props.price} promo={props.promo}></Price>
                         </div>
                         <div className='mt-4 border-t pt-4'>
                             <p className="text-gray-500">Descrição:</p>
@@ -155,7 +139,7 @@ export default function Details(props: ItemProps) {
 }
 
 export async function getStaticPaths() {
-    //const res = await fetch("http://62.72.11.102:8088/api/v1/products");
+    //const res = await fetch("http://localhost:8080/api/v1/products");
     const res = await fetch("https://api.amanditapratas.com.br/api/v1/products");
     let products = await res.json();
     const paths = products.content.map((product: ItemProps) => ({
@@ -166,7 +150,7 @@ export async function getStaticPaths() {
   
 export async function getStaticProps({ params }: any) {
     try {
-        //const res = await fetch("http://62.72.11.102:8088/api/v1/products");
+        //const res = await fetch("http://localhost:8080/api/v1/products/" + params.id);
         const res = await fetch("https://api.amanditapratas.com.br/api/v1/products/" + params.id);
         let products = await res.json();
         return {

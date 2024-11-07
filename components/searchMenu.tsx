@@ -21,10 +21,10 @@ export default function SearchBar() {
 
   return (
     <div className='fixed top-28 md:top-12 md:left-1/2 z-40 md:z-50 flex px-2 md:right-32 items-center text-gray-500 w-full 
-      bg-white md:bg-transparent h-16 md:h-12 md:w-[30%]'>
-      <div className='flex flex-row rounded-full w-full md:w-full border-solid border-[1px] border-brown-1000'>
+      bg-black-1000 md:bg-transparent h-16 md:h-12 md:w-[30%]'>
+      <div className='flex flex-row rounded-full w-full md:w-full border-solid border-[1px] border-white'>
         <Link href={`/search/${searchQuery}`}>
-          <TbSearch className='text-2xl font-bold m-2 text-brown-1000' onClick={handleSearch} />
+          <TbSearch className='text-2xl font-bold m-2 text-white' onClick={handleSearch} />
         </Link>
         <input
           type="text"

@@ -5,8 +5,6 @@ import useLocalStorageReducer from './use-local-storage-reducer';
 const initialFavoritesValues: State = {
   favoritesDetails: {},
   favoritesCount: 0,
-  totalPrice: 0,
-  currency: 'BRL'
 };
 
 export interface State {
@@ -18,17 +16,17 @@ export interface State {
       name: string,
       price: number,
       quantity: number,
-      scrImg: string,
+      srcImg: string,
+      promo: number
     } | { quantity: number, id: string, price: number }
   },
-  favoritesCount: number,
-  totalPrice: number,
-  currency: string | undefined,
+  favoritesCount: number
 }
 
 export interface Product {
   id: string,
   price: number,
+  promo: number,
 }
 
 export interface Action {
@@ -53,8 +51,7 @@ const addItemToFavorites = (state: State = {} as State, product: Product|null = 
           quantity: entry.quantity + quantity,
         }
       },
-      favoritesCount: Math.max(0, state.favoritesCount + quantity),
-      totalPrice: Math.max(state.totalPrice + product.price * quantity),
+      favoritesCount: Math.max(0, state.favoritesCount + quantity)
     };
   }
   // Add item
@@ -67,8 +64,7 @@ const addItemToFavorites = (state: State = {} as State, product: Product|null = 
         quantity
       },
     },
-    favoritesCount: Math.max(0, state.favoritesCount + quantity),
-    totalPrice: Math.max(state.totalPrice + product.price * quantity),
+    favoritesCount: Math.max(0, state.favoritesCount + quantity)
   };
 };
 
@@ -85,10 +81,6 @@ const removeItem = (state: State = {} as State, product: Product|null = null, qu
         ...state,
         favoritesDetails: details,
         favoritesCount: Math.max(0, state.favoritesCount - entry.quantity),
-        totalPrice: Math.max(
-          0,
-          state.totalPrice - product.price * entry.quantity
-        ),
       };
     }
     // Update item
@@ -102,8 +94,7 @@ const removeItem = (state: State = {} as State, product: Product|null = null, qu
             quantity: entry.quantity - quantity,
           },
         },
-        favoritesCount: Math.max(0, state.favoritesCount - quantity),
-        totalPrice: Math.max(0, state.totalPrice - product.price * quantity),
+        favoritesCount: Math.max(0, state.favoritesCount - quantity)
       };
     }
   } else {
@@ -146,8 +137,7 @@ export const FavoritesProvider = ({ currency = 'BRL', children = null }: Props) 
   const contextValue =  useMemo(
     () => [
       {
-        ...favorites,
-        currency,
+        ...favorites
       },
       dispatch,
     ] as [State, Dispatch<Action>],

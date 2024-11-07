@@ -1,12 +1,13 @@
 import axios from 'axios';
 import X2JS from "x2js";
 
-export const formatCurrency = (amount = 0, currency = 'BRL') =>
-  new Intl.NumberFormat('pt-BR', {
+export const formatCurrency = (amount = 0,  promo = 0, parcelas = 1,  currency = 'BRL') => {
+  
+  return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency,
     minimumIntegerDigits: 2,
-  }).format(amount / 100);
+  }).format(((promo > 0 ? amount * (1-(promo/100)) : amount) / 100) / parcelas)};
 
 export const isClient = typeof window === 'object';
 
