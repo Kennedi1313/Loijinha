@@ -79,7 +79,7 @@ export default function Item(props: ItemProps) {
         <Share productName={props.name} productUrl={"https://www.amanditapratas.com.br/details/" + props.id} />
         
         { props.quantity > 0 && props.promo > 0 ?
-                <span className='font-bold text-[14px] absolute left-[3%] w-[60%] top-2 rounded-lg bg-brown-1000 py-2 px-4 text-white md:w-fit'>
+                <span className='font-bold text-[14px] absolute left-[3%] top-2 rounded-lg bg-brown-1000 py-2 px-4 text-white w-fit'>
                     -{props.promo}%
                 </span> 
             : <></>
