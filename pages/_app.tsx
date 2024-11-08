@@ -58,12 +58,13 @@ export default function App({ Component, pageProps }: AppProps) {
       
         <Helmet>
           <title>Amandita Pratas | Joias em prata 925</title>
+          <link rel="icon" href="/favicon.ico" />
           <meta
             name="description"
             content="Clique e conheça a mais nova loja de joias em prata 925 de Natal/RN!"
           />
           <meta property="og:type" content="website" />
-          <meta property="og:url" content="www.amanditapratas.com.br" />
+          <meta property="og:url" content="https://www.amanditapratas.com.br" />
           <meta
             property="og:title"
             content="Amandita Pratas | Joias em prata 925"

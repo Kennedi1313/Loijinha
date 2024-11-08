@@ -35,6 +35,7 @@ export default function Home({ products, itemsCount }: any) {
         <div>
           <Head>
             <title>Amandita | Joias em Prata 925 | Natal/RN</title>
+            <link rel="icon" href="/favicon.ico" />
           </Head>
           <div className="md:mt-32 mt-32 blur-[6px] h-80 md:h-96 bg-cover bg-no-repeat bg-center"></div>
           <div className="bg-[url('/2.png')] md:bg-[url('/3.png')]
