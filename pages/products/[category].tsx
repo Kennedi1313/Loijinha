@@ -87,6 +87,7 @@ export async function getStaticPaths() {
     {params: { category: 'tornozeleiras' }},
     {params: { category: 'pingentes' }},
     {params: { category: 'conjuntos' }},
+    {params: { category: 'berloque' }},
     {params: { category: 'promo' }}
   ]
   return { paths, fallback: false }
