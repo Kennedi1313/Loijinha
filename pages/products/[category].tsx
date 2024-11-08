@@ -4,22 +4,30 @@ import { TbSearch } from 'react-icons/tb';
 import Pagination from '@/components/pagination';
 import { usePagination } from '@/components/Context/paginationContext';
 import Head from 'next/head';
-let PageSize = 12;
 export default function Home({ products, category, itemsCount }: any) {
   const [productList, setProductList] = useState(products);
   const [productListSize, setProductListSize] = useState(itemsCount);
   const { currentPage, setCurrentPage } = usePagination();
-  const pageSize = 8; 
+  const [ pageSize, setPageSize ] = useState(8); 
 
   useEffect(() => {
     fetchProducts();
-    console.log(category)
+    console.log(pageSize)
   }, [currentPage, category]);
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch(`https://api.amanditapratas.com.br/api/v1/products/by-category?category=${category}&page=${currentPage}&size=${pageSize}`);
-      let products = await res.json();
+      let res = null;
+      let products = [];
+      if (category != 'promo') {
+        res = await fetch(`https://api.amanditapratas.com.br/api/v1/products/by-category?category=${category}&page=${currentPage}&size=${pageSize}`);
+        products = await res.json();
+      } else {
+        res = await fetch(`https://api.amanditapratas.com.br/api/v1/products?page=${0}&size=${500}`);
+        products = await res.json();
+        products.content = products.content.filter((product: any) => product.promo > 0);
+        products.totalElements = products.content.length
+      }
       setProductList(products.content);
       setProductListSize(products.totalElements);
     } catch (error) {
@@ -54,7 +62,7 @@ export default function Home({ products, category, itemsCount }: any) {
                 className="pagination-bar"
                 currentPage={currentPage}
                 totalCount={productListSize}
-                pageSize={pageSize}
+                pageSize={category != 'promo' ? 8 : 500}
                 onPageChange={(page: number) => setCurrentPage(page)}
               />
         </div>
@@ -79,19 +87,30 @@ export async function getStaticPaths() {
     {params: { category: 'tornozeleiras' }},
     {params: { category: 'pingentes' }},
     {params: { category: 'conjuntos' }},
+    {params: { category: 'promo' }}
   ]
   return { paths, fallback: false }
 }
 
- export const getStaticProps = async ({ params }: any) => {
-   //const res = await fetch("http://62.72.11.102:8088/api/v1/products");
-   const res = await fetch(`https://api.amanditapratas.com.br/api/v1/products/by-category?category=${params.category}&page=${0}&size=${8}`);
-   let products = await res.json();
-   return {
-     props: {
+export const getStaticProps = async ({ params }: any) => {
+  //const res = await fetch("http://62.72.11.102:8088/api/v1/products"); 
+  let res = null;
+  let products = [];
+  if (params.category != 'promo') {
+    res = await fetch(`https://api.amanditapratas.com.br/api/v1/products/by-category?category=${params.category}&page=${0}&size=${8}`);
+    products = await res.json();
+  } else {
+    res = await fetch(`https://api.amanditapratas.com.br/api/v1/products?page=${0}&size=${500}`);
+    products = await res.json();
+    products.content = products.content.filter((product: any) => product.promo > 0);
+    products.totalElements = products.content.length
+  }
+  
+  return {
+    props: {
         products: products.content,
         category: params.category,
         itemsCount: products.totalElements
-     }
-   }
+    }
+  }
 }

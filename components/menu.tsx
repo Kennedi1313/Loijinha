@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 
 // Organized Menu Categories
 const categories = [
+  { name: 'Esquenta Black', path: '/products/promo' },
   { name: 'Anel', path: '/products/aneis' },
   { name: 'Brinco', path: '/products/brincos' },
   { name: 'Colar', path: '/products/colares' },
@@ -68,8 +69,9 @@ export default function Menu() {
           <div className='z-50 flex flex-col items-center justify-start h-full w-[70%] gap-2 bg-white p-2 md:w-full md:flex-row md:justify-center md:align-middle md:h-12'>
             {categories.map((category) => (
               <Link key={category.name} href={category.path}
-                className={`p-3 no-underline border-solid border-b-[1px] md:w-fit border-black-1000 w-full text-left text-black-1000 cursor-pointer
-                   ${isActive(category.path) ? 'border-b-2 border-black-1000 font-bold' : 'border-none'}`}
+                className={` no-underline border-solid border-b-[1px] md:w-fit border-black-1000 w-full text-left text-black-1000 cursor-pointer
+                    ${isActive(category.path) ? 'border-b-2 border-black-1000 font-bold' : 'border-none'}
+                    ${category.name == 'Esquenta Black' ? 'bg-black-1000 text-white font-bold p-2' : 'p-3'}`}
                 onClick={() => { toggleMenu(); updateCategory(category.name.toLowerCase()); }}>
                 {category.name}
               </Link>
