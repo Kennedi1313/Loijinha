@@ -43,7 +43,7 @@ export default function Home({ products, itemsCount }: any) {
                absolute top-44 md:top-40 w-full text-center h-[48rem] md:h-[36rem]
                align-center justify-center flex flex-col gap-3 bg-cover md:bg-contain bg-center bg-no-repeat bg-black-1000">
           </div>
-          <div className="bg-white z-10 mx-full flex flex-col items-center align-middle justify-center px-1 md:px-0 py-5 my-2 relative mt-64 md:mt-36 ">
+          <div className="bg-white z-10 mx-full flex flex-col items-center align-middle justify-center px-1 md:px-0 py-5 my-2 relative mt-72 md:mt-36 ">
             <h1 className='pb-5 text-4xl mt-12 w-full md:text-center'>Novidades</h1>
             <div className=' z-30 md:max-w-screen-lg mx-auto center grid lg:grid-cols-4 grid-cols-2 w-full gap-1 gap-y-6'>
               {productList.map((item: any) => {
