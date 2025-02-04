@@ -38,21 +38,11 @@ const Signup = () => {
 
     return (
         <>{isClient ? 
-        <div className="md:mt-48 mt-28 flex-col md:flex-row">
-            <div className="flex items-center justify-center">
-                <div className="w-full max-w-5xl">
-                    <div className="flex align-top">
-                        <h1 className="text-3xl font-bold m-4">Faça seu cadastro</h1>
-                        <CreateCustomerForm 
-                            onSubmit={onSubmit} 
-                            initialValues={initialValues} 
-                            validationSchema={validationSchema} 
-                            newCustomer={true}
-                        />
-                    </div>
-                </div>
+            <div className="md:container xl:max-w-screen-xl mx-auto py-12 p-2 md:px-6 mt-36 min-h-[40vh]">
+                <h2 className="text-4xl font-semibold">Faça seu cadastro</h2>
+                <p className="mt-1 text-xl">Insira informações de nome e endereço</p>
+                <CreateCustomerForm onSubmit={onSubmit} initialValues={initialValues} validationSchema={validationSchema} newCustomer={true}/>
             </div>
-        </div>
          : ""
         }</>
     );

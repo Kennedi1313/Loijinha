@@ -57,13 +57,13 @@ const CreateCustomerForm = ({ onSubmit, initialValues, validationSchema, newCust
                         </div>
                         {
                             newCustomer ? 
-                            <div className='flex md:flex-row flex-col gap-4 p-2 md:p-0'>
-                                <Link className="flex gap-2 text-center justify-center rounded-md px-2 py-4 bg-blue-500 mt-5 text-white font-bold md:w-1/2" href={"/login"}>
+                            <div className='flex md:flex-row flex-col gap-4 md:p-0 mt-5'>
+                                <Link className="flex gap-2 text-center justify-center rounded-md px-2 py-4 bg-blue-500 text-white font-bold md:w-1/2" href={"/login"}>
                                     <BsArrowLeft className='text-2xl font-bold'/>
                                     Já possui uma conta? Faça login aqui
                                 </Link>
                                 <button 
-                                    className="flex flex-row justify-center gap-2 rounded-md px-2 py-4 bg-green-500 mt-5 text-white font-bold md:w-1/2"
+                                    className="flex flex-row justify-center gap-2 rounded-md px-2 py-4 bg-green-500 text-white font-bold md:w-1/2"
                                     disabled={!isValid} 
                                     type="submit">
                                         Cadastrar novo usuário

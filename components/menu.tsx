@@ -57,21 +57,15 @@ export default function Menu() {
 
   return (
     <div id="menu-container" className="fixed top-0 w-full h-20 z-50 bg-white text-black">
-      {/* Mobile Menu Button */}
-      <button id="toggle-button"
-        className="fixed block md:hidden right-0 w-12 h-14 z-[100] top-11"
-        onClick={toggleMenu}>
-        <HiOutlineBars3 id='bar-icon' className="text-[30px]"></HiOutlineBars3>
-        <TfiClose id='times-icon' className="text-[30px] hidden"></TfiClose>
-      </button>
+      
 
       {/* Menu Links */}
       <menu id="menu" className="fixed hidden md:block top-0 left-0 shadow-sm z-40">
-        <div className="top-44 flex md:top-28 fixed w-full justify-end z-40 bg-black/50 h-full md:h-12 items-center border-t-[0px] border-solid border-black-1000">
+        <div className="top-44 flex md:top-28 fixed w-full justify-start z-40 bg-black/50 h-full md:h-12 items-center border-t-[0px] border-solid border-black-1000">
           <div className='z-50 flex flex-col items-center justify-start h-full w-[70%] gap-2 bg-white p-2 md:w-full md:flex-row md:justify-center md:align-middle md:h-12'>
             {categories.map((category) => (
               <Link key={category.name} href={category.path}
-                className={` no-underline border-solid border-b-[1px] md:w-fit p-3 border-black-1000 w-full text-right text-black-1000 cursor-pointer
+                className={` no-underline border-solid border-b-[1px] md:w-fit p-3 border-black-1000 w-full text-left text-black-1000 cursor-pointer
                     ${isActive(category.path) ? 'border-b-2 border-black-1000 font-bold' : 'border-none'}`}
                     onClick={() => { toggleMenu(); updateCategory(category.name.toLowerCase()); }}>
                 {category.name}
@@ -86,9 +80,17 @@ export default function Menu() {
 
       {/* Header */}
       <div className="fixed top-8 w-full h-20 flex flex-row justify-between md:justify-between bg-white items-center z-50">
-        <div className="md:w-1/3 relative md:left-1/3 h-20 z-50 flex justify-center">
+        
+        {/* Mobile Menu Button */}
+        <button id="toggle-button"
+          className="md:hidden p-2 h-14 z-[100]"
+          onClick={toggleMenu}>
+          <HiOutlineBars3 id='bar-icon' className="text-[30px]"></HiOutlineBars3>
+          <TfiClose id='times-icon' className="text-[30px] hidden"></TfiClose>
+        </button>
+        <div className="md:w-1/3 relative md:left-1/3 h-16 z-50 flex justify-center self-start">
           <Link href={'/'}
-            className='w-48 h-20 relative overflow-hidden'
+            className='w-48 h-[4.5rem] relative overflow-hidden'
             onClick={() => { updateCategory(''); }}>
             <Image src={logo} alt='item' priority fill className='object-cover' />
           </Link>
@@ -105,7 +107,7 @@ export default function Menu() {
         </div>*/}
 
          
-        <div className="w-1/2 md:w-1/3 flex flex-row justify-left md:justify-center gap-3 md:gap-6">
+        <div className="w-1/2 md:w-1/3 flex flex-row justify-end md:justify-center gap-3 md:gap-6 px-2">
           <Link className='flex justify-end' href='/favorites'>
             <TbHeartFilled className='text-[30px] font-bold text-rose-400'></TbHeartFilled>
           </Link>
