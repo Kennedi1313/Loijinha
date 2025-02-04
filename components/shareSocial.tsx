@@ -30,7 +30,7 @@ const Share: React.FC<ShareProps> = ({ productName, productUrl }) => {
     <div>
       <button 
         onClick={handleNativeShare}
-        className='rounded-full absolute right-1 top-14 border-[1px] border-gray-200 flex flex-row 
+        className='rounded-full absolute right-1 top-16 border-[1px] border-gray-200 flex flex-row 
             bg-white opacity-80 justify-center items-center p-3'
       >
         <FiShare2  className='w-5 h-5 opacity-100 text-gray-700'/>

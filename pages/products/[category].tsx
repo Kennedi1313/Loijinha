@@ -1,117 +1,70 @@
-import { useEffect, useMemo, useState } from 'react';
-import Item from '../../components/item'
-import { TbSearch } from 'react-icons/tb';
+import { useEffect, useState } from 'react';
+import Item from '../../components/item';
 import Pagination from '@/components/pagination';
 import { usePagination } from '@/components/Context/paginationContext';
 import Head from 'next/head';
-export default function Home({ products, category, itemsCount }: any) {
-  const [productList, setProductList] = useState(products);
-  const [productListSize, setProductListSize] = useState(itemsCount);
+import { HomeProps, Product } from '@/types/ProductTypes';
+import { getProductsByCategory } from '@/lib/productClient';
+const PAGE_SIZE = 8;
+const PROMO_PAGE_SIZE = 500;
+
+export default function Home({ products, category, itemsCount }: HomeProps) {
+  const [productList, setProductList] = useState<Product[]>(products);
+  const [productListSize, setProductListSize] = useState<number>(itemsCount);
   const { currentPage, setCurrentPage } = usePagination();
-  const [ pageSize, setPageSize ] = useState(8); 
 
   useEffect(() => {
     fetchProducts();
-    console.log(pageSize)
   }, [currentPage, category]);
 
   const fetchProducts = async () => {
     try {
-      let res = null;
-      let products = [];
-      if (category != 'promo') {
-        res = await fetch(`https://api.amanditapratas.com.br/api/v1/products/by-category?category=${category}&page=${currentPage}&size=${pageSize}`);
-        products = await res.json();
-      } else {
-        res = await fetch(`https://api.amanditapratas.com.br/api/v1/products?page=${0}&size=${500}`);
-        products = await res.json();
-        products.content = products.content.filter((product: any) => product.promo > 0);
-        products.totalElements = products.content.length
-      }
-      setProductList(products.content);
-      setProductListSize(products.totalElements);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-    }
-  };
+      const data = await getProductsByCategory(category, currentPage);
+      setProductList(data.content);
+      setProductListSize(data.totalElements);
+    } catch (error) { }
+  }
+
+  const renderProductList = () => (
+    <div>
+      <div className="mt-40 md:max-w-screen-lg mx-auto flex items-center justify-center px-1 md:px-0 py-5 my-2">
+        <div className="center grid lg:grid-cols-4 grid-cols-2 w-full gap-1 gap-y-6">
+          {productList.map((item) => (
+            <Item key={item.id} id={item.id} name={item.name} price={item.price} description={item.description} quantity={item.quantity} promo={item.promo} profileImageId={item.profileImageId} />
+          ))}
+        </div>
+      </div>
+      <Pagination className="pagination-bar" currentPage={currentPage} totalCount={productListSize} pageSize={category !== 'promo' ? PAGE_SIZE : PROMO_PAGE_SIZE} onPageChange={(page: any) => setCurrentPage(page)} />
+    </div>
+  );
+
+  const renderEmptyState = () => (
+    <div className="mt-40 md:max-w-screen-lg mx-auto flex flex-col items-center justify-center px-1 md:px-0 py-5 my-2">
+      <h1>NENHUM PRODUTO CADASTRADO NESSA CATEGORIA</h1>
+    </div>
+  );
 
   return (
-      <>
-        <Head>
-          <title>Amandita | {category[0].toUpperCase() + category.substring(1)}</title>
-        </Head>
-        { productList && productListSize > 0 ? 
-        <div>
-          <div className="mt-40 md:max-w-screen-lg mx-auto flex items-center justify-center px-1 md:px-0 py-5 my-2">
-            <div className='center grid lg:grid-cols-4 grid-cols-2 w-full gap-1 gap-y-6'>
-              {productList.map((item: any) => {
-                return (
-                  <Item 
-                    key={item.id}
-                    id={item.id}
-                    name={item.name} 
-                    price={item.price} 
-                    description={item.description}
-                    quantity={item.quantity}
-                    promo={item.promo}
-                    profileImageId={item.profileImageId}/>)
-              })}
-            </div>
-          </div>
-          <Pagination
-                className="pagination-bar"
-                currentPage={currentPage}
-                totalCount={productListSize}
-                pageSize={category != 'promo' ? 8 : 500}
-                onPageChange={(page: number) => setCurrentPage(page)}
-              />
-        </div>
-        : 
-          <div className="mt-40 md:max-w-screen-lg mx-auto flex flex-col items-center justify-center 
-              px-1 md:px-0 py-5 my-2">
-                <h1>NENHUM PRODUTO CADASTRADO NESSA CATEGORIA</h1>
-          </div>
-        }
-      </>
-    )
+    <>
+      <Head>
+        <title>Amandita | {category[0].toUpperCase() + category.substring(1)}</title>
+      </Head>
+      {productList && productListSize > 0 ? renderProductList() : renderEmptyState()}
+    </>
+  );
 }
 
 export async function getStaticPaths() {
-  const paths = [
-    {params: { category: 'promocional' }},
-    {params: { category: 'aneis' }},
-    {params: { category: 'brincos' }},
-    {params: { category: 'colares' }},
-    {params: { category: 'correntes' }},
-    {params: { category: 'pulseiras' }},
-    {params: { category: 'tornozeleiras' }},
-    {params: { category: 'pingentes' }},
-    {params: { category: 'conjuntos' }},
-    {params: { category: 'berloque' }},
-    {params: { category: 'promo' }}
-  ]
-  return { paths, fallback: false }
+  const categories = ['promocional', 'aneis', 'brincos', 'colares', 'correntes', 'pulseiras', 'tornozeleiras', 'pingentes', 'conjuntos', 'berloque', 'promo',];
+  const paths = categories.map((category) => ({ params: { category } }));
+  return { paths, fallback: false };
 }
 
-export const getStaticProps = async ({ params }: any) => {
-  //const res = await fetch("http://62.72.11.102:8088/api/v1/products"); 
-  let res = null;
-  let products = [];
-  if (params.category != 'promo') {
-    res = await fetch(`https://api.amanditapratas.com.br/api/v1/products/by-category?category=${params.category}&page=${0}&size=${8}`);
-    products = await res.json();
-  } else {
-    res = await fetch(`https://api.amanditapratas.com.br/api/v1/products?page=${0}&size=${500}`);
-    products = await res.json();
-    products.content = products.content.filter((product: any) => product.promo > 0);
-    products.totalElements = products.content.length
-  }
-  
-  return {
-    props: {
-        products: products.content,
-        category: params.category,
-        itemsCount: products.totalElements
-    }
-  }
+export const getStaticProps = async ({ params }: { params: { category: string } }) => {
+  const { category } = params;
+  try {
+    const data = await getProductsByCategory(category, 0);
+    return { props: { products: data.content, category, itemsCount: data.totalElements } }
+  } catch (err) {
+    return { props: { products: [], category, itemsCount: 0 } } }
 }

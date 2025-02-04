@@ -98,8 +98,6 @@ const Login = () => {
     })
 
     return (
-        <>
-        <Menu></Menu>
         <div className="md:mt-48 mt-24 flex-col md:flex-row">
             <div className="flex items-center justify-center">
                 <div className="w-full max-w-md">
@@ -111,7 +109,6 @@ const Login = () => {
                 </div>
             </div>
         </div>
-        </>
     );
 }
 

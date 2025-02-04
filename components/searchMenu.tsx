@@ -15,17 +15,17 @@ export default function SearchBar() {
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      await handleSearch(); // Trigger search on Enter key press
+      await handleSearch(); 
     }
   };
 
   return (
-    <div className='fixed top-28 md:top-12 md:left-1/2 z-40 md:z-50 flex px-2 md:right-32 items-center text-gray-500 w-full 
-      bg-transparent h-16 md:h-12 md:w-[30%]'>
+    <div className='fixed top-28 md:top-12 md:left-0 z-40 md:z-50 flex px-2 md:px-10 items-center text-gray-500 w-full 
+      bg-white md:bg-transparent h-16 md:h-12 md:w-1/3'>
       <div className='flex flex-row rounded-full w-full md:w-full border-solid border-[1px] border-black'>
-        <Link href={`/search/${searchQuery}`}>
+        <button>
           <TbSearch className='text-2xl font-bold m-2 text-black' onClick={handleSearch} />
-        </Link>
+        </button>
         <input
           type="text"
           name="query"
@@ -33,7 +33,7 @@ export default function SearchBar() {
           autoComplete="off"
           className='w-full rounded-full py-1 px-2 active:border-0 dark:text-black outline-none'
           onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyDown={handleKeyDown}  // Using onKeyDown instead of onKeyPress
+          onKeyDown={handleKeyDown} 
         />
       </div>
     </div>

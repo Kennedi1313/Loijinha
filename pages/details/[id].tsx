@@ -1,71 +1,45 @@
-import { useState, useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
 import { useShoppingFavorites } from '@/hooks/use-shopping-favorites';
-import Image from 'next/image'
-import { BsCart, BsCartDash, BsCartPlus, BsHeart, BsHeartFill, BsStar, BsStarFill, BsWhatsapp } from 'react-icons/bs';
+import { BsCart, BsCartCheckFill, BsHeart, BsHeartFill, BsWhatsapp } from 'react-icons/bs';
 import Head from 'next/head';
-import { formatCurrency } from '@/lib/utils';
-import Menu from '@/components/menu';
 import { useShoppingCart } from '@/hooks/use-shopping-cart';
 import Price from '@/components/price';
-interface ItemProps {
-    id: string,
-    name: string,
-    description: string,
-    price: number,
-    quantity: number,
-    profileImageId: string
-    promo: number
-}
+import { getProducts, getProductsById } from '@/lib/productClient';
+import { Product } from '@/types/ProductTypes';
 
-export default function Details(props: ItemProps) {
+export default function Details(props: Product) {
     const router = useRouter();
-    const { favoritesCount, addItemToFavorites } = useShoppingFavorites();
-    const { cartCount, addItemToCart } = useShoppingCart();
-    const actualFavoritesCount = useRef(favoritesCount);
-    const actualCartCount = useRef(cartCount);
-    const [qty, setQty] = useState(1);
-
-    const [adding, setAdding] = useState(false);
+    const { addItemToFavorites, favoritesDetails, removeItem: removeItemFavorites } = useShoppingFavorites();
+    const { addItemToCart, cartDetails, removeItem: removeItemCart } = useShoppingCart();
     const toastId = useRef<string>();
 
     const handleOnAddToCart = () => {
-        setAdding(true);
         addItemToCart(props);
-};
-
-    const handleOnAddToFavorites = () => {
-            setAdding(true);
-            addItemToFavorites(props);
-    };
-
-    useEffect(() => {
-        if (cartCount == actualCartCount.current) {
-            return;
-        } else {
-            actualCartCount.current = cartCount;
-        }
-        setAdding(false);
         toast.success(`${props.name} adicionado (a) ao seu carrinho!`, {
             id: toastId.current,
         })
-        setQty(1);
-    }, [cartCount]);
+    };
 
-
-    useEffect(() => {
-        if (favoritesCount == actualFavoritesCount.current) {
-            return;
-        } else {
-            actualFavoritesCount.current = favoritesCount;
-        }
-        setAdding(false);
+    const handleOnAddToFavorites = () => {
+        addItemToFavorites(props);
         toast.success(`${props.name} adicionado (a) aos favoritos!`, {
             id: toastId.current,
         })
-        setQty(1);
-    }, [favoritesCount]);
+    };
+
+    const isInFavorites = () => {
+        if(favoritesDetails) {
+            return Object.keys(favoritesDetails).includes(String(props.id))
+         } else { return false }
+    }
+
+    const isInCart = () => {
+        if(cartDetails) {
+            return Object.keys(cartDetails).includes(String(props.id))
+         } else { return false }
+    }
 
     return router.isFallback ?  (
         <>
@@ -75,19 +49,12 @@ export default function Details(props: ItemProps) {
             <p className="text-center text-lg py-12">Loading...</p>
         </>
         ) : (
-        <>
-            <Menu></Menu>
             <div className='md:container md:max-w-screen-lg mx-auto p-2 my-32 md:px-8 h-full'>
                 <div className='flex flex-col md:flex-row justify-between items-center space-y-8 container pt-2 
                     md:pt-12 md:space-y-0 md:space-x-12 h-full'>
                     <div className='relative w-full md:w-[30rem] h-full bg-white'>
-                        <img 
-                            src={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${props.id}/${props.profileImageId}.jpg`}
-                            alt='item'
-                            className='object-scale-down rounded-md'
-                            sizes="(max-width: 768px) 100vw,
-                                (max-width: 1200px) 100vw,
-                                33vw"/>
+                        <img src={`https://amandita-products-uploads.s3.sa-east-1.amazonaws.com/profile-images/${props.id}/${props.profileImageId}.jpg`}
+                            alt='item' className='object-scale-down rounded-md' sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 33vw"/>
                     </div>
                     
                     <div className='flex flex-col max-w-md w-full rounded-md gap-2'>
@@ -104,17 +71,26 @@ export default function Details(props: ItemProps) {
                         <div className='mt-4 border-t pt-4'>
                             <p className="text-gray-500">Descrição:</p>
                             <p className='whitespace-pre-line'>{props.description}</p>
-                        
                         </div>
                         <div className='flex flex-col w-full cursor-pointer'>
                             {props.quantity > 0 ?
-                                <a href={"https://api.whatsapp.com/send?phone=8498594171&text=Olá,%20tudo%20bem?%20Gostaria%20de%20comprar%20este%20produto:%20https://www.amanditapratas.com.br/details/" + props.id}
+                                
+                                <div className='rounded-md flex flex-row text-white 
+                                    bg-brown-1000 gap-2 justify-center items-center p-2 h-12 mt-2 w-full'
+                                    onClick={() => { isInCart() ? removeItemCart(props) : handleOnAddToCart()}}>
+                                    {
+                                        isInCart() ? <> <BsCartCheckFill className='w-5 h-5 text-white'></BsCartCheckFill> Remover do carrinho </>
+                                        : <><BsCart className='w-5 h-5 opacity-100 text-white'></BsCart> Adicionar ao carrinho </>
+                                    }
+                                </div>
+                                /*
+                                <a href={"https://api.whatsapp.com/send?phone=8498594171&text=Olá,%20tudo%20bem?%20Gostaria%20de%20informações%20sobre%20este%20produto:%20https://www.amanditapratas.com.br/details/" + props.id}
                                     target='blank'
                                     className='rounded-md flex flex-row text-white 
                                         bg-green-whatsapp gap-2 justify-center items-center p-2 h-12 mt-2 w-full'>
                                         <BsWhatsapp className='w-5 h-5'></BsWhatsapp>
                                         <span className='font-bold text-[14px]'>Consultar disponibilidade</span>
-                                </a>
+                                </a>*/
                                 :
                                 <a href={"https://api.whatsapp.com/send?phone=8498594171&text=Olá,%20tudo%20bem?%20Gostaria%20de%20ser%20avisado%20quando%20este%20produto%20chegar%20em%20estoque:%20https://www.amanditapratas.com.br/details/" + props.id}
                                     target='blank'
@@ -126,39 +102,30 @@ export default function Details(props: ItemProps) {
                             }
                             <div className='rounded-md border-[1px] border-rose-400 flex flex-row text-white 
                                     bg-rose-400 gap-2 justify-center items-center p-2 h-12 mt-2 w-full'
-                                onClick={handleOnAddToFavorites}>
-                                <BsHeartFill className='w-5 h-5'></BsHeartFill>
-                                <span className='font-bold text-[14px]'>Adicionar aos favoritos</span>
+                                    onClick={() => { isInFavorites() ? removeItemFavorites(props) : handleOnAddToFavorites()}}>
+                                {
+                                    isInFavorites() ? 
+                                    <><BsHeartFill className='w-5 h-5 text-white'></BsHeartFill> Remover dos favoritos</>
+                                    : <><BsHeart className='w-5 h-5 opacity-100 text-white'></BsHeart> Adicionar aos favoritos</>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </>
     )
 }
 
 export async function getStaticPaths() {
-    //const res = await fetch("http://localhost:8080/api/v1/products");
-    const res = await fetch("https://api.amanditapratas.com.br/api/v1/products");
-    let products = await res.json();
-    const paths = products.content.map((product: ItemProps) => ({
-        params: { id: product.id.toString() },
-    }))
+    const data = await getProducts()
+    const paths = data.content.map((product: Product) => ({params: { id: product.id.toString() }}))
     return { paths, fallback: true }
 }
   
 export async function getStaticProps({ params }: any) {
     try {
-        //const res = await fetch("http://localhost:8080/api/v1/products/" + params.id);
-        const res = await fetch("https://api.amanditapratas.com.br/api/v1/products/" + params.id);
-        let products = await res.json();
-        return {
-            props: products,
-        };
-    } catch (error) {
-        console.log(error)
-        return { notFound: true };
-    }
+        const data = await getProductsById(params.id)
+        return { props: data }
+    } catch (error) { return { notFound: true } }
 }
 
